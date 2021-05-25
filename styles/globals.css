@@ -1,3 +1,18 @@
+@font-face {
+  font-family: 'CircularStd';
+  src: url('/fonts/CircularStd-Book.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'CircularStdBold';
+  src: url('/fonts/CircularStd-Bold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'CircularStdMedium';
+  src: url('/fonts/CircularStd-Medium.woff') format('woff');
+}
+
 html,
 body {
   padding: 0;
@@ -13,4 +28,9 @@ a {
 
 * {
   box-sizing: border-box;
+  font-family: 'CircularStd';
+}
+
+*:focus-visible {
+  outline-color: #752eeb;
 }
