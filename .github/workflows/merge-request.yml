@@ -1,0 +1,19 @@
+name: merge-request
+on:
+  pull_request:
+    branches: [ master, develop ]
+jobs:
+  typecheck:
+    name: Run Prettier, Linter, and Typecheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - name: Install packages
+        run: yarn
+      - name: Prettier
+        run: yarn format
+      - name: Linter
+        run: yarn lint
+      - name: Typecheck
+        run: yarn typecheck

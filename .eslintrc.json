@@ -1,0 +1,67 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+      "ecmaFeatures": {
+          "jsx": true
+      },
+      "ecmaVersion": 12,
+      "sourceType": "module"
+  },
+  "env": {
+      "browser": true,
+      "es2021": true,
+      "jest": true,
+      "node": true
+  },
+  "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:react/recommended",
+      "plugin:jsx-a11y/recommended",
+      "plugin:react-hooks/recommended",
+      "prettier/@typescript-eslint",
+      "plugin:prettier/recommended" // keep this last so prettier config overrides other formatting rules
+  ],
+  "plugins": [
+      "react"
+  ],
+  "rules": {
+      "react-hooks/exhaustive-deps": "off",
+      "react/react-in-jsx-scope": "off",
+      "react/prop-types": "off",
+      "@typescript-eslint/no-empty-function": "off",
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "prettier/prettier": ["error", {}, { "usePrettierrc": true }],  // Use our .prettierrc file as source
+      "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }], // ignore args with _ (needed for React.forwardRef fix
+      "jsx-a11y/accessible-emoji": "off",
+      "jsx-a11y/anchor-is-valid": [
+          "error",
+          {
+              "components": ["Link"],
+              "specialLink": ["hrefLeft", "hrefRight"],
+              "aspects": ["invalidHref", "preferButton"]
+          }
+      ],
+      "prefer-destructuring": ["error", {
+          "VariableDeclarator": {
+              "array": false,
+              "object": true
+              },
+              "AssignmentExpression": {
+              "array": true,
+              "object": true
+              }
+          }, {
+              "enforceForRenamedProperties": false
+      }]
+  },
+  "globals": {
+      "React": "writable"
+  },
+  "settings": {
+      "react": {
+          "version": "17.0.1"
+      }
+  }
+}
