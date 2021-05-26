@@ -119,7 +119,49 @@ const customizationJson = {
       backgroundColor: '#ffffff',
       link: 'https://goestohere.com'
     }
-  }
+  },
+  myItemsPage: {
+    backgroundColor: '#ffffff',
+    headerFont: {
+      type: 'h2',
+      color: 'black',
+    },
+  },
+  detailPage: {
+    imagePlacement: 'left',
+    imageBackgroundColor: '#efefef',
+    cardTitleFont: {
+      type: 'h1',
+      color: 'black',
+    },
+    collectionNameFont: {
+      type: 'caption',
+      color: 'red',
+    },
+    priceEditionLabelFont: {
+      type: 'caption',
+      color: '#ffffff',
+    },
+    priceEditionFont: {
+      type: 'h2',
+      color: '#ffffff',
+    },
+    cardDescriptionFont: {
+      type: 'caption',
+      color: 'grey',
+    },
+    button: {
+      textColor: 'white',
+      textFont: 'caption',
+      backgroundColor: '#ffffff',
+    },
+    dropdown: {
+      borderColor: '#0f0f0f',
+      arrowDropdownColor: '#000000',
+      textColor: 'black',
+      textFont: 'caption',
+    }
+  },
 };
 
 export default customizationJson;
