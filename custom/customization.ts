@@ -43,9 +43,19 @@ const customizationJson = {
     defaultAvatarPng: 'https://google.com',
     navLinkFontType: 'label',
     navLinks: [{
-      link: 'https://protonmarket.com',
-      title: 'Market',
-      color: '#ffffff',
+      link: 'https://google.com',
+      title: 'LINK 01',
+      color: '#000000',
+    },
+    {
+      link: 'https://google.com',
+      title: 'LINK 02',
+      color: '#000000',
+    },
+    {
+      link: 'https://google.com',
+      title: 'LINK 03',
+      color: '#000000',
     }],
     buttonFontColor: '#ffffff',
     buttonBackgroundColor: '#000000',
