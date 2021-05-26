@@ -5,7 +5,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "eslint --fix .",
+    "format": "prettier --write './**/*.{js,jsx, ts, tsx}' --config ./.prettierrc.js",
+    "typecheck": "$(npm bin)/tsc --noEmit",
+    "check:all": "yarn lint && yarn format && yarn typecheck"
   },
   "dependencies": {
     "@proton/js": "^22.0.64",
