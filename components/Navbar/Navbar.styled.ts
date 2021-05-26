@@ -18,6 +18,9 @@ export const Wrapper = styled(MaxWidth).attrs({ as: 'nav' })<ThemeProps>`
   justify-content: space-between;
 `;
 
+export const LogoContainer = styled.a`
+  cursor: pointer;
+`;
 
 export const DesktopOnlySection = styled.section`
   ${breakpoint.tablet`
