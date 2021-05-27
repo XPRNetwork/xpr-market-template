@@ -1,15 +1,15 @@
-import '../styles/globals.css'
-import { ThemeProvider } from "styled-components";
-import theme from '../custom/customization';
+import '../styles/globals.css';
 import '../styles/reset.css';
 import '../styles/globals.css';
-import type { AppProps } from 'next/app'
+import type { AppProps } from 'next/app';
+import { Footer } from '../components';
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <Component {...pageProps} />
-    </ThemeProvider>
+      <Footer />
+    </>
   );
 }
-export default MyApp
+export default MyApp;
