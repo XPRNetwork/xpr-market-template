@@ -37,21 +37,20 @@ const customizationJson = {
     },
   },
   navbar: {
-    logo: 'https://google.com',
-    backgroundColor: '#eeeeee',
+    logo: '/mlb-logo.png',
+    logoLink: '/',
+    backgroundColor: '#ffffff',
     defaultAvatarPng: 'https://google.com',
     navLinkFontType: 'label',
-    navLinks: [
-      {
-        link: 'https://protonmarket.com',
-        title: 'Market',
-        color: '#ffffff',
-      },
-    ],
+    navLinks: [{
+      link: 'https://protonmarket.com',
+      title: 'Market',
+      color: '#ffffff',
+    }],
     buttonFontColor: '#ffffff',
     buttonBackgroundColor: '#000000',
     buttonFontType: 'label',
-    bottomBorderColor: '#ffffff',
+    bottomBorderColor: '#cccccc',
   },
   footer: {
     logo: '/mlb-logo.png',
@@ -173,7 +172,9 @@ const customizationJson = {
     },
   },
 };
+
 export default customizationJson;
+
 export type ThemeProps = {
   theme: {
     typography: {
