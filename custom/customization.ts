@@ -106,9 +106,9 @@ const customizationJson = {
     backgroundColor: 'grey',
   },
   header: {
-    image: 'https://google.com/image.png',
+    image: '/header-image.png',
     imagePlacement: 'right',
-    backgroundColor: 'white',
+    backgroundColor: 'pink',
     highlightFont: {
       isShown: true,
       type: 'paragraph',
