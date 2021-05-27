@@ -1,11 +1,8 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Head from 'next/head';
+import { FC } from 'react';
 
-const HomePage = () => {
-  return (
-    <div>
-    </div>
-  )
-}
+const HomePage: FC = () => {
+  return <div></div>;
+};
 
 export default HomePage;
