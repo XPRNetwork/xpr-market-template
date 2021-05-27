@@ -5,8 +5,10 @@ import { breakpoint } from '../../styles/Breakpoints';
 export const FooterContainer = styled.div`
   height: 96px;
   width: 100%;
-  background-color: ${({ theme }) => theme.footer.backgroundColor || 'transparent'};
-  border-top: 1px solid ${({ theme }) => theme.footer.borderColor || 'transparent'};
+  background-color: ${({ theme }) =>
+    theme.footer.backgroundColor || 'transparent'};
+  border-top: 1px solid
+    ${({ theme }) => theme.footer.borderColor || 'transparent'};
 
   ${breakpoint.mobile`
     height: 72px;

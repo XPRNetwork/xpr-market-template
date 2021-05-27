@@ -1,66 +1,80 @@
-import { FooterContainer, FooterContent, FooterIconsContainer, Logo } from './Footer.styled';
-import { FacebookIcon, GithubIcon, GoogleIcon, InstagramIcon, LinkedInIcon, MediumIcon, TelegramIcon, TwitterIcon, YoutubeIcon, MessengerIcon } from '../SocialMediaIcons/SocialMediaIcons';
+import {
+  FooterContainer,
+  FooterContent,
+  FooterIconsContainer,
+  Logo,
+} from './Footer.styled';
+import { FC } from 'react';
+import {
+  FacebookIcon,
+  GithubIcon,
+  GoogleIcon,
+  InstagramIcon,
+  LinkedInIcon,
+  MediumIcon,
+  TelegramIcon,
+  TwitterIcon,
+  YoutubeIcon,
+  MessengerIcon,
+} from '../SocialMediaIcons/SocialMediaIcons';
 import customizationJson from '../../custom/customization';
 
 const { footer } = customizationJson;
 const { socialMediaLinks } = footer;
 
 const getSocialMediaIcons = () => {
-  return socialMediaLinks.map(link => (
+  return socialMediaLinks.map((link) => (
     <a href={link.link} target="_blank" rel="noreferrer" key={link.type}>
       {iconGetter(link.type)}
     </a>
-  ))
+  ));
 };
 
 const iconGetter = (type) => {
-  switch(type) {
+  switch (type) {
     case 'facebook': {
-      return <FacebookIcon />
+      return <FacebookIcon />;
     }
     case 'github': {
-      return <GithubIcon />
+      return <GithubIcon />;
     }
     case 'google': {
-      return <GoogleIcon />
+      return <GoogleIcon />;
     }
     case 'instagram': {
-      return <InstagramIcon />
+      return <InstagramIcon />;
     }
     case 'linkedin': {
-      return <LinkedInIcon />
+      return <LinkedInIcon />;
     }
     case 'medium': {
-      return <MediumIcon />
+      return <MediumIcon />;
     }
     case 'telegram': {
-      return <TelegramIcon />
+      return <TelegramIcon />;
     }
     case 'twitter': {
-      return <TwitterIcon />
+      return <TwitterIcon />;
     }
     case 'youtube': {
-      return <YoutubeIcon />
+      return <YoutubeIcon />;
     }
     case 'messenger': {
-      return <MessengerIcon />
+      return <MessengerIcon />;
     }
     default: {
       return null;
     }
   }
-}
+};
 
-
-export const Footer = () => {
+export const Footer: FC = () => {
   return (
     <FooterContainer>
       <FooterContent>
         <Logo src={footer.logo} className="logo" />
-        <FooterIconsContainer>
-          {getSocialMediaIcons()}
-        </FooterIconsContainer>
+        <FooterIconsContainer>{getSocialMediaIcons()}</FooterIconsContainer>
       </FooterContent>
     </FooterContainer>
   );
-}
+};
