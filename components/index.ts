@@ -9,4 +9,5 @@ export {
   InstagramIcon,
   LinkedInIcon,
   YoutubeIcon,
-} from './SocialMediaIcons';
+} from './SocialMediaIcons/SocialMediaIcons';
+export { Footer } from './Footer/Footer';
