@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { FC } from 'react';
-import Header from '../components/Header';
+import { Header } from '../components';
 
 const HomePage: FC = () => {
   return (

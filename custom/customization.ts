@@ -72,8 +72,8 @@ const customizationJson = {
         color: '#FF0000',
       },
     ],
-    backgroundColor: 'lightgrey',
-    borderColor: 'blue',
+    backgroundColor: 'white',
+    borderColor: 'transparent',
   },
   nftCard: {
     mainBackgroundColor: '#ffffff',
@@ -108,7 +108,7 @@ const customizationJson = {
   header: {
     image: '/header-image.png',
     imagePlacement: 'right',
-    backgroundColor: 'pink',
+    backgroundColor: 'white',
     highlightFont: {
       isShown: true,
       type: 'paragraph',
@@ -126,8 +126,8 @@ const customizationJson = {
       isShown: true,
       textColor: 'white',
       textFont: 'caption',
-      backgroundColor: '#ffffff',
-      link: 'https://goestohere.com',
+      backgroundColor: 'black',
+      link: 'https:/google.com',
     },
   },
   myItemsPage: {
