@@ -10,27 +10,32 @@ import {
   ButtonWrapperAnchor,
   Button,
 } from './Header.styled';
+import { useLocaleContext } from '../Provider';
 import customizationJson from '../../custom/customization';
+import localizationJson from '../../custom/localization';
 
 export const Header: FC = () => {
   const {
     header: { image },
   } = customizationJson;
+  const { locale, isLoadingLocale } = useLocaleContext();
+
+  if (isLoadingLocale) return null;
+
+  const text = Object.keys(localizationJson[locale]).length
+    ? localizationJson[locale].header
+    : localizationJson['en'].header;
 
   return (
     <HeaderContainer>
       <HeaderContent>
         <TextContainer>
-          <HighlightText>Exclusive</HighlightText>
-          <HeaderText>Kenny Lofton </HeaderText>
-          <HeaderText>Baseball Card NFTs</HeaderText>
-          <SubHeaderText>
-            Kenneth Lofton is an American former Major League Baseball center
-            fielder. Lofton was a six-time All-Star, four-time Gold Glove Award
-            winner, and at retirement.
-          </SubHeaderText>
+          <HighlightText>{text.highlightText}</HighlightText>
+          <HeaderText>{text.headerLine1}</HeaderText>
+          <HeaderText>{text.headerLine2}</HeaderText>
+          <SubHeaderText>{text.description}</SubHeaderText>
           <ButtonWrapperAnchor>
-            <Button>Label</Button>
+            <Button>{text.buttonText}</Button>
           </ButtonWrapperAnchor>
         </TextContainer>
         <ImageContainer>
