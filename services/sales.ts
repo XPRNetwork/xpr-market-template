@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Template } from './templates';
 import { getFromApi } from '../utils/browser-fetch';
 import { toQueryString } from '../utils';
@@ -63,6 +64,12 @@ type Collection = {
 };
 
 type Sale = {
+=======
+import { Asset } from './assets';
+import { Collection } from './collections';
+
+export type Sale = {
+>>>>>>> 6870b96 (adding functionality to get collection data)
   market_contract: string;
   assets_contract: string;
   sale_id: string;
@@ -86,6 +93,7 @@ type Sale = {
   asset_serial: string;
 };
 
+<<<<<<< HEAD
 export const getLowestPriceAsset = async (
   collection: string,
   templateId: string
@@ -113,4 +121,12 @@ export const getLowestPriceAsset = async (
   } catch (e) {
     throw new Error(e);
   }
+=======
+type Price = {
+  token_contract: string;
+  token_symbol: string;
+  token_precision: number;
+  median: number | null;
+  amount: number;
+>>>>>>> 6870b96 (adding functionality to get collection data)
 };
