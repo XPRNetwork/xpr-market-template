@@ -16,3 +16,6 @@ export { Nft } from './Nft/Nft';
 export { NftDetails } from './NftDetails/NftDetails';
 export { NftMeta } from './NftMeta/NftMeta';
 export { default as Navbar } from './Navbar/Navbar';
+export { Card } from './Card/Card';
+export { Spinner } from './Spinner/Spinner';
+export { LoadingPage } from './LoadingPage/LoadingPage';
