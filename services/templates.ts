@@ -146,6 +146,18 @@ type GetCollectionOptions = {
   page?: number;
 };
 
+export type Account = {
+  assets: number;
+  collections: Array<{
+    collection: { collection_name: string };
+  }>;
+  templates: {
+    assets: string;
+    collection_name: string;
+    template_id: string;
+  }[];
+};
+
 /**
  * Get a list of templates within a collection by page
  * Mostly used in viewing all the templates of a collection (i.e. in the homepage or after searching for one collection)
@@ -201,14 +213,17 @@ export const getTemplatesByCollection = async ({
 /**
  * Gets the lowest price of assets for sale for a collection's templates
  * Mostly used to display the lowest price of any of the templates with assets for sale in the collection
- * @param  {string} type               Name of collection that templates belong to
- * @return {Template[]}                Returns array of templates with an additional 'lowestPrice' flag
+ * @param  {string} type                                    Name of collection that templates belong to
+ * @param  {string} owner                                   Name of original owner selling the templates
+ * @return {{ [templateId: string]: string}}                Returns array of templates with an additional 'lowestPrice' flag
  */
 
 export const getLowestPricesForAllCollectionTemplates = async ({
   type,
+  owner,
 }: {
   type: string;
+  owner: string;
 }): Promise<{ [id: string]: string }> => {
   const limit = 100;
   const lowestPriceByTemplateIds = {};
@@ -218,6 +233,7 @@ export const getLowestPricesForAllCollectionTemplates = async ({
   while (hasResults) {
     const salesQueryObject = {
       collection_name: type,
+      owner,
       symbol: TOKEN_SYMBOL,
       order: 'desc',
       sort: 'created',
@@ -229,8 +245,6 @@ export const getLowestPricesForAllCollectionTemplates = async ({
     const salesResult = await getFromApi<Sale[]>(
       `https://proton.api.atomicassets.io/atomicmarket/v1/sales/templates?${salesQueryParams}`
     );
-
-    console.log('sales result: ', salesResult);
 
     if (!salesResult.success) {
       const errorMessage =
@@ -272,4 +286,81 @@ export const getLowestPricesForAllCollectionTemplates = async ({
 
   return lowestPriceByTemplateIds;
 >>>>>>> 6870b96 (adding functionality to get collection data)
+};
+
+/**
+ * Formats an array of templates with a custom 'lowestPrice' flag
+ * Mostly used to display the lowest price of any of the templates with assets for sale in the collection
+ * @param  {string} templates         Array of templates to format
+ * @param  {string} lowestPrices      Object of a collection's lowest priced assets organized by template ID
+ * @return {Template[]}               Returns array of templates with an additional 'lowestPrice' flag
+ */
+
+export const formatTemplatesWithPriceData = (
+  templates: Template[],
+  lowestPrices: { [id: string]: string }
+): Template[] =>
+  templates.map((template) => ({
+    ...template,
+    lowestPrice: lowestPrices[template.template_id] || '',
+  }));
+
+/***
+ * Gets number of assets for sale by template id for owner
+ * @param {string} owner Owner of assets to look up
+ * @return @return {{ [templateId: string]: string}}      // returns number of assets for sale by template id
+ */
+
+export const getAllTemplatesForUserWithAssetCount = async ({
+  owner,
+  collection,
+}: {
+  owner: string;
+  collection: string;
+}): Promise<{
+  [templateId: string]: string;
+}> => {
+  try {
+    const accountResponse = await getFromApi<Account>(
+      `https://proton.api.atomicassets.io/atomicassets/v1/accounts/${owner}?&collection_whitelist=${collection}`
+    );
+
+    if (!accountResponse.success) {
+      throw new Error(accountResponse.message as unknown as string);
+    }
+
+    // gets template count without counting those currently on sale
+    const accountResponseWithHidden = await getFromApi<Account>(
+      `https://proton.api.atomicassets.io/atomicassets/v1/accounts/${owner}?hide_offers=true&collection_whitelist=${collection}`
+    );
+
+    if (!accountResponseWithHidden.success) {
+      throw new Error(accountResponseWithHidden.message as unknown as string);
+    }
+
+    const userAssetsByTemplateId = {};
+    accountResponse.data.templates.map(({ assets, template_id }) => {
+      userAssetsByTemplateId[template_id] = parseInt(assets);
+    });
+
+    const userAssetsWithHiddenByTemplateId = {};
+    accountResponseWithHidden.data.templates.map(({ assets, template_id }) => {
+      userAssetsWithHiddenByTemplateId[template_id] = parseInt(assets);
+    });
+
+    const numberOfAssetsForSale = {};
+
+    for (const templateId in userAssetsByTemplateId) {
+      const numberOwned = userAssetsByTemplateId[templateId];
+      const numberOwnedMinusOnSale =
+        userAssetsWithHiddenByTemplateId[templateId] || 0;
+      numberOfAssetsForSale[templateId] = (
+        numberOwned - numberOwnedMinusOnSale
+      ).toFixed(0);
+    }
+
+    return numberOfAssetsForSale;
+  } catch (e) {
+    throw new Error(e);
+  }
 };
