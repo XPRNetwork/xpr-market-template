@@ -11,3 +11,5 @@ export {
   YoutubeIcon,
 } from './SocialMediaIcons/SocialMediaIcons';
 export { Footer } from './Footer/Footer';
+export { Header } from './Header/Header';
+export { LocaleProvider } from './Provider';
