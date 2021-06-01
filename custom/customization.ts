@@ -40,7 +40,7 @@ const customizationJson = {
     logo: '/mlb-logo.png',
     logoLink: '/',
     backgroundColor: '#ffffff',
-    defaultAvatarPng: 'https://google.com',
+    defaultAvatarImage: '/default-avatar.png',
     navLinkFontType: 'label',
     navLinks: [{
       link: 'https://google.com',
@@ -55,6 +55,11 @@ const customizationJson = {
     {
       link: 'https://google.com',
       title: 'LINK 03',
+      color: '#000000',
+    },
+    {
+      link: 'https://google.com',
+      title: 'LINK 04',
       color: '#000000',
     }],
     buttonFontColor: '#ffffff',
