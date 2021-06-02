@@ -9,10 +9,7 @@ import {
   ErrorMessage,
 } from '../../styles/templateId.styled';
 import ProtonSDK from '../../services/proton';
-
-interface RouterQuery {
-  [query: string]: string;
-}
+import { RouterQuery } from '../../utils/constants';
 
 const NftDetailPage: FC = () => {
   const {
