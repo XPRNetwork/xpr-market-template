@@ -9,6 +9,7 @@ import {
   Description,
 } from './NftDetails.styled';
 import { Row, Box } from '../../styles/index.styled';
+import { NftMeta } from '../';
 import { Template } from '../../services/templates';
 
 export const NftDetails: FC<{
@@ -24,6 +25,14 @@ export const NftDetails: FC<{
   detailPageText: { priceLabelText, editionLabelText },
 }) => (
   <Container>
+    <NftMeta
+      templateName={immutable_data.name}
+      collectionName={collection.collection_name}
+      collectionDisplayName={collection.name}
+      collectionAuthor={collection.author}
+      image={immutable_data.image}
+      video={immutable_data.video}
+    />
     <Box>
       <Title>{immutable_data.name}</Title>
       <CollectionName>{collection.name}</CollectionName>

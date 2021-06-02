@@ -8,6 +8,8 @@ export type Template = {
   max_supply: string;
   collection: {
     name: string;
+    author: string;
+    collection_name: string;
   };
   immutable_data: {
     name: string;
