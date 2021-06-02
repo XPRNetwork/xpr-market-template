@@ -3,6 +3,7 @@ import { Template, getTemplateDetails } from '../services/templates';
 
 const defaultTemplate = {
   lowestPrice: '',
+  lowestPriceSaleId: '',
   max_supply: '',
   collection: {
     name: '',
