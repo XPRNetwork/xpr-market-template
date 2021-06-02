@@ -1,7 +1,6 @@
 import { FC, ReactNode } from 'react';
 import {
   Container,
-  Details,
   Title,
   CollectionName,
   PriceEditionLabel,
@@ -9,7 +8,7 @@ import {
   Edition,
   Description,
 } from './NftDetails.styled';
-import { Row } from '../../styles/index.styled';
+import { Row, Box } from '../../styles/index.styled';
 import { Template } from '../../services/templates';
 
 export const NftDetails: FC<{ template: Template; children: ReactNode }> = ({
@@ -17,7 +16,7 @@ export const NftDetails: FC<{ template: Template; children: ReactNode }> = ({
   children,
 }) => (
   <Container>
-    <Details>
+    <Box>
       <Title>{immutable_data.name}</Title>
       <CollectionName>{collection.name}</CollectionName>
       <Row>
@@ -29,7 +28,7 @@ export const NftDetails: FC<{ template: Template; children: ReactNode }> = ({
         <Edition>{max_supply}</Edition>
       </Row>
       <Description>{immutable_data.desc}</Description>
-    </Details>
-    {children}
+    </Box>
+    <Box>{children}</Box>
   </Container>
 );
