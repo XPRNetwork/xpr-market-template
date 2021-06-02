@@ -19,27 +19,24 @@ const {
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-content: space-between;
+  justify-content: space-between;
   width: 50%;
-  height: 3000%;
+  height: 70vh;
   margin-left: ${imagePlacement === 'left' ? '48px' : '0'};
   margin-right: ${imagePlacement === 'left' ? '0' : '48px'};
 
   ${breakpoint.laptop`
     width: 60%;
+    height: 60vh;
     margin-left: ${imagePlacement === 'left' ? '24px' : '0'};
     margin-right: ${imagePlacement === 'left' ? '0' : '24px'};
   `}
 
   ${breakpoint.tablet`
     width: 100%;
+    height: 100%;
     margin: 24px 0 0;
   `}
-`;
-
-export const Details = styled.div`
-  display: flex;
-  flex-direction: column;
 `;
 
 export const Title = styled.h1`
