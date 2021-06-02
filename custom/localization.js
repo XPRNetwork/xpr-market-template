@@ -8,6 +8,11 @@ const localizationJson = {
         'Kenneth Lofton is an American former Major League Baseball centerfielder. Lofton was a six-time All-Star, four-time Gold Glove Award winner, and at retirement.',
       buttonText: 'Label',
     },
+    navbar: {
+      navLinks: ['LINK 01', 'LINK 02', 'LINK 03', 'LINK 04'],
+      balanceText: 'Balance',
+      loginText: 'Connect Wallet',
+    },
   },
 };
 
