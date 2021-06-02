@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, FC } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import {
@@ -33,10 +33,10 @@ type DropdownProps = {
   closeNavDropdown: () => void;
 };
 
-const Dropdown = ({ isOpen, closeNavDropdown }: DropdownProps): JSX.Element => {
+const Dropdown: FC<DropdownProps> = ({ isOpen, closeNavDropdown }) => {
   const router = useRouter();
   const { currentUser, currentUserBalance, logout } = useAuthContext();
-  const { locale, isLoadingLocale } = useLocaleContext();
+  const { locale } = useLocaleContext();
   const { isMobile, isTablet } = useWindowSize();
   useEscapeKeyClose(closeNavDropdown);
   const isLoggedIn = currentUser && currentUser.actor;
@@ -55,8 +55,8 @@ const Dropdown = ({ isOpen, closeNavDropdown }: DropdownProps): JSX.Element => {
         onClick: () => {
           window.location.replace(link.link);
           closeNavDropdown();
-        }
-      })  
+        },
+      });
     });
   }
   if (isLoggedIn) {
@@ -70,7 +70,7 @@ const Dropdown = ({ isOpen, closeNavDropdown }: DropdownProps): JSX.Element => {
         router.push('/');
       },
     });
-  } 
+  }
 
   let closeMobileDropdown = <></>;
   if (isMobile || isTablet) {
@@ -80,29 +80,41 @@ const Dropdown = ({ isOpen, closeNavDropdown }: DropdownProps): JSX.Element => {
           <CloseIcon />
         </CloseIconButton>
       </MobileHeaderWrapper>
-    )
+    );
   }
 
   if (routes.length > 0) {
     const minHeightMobileDropdown = routes.length * 70;
     return (
       <>
-        <DropdownList isOpen={isOpen} height={isLoggedIn ? `${minHeightMobileDropdown + 85}px` : `${minHeightMobileDropdown}px`}>
+        <DropdownList
+          isOpen={isOpen}
+          height={
+            isLoggedIn
+              ? `${minHeightMobileDropdown + 85}px`
+              : `${minHeightMobileDropdown}px`
+          }>
           {closeMobileDropdown}
-          { isLoggedIn ? (
+          {isLoggedIn ? (
             <>
               <Name>{currentUser ? currentUser.name : ''}</Name>
               <Subtitle>{text.balanceText}</Subtitle>
               <Balance>{currentUserBalance || `0.00 ${TOKEN_SYMBOL}`}</Balance>
             </>
-          ) : null }
+          ) : null}
           {routes.map(({ name, path, onClick, color }) =>
             path ? (
               <Link href={path} passHref key={name}>
-                <DropdownLink onClick={onClick} color={color}>{name}</DropdownLink>
+                <DropdownLink onClick={onClick} color={color}>
+                  {name}
+                </DropdownLink>
               </Link>
             ) : (
-              <DropdownLink tabIndex={0} onClick={onClick} key={name} color={color}>
+              <DropdownLink
+                tabIndex={0}
+                onClick={onClick}
+                key={name}
+                color={color}>
                 {name}
               </DropdownLink>
             )
@@ -115,11 +127,10 @@ const Dropdown = ({ isOpen, closeNavDropdown }: DropdownProps): JSX.Element => {
   return null;
 };
 
-const Navbar = () => {
+const Navbar: FC = () => {
   const { navbar } = theme;
-  const { currentUser, login, isLoadingUser } =
-    useAuthContext();
-    const { locale, isLoadingLocale } = useLocaleContext();
+  const { currentUser, login, isLoadingUser } = useAuthContext();
+  const { locale, isLoadingLocale } = useLocaleContext();
   const [isOpen, setIsOpen] = useState(false);
   useScrollLock(isOpen);
 
@@ -132,14 +143,19 @@ const Navbar = () => {
   if (isLoadingLocale) return null;
 
   const text = Object.keys(localizationJson[locale]).length
-  ? localizationJson[locale].navbar
-  : localizationJson['en'].navbar;
+    ? localizationJson[locale].navbar
+    : localizationJson['en'].navbar;
 
   return (
     <NavbarContainer>
       <Wrapper>
         <MobileOnlySection>
-          <Image src="/hamburger-icon.svg" height="24px" width="24px" onClick={toggleNavDropdown} />
+          <Image
+            src="/hamburger-icon.svg"
+            height="24px"
+            width="24px"
+            onClick={toggleNavDropdown}
+          />
           <LogoContainer href={navbar.logoLink}>
             <Image src={navbar.logo} height="42px" width="auto" />
           </LogoContainer>

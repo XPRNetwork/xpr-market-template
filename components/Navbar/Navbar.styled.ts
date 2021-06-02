@@ -17,7 +17,7 @@ type DropdownProps = {
 
 type DropdownLinkProps = {
   color: string;
-}
+};
 
 export const AvatarContainer = styled.div`
   position: relative;
@@ -202,7 +202,7 @@ export const Balance = styled(Name)`
 `;
 
 export const DropdownLink = styled.a<DropdownLinkProps>`
-  color: ${({ color }) => color };
+  color: ${({ color }) => color};
   font-size: 14px;
   line-height: 24px;
   cursor: pointer;
