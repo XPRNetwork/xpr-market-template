@@ -21,13 +21,13 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 50%;
-  height: 70vh;
+  height: 65vh;
   margin-left: ${imagePlacement === 'left' ? '48px' : '0'};
   margin-right: ${imagePlacement === 'left' ? '0' : '48px'};
 
   ${breakpoint.laptop`
     width: 60%;
-    height: 60vh;
+    height: 55vh;
     margin-left: ${imagePlacement === 'left' ? '24px' : '0'};
     margin-right: ${imagePlacement === 'left' ? '0' : '24px'};
   `}

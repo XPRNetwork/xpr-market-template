@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Nft, NftDetails } from '../../components';
-import { useAuthContext } from '../../components/Provider';
+import { useAuthContext, useLocaleContext } from '../../components/Provider';
 import { useFetchNft } from '../../hooks';
 import {
   NftPageContainer,
@@ -10,6 +10,7 @@ import {
 } from '../../styles/templateId.styled';
 import ProtonSDK from '../../services/proton';
 import { RouterQuery } from '../../utils/constants';
+import localizationJson from '../../custom/localization';
 
 const NftDetailPage: FC = () => {
   const {
@@ -18,16 +19,20 @@ const NftDetailPage: FC = () => {
     isLoadingUser,
     updateCurrentUserBalance,
   } = useAuthContext();
+
+  const { locale, isLoadingLocale } = useLocaleContext();
+  const detailPageText = localizationJson[locale]
+    ? localizationJson[locale].detailPage
+    : localizationJson['en'].detailPage;
+
   const router = useRouter();
-  const { collection: caseSensitiveCollection, templateId } =
-    router.query as RouterQuery;
-  const collection = caseSensitiveCollection
-    ? caseSensitiveCollection.toLowerCase()
-    : '';
+  const { collection, templateId } = router.query as RouterQuery;
+
   const { template, isLoading, error } = useFetchNft({
-    collection,
+    collection: collection ? collection.toLowerCase() : '',
     templateId,
   });
+
   const [purchasingError, setPurchasingError] = useState<string>('');
 
   const buyAsset = async () => {
@@ -69,7 +74,7 @@ const NftDetailPage: FC = () => {
   };
 
   const getContent = () => {
-    if (isLoadingUser || isLoading || error) {
+    if (isLoadingUser || isLoadingLocale || isLoading || error) {
       return null;
     }
 
@@ -77,8 +82,8 @@ const NftDetailPage: FC = () => {
     return (
       <>
         <Nft name={name} image={image} video={video} />
-        <NftDetails template={template}>
-          <Button onClick={buyAsset}>BUY NOW</Button>
+        <NftDetails template={template} detailPageText={detailPageText}>
+          <Button onClick={buyAsset}>{detailPageText.buyButtonText}</Button>
           {purchasingError ? (
             <ErrorMessage>{purchasingError}</ErrorMessage>
           ) : null}
