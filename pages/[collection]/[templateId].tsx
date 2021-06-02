@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import { useRouter } from 'next/router';
-import { NftDetails } from '../../components/NftDetails/NftDetails';
-import { Nft } from '../../components/Nft/Nft';
+import { Nft, NftDetails } from '../../components';
 import { useFetchNft } from '../../hooks';
 import { NftPageContainer } from '../../styles/templateId.styled';
 

@@ -1,7 +1,7 @@
 import { Template } from './templates';
 import { getFromApi } from '../utils/browser-fetch';
 import { toQueryString } from '../utils';
-import { TOKEN_SYMBOL, NFT_ENDPOINT } from '../utils/constants';
+import { TOKEN_SYMBOL } from '../utils/constants';
 
 type Price = {
   token_contract: string;
@@ -102,7 +102,7 @@ export const getLowestPriceAsset = async (
     };
     const queryString = toQueryString(queryObject);
     const saleRes = await getFromApi<Sale[]>(
-      `${NFT_ENDPOINT}/atomicmarket/v1/sales?${queryString}`
+      `${process.env.NEXT_PUBLIC_NFT_ENDPOINT}/atomicmarket/v1/sales?${queryString}`
     );
 
     if (!saleRes.success) {

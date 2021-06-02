@@ -1,7 +1,6 @@
 import { toQueryString, addPrecisionDecimal } from '../utils';
 import { getFromApi } from '../utils/browser-fetch';
 import { getLowestPriceAsset } from './sales';
-import { NFT_ENDPOINT } from '../utils/constants';
 
 export type Template = {
   lowestPrice: string;
@@ -40,7 +39,7 @@ export const getTemplateDetails = async (
 
     const templatesQueryParams = toQueryString(templatesQueryObject);
     const templatesResponse = await getFromApi<Template[]>(
-      `${NFT_ENDPOINT}/atomicassets/v1/templates?${templatesQueryParams}`
+      `${process.env.NEXT_PUBLIC_NFT_ENDPOINT}/atomicassets/v1/templates?${templatesQueryParams}`
     );
     if (!templatesResponse.success || !templatesResponse.data.length) {
       throw new Error('NFT not found');

@@ -10,7 +10,7 @@ export const Image = styled.img<ImgProps>`
   width: ${({ width }) => width || '270px'};
   height: ${({ height }) => height || '270px'};
   object-fit: ${({ objectFit }) => objectFit || ''};
-`:
+`;
 
 export const Row = styled.div`
   display: flex;
