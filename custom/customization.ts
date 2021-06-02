@@ -178,6 +178,10 @@ const customizationJson = {
       type: 'caption',
       color: '#666666',
     },
+    errorFont: {
+      type: 'caption',
+      color: '#c71f3e',
+    },
     button: {
       textColor: 'white',
       textFont: 'caption',

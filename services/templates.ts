@@ -4,6 +4,7 @@ import { getLowestPriceAsset } from './sales';
 
 export type Template = {
   lowestPrice: string;
+  lowestPriceSaleId: string;
   max_supply: string;
   collection: {
     name: string;
@@ -49,6 +50,7 @@ export const getTemplateDetails = async (
       collectionName,
       templateId
     );
+
     const lowestPriceSale = saleForTemplateAsc[0];
     const lowestPrice =
       lowestPriceSale && lowestPriceSale.listing_price
@@ -57,10 +59,12 @@ export const getTemplateDetails = async (
             lowestPriceSale.price.token_precision
           )} ${lowestPriceSale.listing_symbol}`
         : '';
-
+    const lowestPriceSaleId =
+      lowestPriceSale && lowestPriceSale.sale_id ? lowestPriceSale.sale_id : '';
     return {
       ...templatesResponse.data[0],
       lowestPrice,
+      lowestPriceSaleId,
     };
   } catch (e) {
     throw new Error(e);
