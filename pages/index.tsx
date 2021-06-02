@@ -1,5 +1,4 @@
 import { FC } from 'react';
-<<<<<<< HEAD
 import { Header } from '../components';
 
 const HomePage: FC = () => {
@@ -9,14 +8,5 @@ const HomePage: FC = () => {
     </div>
   );
 };
-=======
-
-const HomePage: FC = () => {
-  return (
-    <>
-    </>
-  )
-}
->>>>>>> 29f4e83 (Continue working on Navbar)
 
 export default HomePage;

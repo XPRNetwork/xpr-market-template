@@ -1,6 +1,7 @@
 import { ConnectWallet } from '@proton/web-sdk';
 import { LinkSession, Link } from '@proton/link';
 import proton from './proton-rpc';
+import logoUrl from '../public/mlb-logo.png';
 
 export interface User {
   actor: string;
@@ -137,7 +138,7 @@ class ProtonSDK {
   link: Link | null;
 
   constructor() {
-    this.appName = 'Proton Market';
+    this.appName = 'Market';
     this.requestAccount = 'nftmarket';
     this.session = null;
     this.link = null;
