@@ -12,7 +12,6 @@ const {
     priceFont,
     editionFont,
     cardDescriptionFont,
-    button,
   },
 } = customizationJson;
 
