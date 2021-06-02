@@ -23,40 +23,6 @@ interface BurnOptions {
   asset_id: string;
 }
 
-interface CreateNftOptions {
-  author: string;
-  collection_name?: string;
-  collection_description: string;
-  collection_display_name: string;
-  collection_image?: string;
-  collection_market_fee?: string;
-  template_name: string;
-  template_image?: string;
-  template_video?: string;
-  template_description: string;
-  max_supply: number;
-  initial_mint_amount: number;
-}
-
-interface CreateTemplateAssetsOptions {
-  author: string;
-  collection_name: string;
-  template_name: string;
-  template_image?: string;
-  template_video?: string;
-  template_description: string;
-  max_supply: number;
-  initial_mint_amount: number;
-}
-
-interface MintAssetsOptions {
-  author: string;
-  collection_name: string;
-  template_id: string;
-  mint_amount: number;
-  mint_fee: number;
-}
-
 interface UpdateCollectionOptions {
   author: string;
   collection_name: string;
@@ -72,33 +38,10 @@ interface SetMarketFeeOptions {
   market_fee: string;
 }
 
-interface CreateSaleOptions {
-  seller: string;
-  asset_id: string;
-  price: string;
-  currency: string;
-  listing_fee: number;
-}
-
-interface CreateMultipleSalesOptions
-  extends Omit<CreateSaleOptions, 'asset_id'> {
-  assetIds: string[];
-}
-
 interface PurchaseSaleOptions {
   buyer: string;
   amount: string;
   sale_id: string;
-}
-
-interface SaleOptions {
-  actor: string;
-  sale_id: string;
-}
-
-interface CancelMultipleSalesOptions {
-  actor: string;
-  saleIds: string[];
 }
 
 interface DepositWithdrawOptions {
@@ -115,10 +58,6 @@ interface Response {
 interface WalletResponse {
   user: User;
   error: string;
-}
-
-interface GenerateRamActions {
-  author: string;
 }
 
 interface Action {
