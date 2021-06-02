@@ -12,10 +12,19 @@ export type GradientBackgroundProps = {
 
 type DropdownProps = {
   isOpen: boolean;
+  height?: string;
 };
+
+type DropdownLinkProps = {
+  color: string;
+}
 
 export const AvatarContainer = styled.div`
   position: relative;
+`;
+
+export const HamburgerIcon = styled(Image)`
+  cursor: pointer;
 `;
 
 export const NavbarContainer = styled.div`
@@ -31,16 +40,20 @@ export const Wrapper = styled(MaxWidth).attrs({ as: 'nav' })`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 `;
 
 export const LogoContainer = styled.a`
   cursor: pointer;
+
+  ${breakpoint.tablet`
+    margin-left: 16px;
+  `}
 `;
 
 export const DesktopOnlySection = styled.section`
-  width: 50%;
-  max-width: 50%;
-  margin-left: 25%;
+  width: 85%;
+  margin-right: 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -59,6 +72,7 @@ export const LoginButton = styled.button`
   border: 2px solid ${navbar.buttonBorderColor};
   height: 42px;
   padding: 0 15px;
+  color: ${navbar.buttonFontColor};
   background-color: ${navbar.buttonBackgroundColor};
   cursor: pointer;
 `;
@@ -66,15 +80,48 @@ export const LoginButton = styled.button`
 export const MobileOnlySection = styled.section`
   display: none;
   ${breakpoint.tablet`
-    display: unset;
+    display: flex;
+    align-items: center;
   `}
+`;
+
+export const NavLinks = styled.section`
+  max-width: 45%;
+  width: 45%;
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const MobileHeaderWrapper = styled.div`
+  height: 92px;
+  display: flex;
+  align-items: center;
+`;
+
+export const CloseIconButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border: none;
+  cursor: pointer;
+  border-radius: 100%;
+  z-index: 3;
+  width: 40px;
+  height: 40px;
+  background: #f2f2f2;
+  outline: none;
+
+  * {
+    z-index: 3;
+  }
 `;
 
 export const DropdownList = styled.section<DropdownProps>`
   display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
   flex-direction: column;
   position: absolute;
-  top: 75px;
+  top: 70px;
   right: 0;
   background: #ffffff;
   border-radius: 8px;
@@ -82,27 +129,26 @@ export const DropdownList = styled.section<DropdownProps>`
   min-width: 224px;
   z-index: 2;
 
-  ${breakpoint.tablet`
-    display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
+  @media (max-width: 970px) {
     flex-direction: column;
     position: absolute;
     right: 0;
+    top: 0;
     z-index: 2;
-    top: 65px;
     width: 100%;
     background: none;
 
     &:before {
       content: '';
       background: #ffffff;
+      height: ${({ height }) => height || '400px'};
       width: 100%;
-      height: 320px;
       position: fixed;
       top: 0;
       left: 0;
       z-index: -1;
     }
-  `}
+  }
 `;
 
 export const GradientBackground = styled.div<GradientBackgroundProps>`
@@ -155,8 +201,8 @@ export const Balance = styled(Name)`
   `}
 `;
 
-export const DropdownLink = styled.a`
-  color: ${navbar.buttonFontColor};
+export const DropdownLink = styled.a<DropdownLinkProps>`
+  color: ${({ color }) => color };
   font-size: 14px;
   line-height: 24px;
   cursor: pointer;
