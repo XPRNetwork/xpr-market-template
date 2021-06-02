@@ -23,15 +23,16 @@ import { TOKEN_SYMBOL } from '../../utils/constants';
 
 const Navbar = () => {
   const { navbar } = theme;
-  const { currentUser, login, logout, currentUserBalance,  isLoadingUser } = useAuthContext();
+  const { currentUser, login, logout, currentUserBalance, isLoadingUser } =
+    useAuthContext();
   const [isOpen, setIsOpen] = useState(false);
   const [isLoginDisabled, setIsLoginDisabled] = useState<boolean>(false);
   useScrollLock(isOpen);
-  
+
   const toggleNavDropdown = () => setIsOpen(!isOpen);
-  
+
   const closeNavDropdown = () => setIsOpen(false);
-  
+
   useEscapeKeyClose(closeNavDropdown);
 
   return (
@@ -47,32 +48,38 @@ const Navbar = () => {
             </Link>
           ))}
         </DesktopOnlySection>
-        <MobileOnlySection>
-
-        </MobileOnlySection>
-        { !isLoadingUser && currentUser && currentUser.actor ? (
+        <MobileOnlySection></MobileOnlySection>
+        {!isLoadingUser && currentUser && currentUser.actor ? (
           <AvatarContainer>
-            <AvatarImage onClick={toggleNavDropdown} src={currentUser.avatar || navbar.defaultAvatarImage || '/default-avatar.png'} width="48px" height="48opx" />
+            <AvatarImage
+              onClick={toggleNavDropdown}
+              src={
+                currentUser.avatar ||
+                navbar.defaultAvatarImage ||
+                '/default-avatar.png'
+              }
+              width="48px"
+              height="48opx"
+            />
             <DropdownList isOpen={isOpen}>
               <Name>{currentUser ? currentUser.name : ''}</Name>
               <Subtitle>Balance</Subtitle>
               <Balance>{currentUserBalance || `0.00 ${TOKEN_SYMBOL}`}</Balance>
-              <DropdownLink onClick={() => {
-                logout();
-                closeNavDropdown();
-              }}>
+              <DropdownLink
+                onClick={() => {
+                  logout();
+                  closeNavDropdown();
+                }}>
                 Sign out
               </DropdownLink>
             </DropdownList>
           </AvatarContainer>
-        ) :
-          <LoginButton onClick={login}>
-            Connect Wallet
-          </LoginButton>
-        }
+        ) : (
+          <LoginButton onClick={login}>Connect Wallet</LoginButton>
+        )}
       </Wrapper>
     </NavbarContainer>
   );
-}
+};
 
 export default Navbar;

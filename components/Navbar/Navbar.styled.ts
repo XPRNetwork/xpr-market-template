@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import customizationJson, { ThemeProps } from '../../custom/customization';
+import customizationJson from '../../custom/customization';
 import { Image } from '../../styles/index.styled';
 import { MaxWidth } from '../../styles/MaxWidth.styled';
 import { breakpoint } from '../../styles/Breakpoints';
@@ -18,12 +18,11 @@ export const AvatarContainer = styled.div`
   position: relative;
 `;
 
-
 export const NavbarContainer = styled.div`
   width: 100%;
   position: relative;
   border-bottom: 1px solid ${navbar.bottomBorderColor};
-  background-color: ${navbar.backgroundColor };
+  background-color: ${navbar.backgroundColor};
   height: 96px;
 `;
 
@@ -70,7 +69,6 @@ export const MobileOnlySection = styled.section`
     display: unset;
   `}
 `;
-
 
 export const DropdownList = styled.section<DropdownProps>`
   display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};

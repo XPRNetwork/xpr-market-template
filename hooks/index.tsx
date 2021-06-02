@@ -88,10 +88,8 @@ export const useNavigatorUserAgent = (): {
   isBrowserVideoCompatible: boolean;
 } => {
   const [isDesktop, setIsDesktop] = useState<boolean>(null);
-  const [
-    isBrowserVideoCompatible,
-    setIsBrowserVideoCompatible,
-  ] = useState<boolean>(true);
+  const [isBrowserVideoCompatible, setIsBrowserVideoCompatible] =
+    useState<boolean>(true);
 
   const checkIfDesktop = () => {
     const isMobile =
