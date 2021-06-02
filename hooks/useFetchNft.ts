@@ -7,6 +7,8 @@ const defaultTemplate = {
   max_supply: '',
   collection: {
     name: '',
+    collection_name: '',
+    author: '',
   },
   immutable_data: {
     image: '',
