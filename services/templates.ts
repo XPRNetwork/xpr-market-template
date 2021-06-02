@@ -1,24 +1,68 @@
-<<<<<<< HEAD
 import { toQueryString, addPrecisionDecimal } from '../utils';
 import { getFromApi } from '../utils/browser-fetch';
 import { getLowestPriceAsset } from './sales';
+import { TOKEN_SYMBOL } from '../utils/constants';
+import { Collection } from './collections';
+import { Sale } from './sales';
 
-export type Template = {
-  lowestPrice: string;
+export type SchemaFormat = {
+  name: string;
+  type: string;
+};
+
+export type Schema = {
+  schema_name: string;
+  format: SchemaFormat[];
+  created_at_block: string;
+  created_at_time: string;
+};
+
+type ImmutableData = {
+  name: string;
+  image?: string;
+  series: number;
+  desc: string;
+  video?: string;
+  model?: string;
+  stage?: string;
+  skybox?: string;
+};
+
+export interface Template {
+  immutable_data?: ImmutableData;
+  template_id?: string;
+  contract?: string;
+  collection?: Collection;
+  schema?: Schema;
+  name?: string;
+  max_supply?: string;
+  is_transferable?: boolean;
+  is_burnable?: boolean;
+  created_at_time?: string;
+  created_at_block?: string;
+  issued_supply?: string;
+  lowestPrice?: string;
   lowestPriceSaleId: string;
-  max_supply: string;
-  collection: {
-    name: string;
-    author: string;
+  totalAssets?: string;
+  assetsForSale?: string;
+}
+
+type GetCollectionOptions = {
+  type: string;
+  limit?: number;
+  page?: number;
+};
+
+export type Account = {
+  assets: number;
+  collections: Array<{
+    collection: { collection_name: string };
+  }>;
+  templates: {
+    assets: string;
     collection_name: string;
-  };
-  immutable_data: {
-    name: string;
-    image: string;
-    series: number;
-    desc: string;
-    video?: string;
-  };
+    template_id: string;
+  }[];
 };
 
 /**
@@ -72,90 +116,6 @@ export const getTemplateDetails = async (
   } catch (e) {
     throw new Error(e);
   }
-=======
-import { getFromApi } from '../utils/browser-fetch';
-import { toQueryString, addPrecisionDecimal } from '../utils';
-import { TOKEN_SYMBOL } from '../utils/constants';
-import { Sale } from './sales';
-
-export interface Collection {
-  author: string;
-  collection_name: string;
-  name?: string | null;
-  img?: string | null;
-  allow_notify?: boolean;
-  authorized_accounts?: string[];
-  notify_accounts?: string[] | [];
-  market_fee?: number;
-  created_at_block?: string;
-  created_at_time?: string;
-  order?: number;
-  sales?: string;
-  volume?: string;
-  data?: {
-    img?: string;
-    name?: string;
-    description?: string;
-  };
-}
-
-export type SchemaFormat = {
-  name: string;
-  type: string;
-};
-
-export type Schema = {
-  schema_name: string;
-  format: SchemaFormat[];
-  created_at_block: string;
-  created_at_time: string;
-};
-
-type ImmutableData = {
-  name: string;
-  image?: string;
-  series: number;
-  desc: string;
-  video?: string;
-  model?: string;
-  stage?: string;
-  skybox?: string;
-};
-
-export interface Template {
-  immutable_data?: ImmutableData;
-  template_id?: string;
-  contract?: string;
-  collection?: Collection;
-  schema?: Schema;
-  name?: string;
-  max_supply?: string;
-  is_transferable?: boolean;
-  is_burnable?: boolean;
-  created_at_time?: string;
-  created_at_block?: string;
-  issued_supply?: string;
-  lowestPrice?: string;
-  totalAssets?: string;
-  assetsForSale?: string;
-}
-
-type GetCollectionOptions = {
-  type: string;
-  limit?: number;
-  page?: number;
-};
-
-export type Account = {
-  assets: number;
-  collections: Array<{
-    collection: { collection_name: string };
-  }>;
-  templates: {
-    assets: string;
-    collection_name: string;
-    template_id: string;
-  }[];
 };
 
 /**
@@ -285,7 +245,6 @@ export const getLowestPricesForAllCollectionTemplates = async ({
   }
 
   return lowestPriceByTemplateIds;
->>>>>>> 6870b96 (adding functionality to get collection data)
 };
 
 /***

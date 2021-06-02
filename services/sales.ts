@@ -1,8 +1,8 @@
-<<<<<<< HEAD
-import { Template } from './templates';
 import { getFromApi } from '../utils/browser-fetch';
 import { toQueryString } from '../utils';
 import { TOKEN_SYMBOL } from '../utils/constants';
+import { Asset } from './assets';
+import { Collection } from './collections';
 
 type Price = {
   token_contract: string;
@@ -12,64 +12,7 @@ type Price = {
   amount: number;
 };
 
-type Asset = {
-  name: string;
-  data: Record<string, unknown>;
-  owner: string;
-  template: Template;
-  asset_id: string;
-  saleId: string;
-  mutable_data?: Record<string, unknown>;
-  immutable_data?: Record<string, unknown>;
-  template_mint?: string;
-  schema_mint?: string;
-  collection_mint?: string;
-  backed_tokens?: string[] | [];
-  burned_by_account?: string | null;
-  burned_at_block?: string | null;
-  burned_at_time?: string | null;
-  updated_at_block?: string;
-  updated_at_time?: string;
-  transferred_at_block?: string;
-  transferred_at_time?: string;
-  minted_at_block?: string;
-  minted_at_time?: string;
-  contract?: string;
-  is_transferable?: boolean;
-  is_burnable?: boolean;
-  collection?: Collection;
-  isForSale?: boolean;
-  salePrice?: string;
-};
-
-type Collection = {
-  author: string;
-  collection_name: string;
-  name?: string | null;
-  img?: string | null;
-  allow_notify?: boolean;
-  authorized_accounts?: string[];
-  notify_accounts?: string[] | [];
-  market_fee?: number;
-  created_at_block?: string;
-  created_at_time?: string;
-  order?: number;
-  sales?: string;
-  volume?: string;
-  data?: {
-    img?: string;
-    name?: string;
-    description?: string;
-  };
-};
-
-type Sale = {
-=======
-import { Asset } from './assets';
-import { Collection } from './collections';
-
 export type Sale = {
->>>>>>> 6870b96 (adding functionality to get collection data)
   market_contract: string;
   assets_contract: string;
   sale_id: string;
@@ -93,7 +36,6 @@ export type Sale = {
   asset_serial: string;
 };
 
-<<<<<<< HEAD
 export const getLowestPriceAsset = async (
   collection: string,
   templateId: string
@@ -121,12 +63,4 @@ export const getLowestPriceAsset = async (
   } catch (e) {
     throw new Error(e);
   }
-=======
-type Price = {
-  token_contract: string;
-  token_symbol: string;
-  token_precision: number;
-  median: number | null;
-  amount: number;
->>>>>>> 6870b96 (adding functionality to get collection data)
 };
