@@ -185,7 +185,7 @@ export const getTemplatesByCollection = async ({
 
       const templatesQueryParams = toQueryString(templatesQueryObject);
       const templatesResponse = await getFromApi<Template[]>(
-        `https://proton.api.atomicassets.io/atomicassets/v1/templates?${templatesQueryParams}`
+        `${process.env.NEXT_PUBLIC_NFT_ENDPOINT}/atomicassets/v1/templates?${templatesQueryParams}`
       );
 
       if (!templatesResponse.success) {
@@ -243,7 +243,7 @@ export const getLowestPricesForAllCollectionTemplates = async ({
 
     const salesQueryParams = toQueryString(salesQueryObject);
     const salesResult = await getFromApi<Sale[]>(
-      `https://proton.api.atomicassets.io/atomicmarket/v1/sales/templates?${salesQueryParams}`
+      `${process.env.NEXT_PUBLIC_NFT_ENDPOINT}/atomicmarket/v1/sales/templates?${salesQueryParams}`
     );
 
     if (!salesResult.success) {
@@ -288,23 +288,6 @@ export const getLowestPricesForAllCollectionTemplates = async ({
 >>>>>>> 6870b96 (adding functionality to get collection data)
 };
 
-/**
- * Formats an array of templates with a custom 'lowestPrice' flag
- * Mostly used to display the lowest price of any of the templates with assets for sale in the collection
- * @param  {string} templates         Array of templates to format
- * @param  {string} lowestPrices      Object of a collection's lowest priced assets organized by template ID
- * @return {Template[]}               Returns array of templates with an additional 'lowestPrice' flag
- */
-
-export const formatTemplatesWithPriceData = (
-  templates: Template[],
-  lowestPrices: { [id: string]: string }
-): Template[] =>
-  templates.map((template) => ({
-    ...template,
-    lowestPrice: lowestPrices[template.template_id] || '',
-  }));
-
 /***
  * Gets number of assets for sale by template id for owner
  * @param {string} owner Owner of assets to look up
@@ -322,7 +305,7 @@ export const getAllTemplatesForUserWithAssetCount = async ({
 }> => {
   try {
     const accountResponse = await getFromApi<Account>(
-      `https://proton.api.atomicassets.io/atomicassets/v1/accounts/${owner}?&collection_whitelist=${collection}`
+      `${process.env.NEXT_PUBLIC_NFT_ENDPOINT}/atomicassets/v1/accounts/${owner}?&collection_whitelist=${collection}`
     );
 
     if (!accountResponse.success) {
@@ -331,7 +314,7 @@ export const getAllTemplatesForUserWithAssetCount = async ({
 
     // gets template count without counting those currently on sale
     const accountResponseWithHidden = await getFromApi<Account>(
-      `https://proton.api.atomicassets.io/atomicassets/v1/accounts/${owner}?hide_offers=true&collection_whitelist=${collection}`
+      `${process.env.NEXT_PUBLIC_NFT_ENDPOINT}/atomicassets/v1/accounts/${owner}?hide_offers=true&collection_whitelist=${collection}`
     );
 
     if (!accountResponseWithHidden.success) {
@@ -364,3 +347,23 @@ export const getAllTemplatesForUserWithAssetCount = async ({
     throw new Error(e);
   }
 };
+
+/**
+ * Formats an array of templates with a custom 'lowestPrice' and 'assetsForSale' flags
+ * Mostly used to display the lowest price of any of the templates with assets for sale in the collection
+ * @param  {string} templates         Array of templates to format
+ * @param  {string} lowestPrices      Object of a collection's lowest priced assets organized by template ID
+ * @param  {string} assetCount        Object of count of assets for sale of each template in collection
+ * @return {Template[]}               Returns array of templates with an additional 'lowestPrice' flag
+ */
+
+export const formatTemplatesWithPriceAndSaleData = (
+  templates: Template[],
+  lowestPrices: { [id: string]: string },
+  assetsForSale: { [id: string]: string }
+): Template[] =>
+  templates.map((template) => ({
+    ...template,
+    lowestPrice: lowestPrices[template.template_id] || '',
+    assetsForSale: assetsForSale[template.template_id] || '',
+  }));

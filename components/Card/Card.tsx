@@ -1,10 +1,75 @@
 import { FC } from 'react';
-import { CardContainer, AssetContainer, QuantityText } from './Card.styled';
+import {
+  CardContainer,
+  QuantityText,
+  Price,
+  Name,
+  CollectionName,
+  ShimmerBlock,
+} from './Card.styled';
+import { useLocaleContext } from '../Provider';
+import { Template } from '../../services/templates';
+import localizationJson from '../../custom/localization';
+import { TemplateImage, TemplateVideo } from '../index';
+import {
+  IPFS_RESOLVER_IMAGE,
+  IPFS_RESOLVER_VIDEO,
+  RESIZER_IMAGE_SM,
+} from '../../utils/constants';
 
-export const Card: FC = () => {
+type Props = {
+  template: Template;
+};
+
+export const Card: FC<Props> = ({ template }) => {
+  const {
+    assetsForSale,
+    lowestPrice,
+    collection: { collection_name },
+    immutable_data: { name, image, video },
+  } = template;
+  const { locale } = useLocaleContext();
+  const text = Object.keys(localizationJson[locale]).length
+    ? localizationJson[locale].nftCard
+    : localizationJson['en'].nftCard;
+
+  const formattedSaleCount = assetsForSale
+    ? assetsForSale.replace(/\d{1,3}(?=(\d{3})+(?!\d))/g, '$&,')
+    : '';
+
+  const videoSrc = `${IPFS_RESOLVER_VIDEO}${video}`;
+  const imageSrc = !image
+    ? image
+    : `${RESIZER_IMAGE_SM}${IPFS_RESOLVER_IMAGE}${image}`;
+  const fallbackImageSrc = image ? `${IPFS_RESOLVER_IMAGE}${image}` : '';
+
   return (
     <CardContainer>
-      <AssetContainer></AssetContainer>
+      <QuantityText>
+        {formattedSaleCount ? (
+          `${formattedSaleCount} ${text.nftsLeft}`
+        ) : (
+          <ShimmerBlock width="75px" />
+        )}
+      </QuantityText>
+
+      {video ? (
+        <TemplateVideo src={videoSrc} autoPlay={false} />
+      ) : (
+        <TemplateImage
+          templateImgSrc={imageSrc}
+          templateName={name}
+          fallbackImgSrc={fallbackImageSrc}
+        />
+      )}
+
+      <Name>{name}</Name>
+      <CollectionName>{collection_name}</CollectionName>
+      {lowestPrice ? (
+        <Price>{lowestPrice}</Price>
+      ) : (
+        <ShimmerBlock position="flex-start" />
+      )}
     </CardContainer>
   );
 };

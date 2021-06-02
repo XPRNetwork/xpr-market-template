@@ -1,51 +1,56 @@
-import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import {
   getTemplatesByCollection,
   Template,
   getLowestPricesForAllCollectionTemplates,
   getAllTemplatesForUserWithAssetCount,
+  formatTemplatesWithPriceAndSaleData,
 } from '../services/templates';
 import { FC } from 'react';
 import { Card, LoadingPage, Header } from '../components';
 import { useLocaleContext } from '../components/Provider';
 
 const HomePage: FC = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoadingTemplates, setIsLoadingTemplates] = useState<boolean>(true);
+  const [isLoadingPriceAndSales, setIsLoadingPriceAndSales] =
+    useState<boolean>(true);
   const [templates, setTemplates] = useState<Template[]>([]);
   const { isLoadingLocale } = useLocaleContext();
 
   useEffect(() => {
     (async () => {
-      setIsLoading(true);
-      const templates = await getTemplatesByCollection({ type: 'alprclk' });
+      let templates = await getTemplatesByCollection({ type: 'killerz' });
       setTemplates(templates);
-      setIsLoading(false);
-
-      console.log('templates: ', templates);
+      setIsLoadingTemplates(false);
 
       const prices = await getLowestPricesForAllCollectionTemplates({
-        type: 'alprclk',
-        owner: 'alprclk',
+        type: 'killerz',
+        owner: 'killerz',
       });
-      console.log('prices: ', prices);
+      const assetsForSale = await getAllTemplatesForUserWithAssetCount({
+        owner: 'killerz',
+        collection: 'killerz',
+      });
+      templates = formatTemplatesWithPriceAndSaleData(
+        templates,
+        prices,
+        assetsForSale
+      );
 
-      const onSale = await getAllTemplatesForUserWithAssetCount({
-        owner: 'alprclk',
-        collection: 'alprclk',
-      });
-      console.log('onsale: ', onSale);
+      setTemplates(templates);
+      setIsLoadingPriceAndSales(false);
     })();
   }, []);
 
-  if (isLoading || isLoadingLocale) {
+  if (isLoadingTemplates || isLoadingLocale) {
     return <LoadingPage />;
   }
 
+  console.log('templates: ', templates);
   return (
     <div>
       <Header />
-      <Card />
+      <Card template={templates[0]} />
     </div>
   );
 };
