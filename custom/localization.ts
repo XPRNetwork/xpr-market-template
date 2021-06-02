@@ -13,6 +13,11 @@ const localizationJson = {
       balanceText: 'Balance',
       loginText: 'Connect Wallet',
     },
+    detailPage: {
+      priceLabelText: 'PRICE',
+      editionLabelText: 'EDITION SIZE',
+      buyButtonText: 'BUY NOW',
+    },
   },
 };
 
