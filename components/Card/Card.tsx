@@ -11,11 +11,7 @@ import { useLocaleContext } from '../Provider';
 import { Template } from '../../services/templates';
 import localizationJson from '../../custom/localization';
 import { TemplateImage, TemplateVideo } from '../index';
-import {
-  IPFS_RESOLVER_IMAGE,
-  IPFS_RESOLVER_VIDEO,
-  RESIZER_IMAGE_SM,
-} from '../../utils/constants';
+import { IPFS_RESOLVER, RESIZER_IMAGE_SM } from '../../utils/constants';
 
 type Props = {
   template: Template;
@@ -37,11 +33,11 @@ export const Card: FC<Props> = ({ template }) => {
     ? assetsForSale.replace(/\d{1,3}(?=(\d{3})+(?!\d))/g, '$&,')
     : '';
 
-  const videoSrc = `${IPFS_RESOLVER_VIDEO}${video}`;
+  const videoSrc = `${IPFS_RESOLVER}${video}`;
   const imageSrc = !image
     ? image
-    : `${RESIZER_IMAGE_SM}${IPFS_RESOLVER_IMAGE}${image}`;
-  const fallbackImageSrc = image ? `${IPFS_RESOLVER_IMAGE}${image}` : '';
+    : `${RESIZER_IMAGE_SM}${IPFS_RESOLVER}${image}`;
+  const fallbackImageSrc = image ? `${IPFS_RESOLVER}${image}` : '';
 
   return (
     <CardContainer>
