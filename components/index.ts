@@ -12,4 +12,4 @@ export {
 } from './SocialMediaIcons/SocialMediaIcons';
 export { Footer } from './Footer/Footer';
 export { Header } from './Header/Header';
-export { LocaleProvider } from './Provider';
+export { default as Navbar } from './Navbar/Navbar';
