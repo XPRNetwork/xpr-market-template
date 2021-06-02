@@ -1,10 +1,22 @@
 import dayjs from 'dayjs';
 import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc'; // dependent on utc plugin
-import { QueryParams, SHORTENED_TOKEN_PRECISION } from './constants';
+import { SHORTENED_TOKEN_PRECISION } from './constants';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
+
+export interface QueryParams {
+  collection_name?: string;
+  template_id?: string;
+  ids?: string;
+  sort?: string;
+  order?: string;
+  symbol?: string;
+  state?: number;
+  limit?: number;
+  page?: number;
+}
 
 export const toQueryString = (queryObject: QueryParams): string => {
   return Object.keys(queryObject)
