@@ -160,27 +160,31 @@ const customizationJson = {
     },
     collectionNameFont: {
       type: 'caption',
-      color: 'red',
+      color: '#666666',
     },
     priceEditionLabelFont: {
       type: 'caption',
-      color: '#ffffff',
+      color: '#666666',
     },
-    priceEditionFont: {
+    priceFont: {
       type: 'h2',
-      color: '#ffffff',
+      color: '#c71f3e',
+    },
+    editionFont: {
+      type: 'h2',
+      color: 'black',
     },
     cardDescriptionFont: {
       type: 'caption',
-      color: 'grey',
+      color: '#666666',
     },
     button: {
       textColor: 'white',
       textFont: 'caption',
-      backgroundColor: '#ffffff',
+      backgroundColor: 'black',
     },
     dropdown: {
-      borderColor: '#0f0f0f',
+      borderColor: '#f2f2f2',
       arrowDropdownColor: '#000000',
       textColor: 'black',
       textFont: 'caption',
