@@ -42,7 +42,7 @@ const customizationJson = {
     backgroundColor: '#ffffff',
     defaultAvatarImage: '/default-avatar.png',
     navLinkFontType: 'label',
-    navLinks: [
+    navLinks: [ // recommended 3 - 5
       {
         link: 'https://google.com',
         title: 'LINK 01',
@@ -64,9 +64,9 @@ const customizationJson = {
         color: '#000000',
       },
     ],
-    buttonFontColor: '#ffffff',
+    buttonFontColor: '#000000',
     buttonBackgroundColor: 'transparent',
-    buttonBorderColor: 'black',
+    buttonBorderColor: '#000000',
     buttonFontType: 'label',
     bottomBorderColor: '#cccccc',
   },
