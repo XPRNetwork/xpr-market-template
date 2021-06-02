@@ -26,6 +26,7 @@ import { ReactComponent as CloseIcon } from '../../public/icon-light-close-16-px
 import { useAuthContext, useLocaleContext } from '../Provider';
 import { useScrollLock, useEscapeKeyClose, useWindowSize } from '../../hooks';
 import { TOKEN_SYMBOL } from '../../utils/constants';
+import localizationJson from '../../custom/localization';
 
 type DropdownProps = {
   isOpen: boolean;
@@ -35,15 +36,20 @@ type DropdownProps = {
 const Dropdown = ({ isOpen, closeNavDropdown }: DropdownProps): JSX.Element => {
   const router = useRouter();
   const { currentUser, currentUserBalance, logout } = useAuthContext();
+  const { locale, isLoadingLocale } = useLocaleContext();
   const { isMobile, isTablet } = useWindowSize();
   useEscapeKeyClose(closeNavDropdown);
   const isLoggedIn = currentUser && currentUser.actor;
   const routes = [];
 
+  const text = Object.keys(localizationJson[locale]).length
+    ? localizationJson[locale].navbar
+    : localizationJson['en'].navbar;
+
   if (isMobile || isTablet) {
-    theme.navbar.navLinks.forEach((link) => {
+    theme.navbar.navLinks.forEach((link, index) => {
       routes.push({
-        name: link.title,
+        name: text.navLinks[index],
         path: link.link,
         color: link.color || theme.navbar.buttonFontColor,
         onClick: () => {
@@ -86,7 +92,7 @@ const Dropdown = ({ isOpen, closeNavDropdown }: DropdownProps): JSX.Element => {
           { isLoggedIn ? (
             <>
               <Name>{currentUser ? currentUser.name : ''}</Name>
-              <Subtitle>Balance</Subtitle>
+              <Subtitle>{text.balanceText}</Subtitle>
               <Balance>{currentUserBalance || `0.00 ${TOKEN_SYMBOL}`}</Balance>
             </>
           ) : null }
@@ -113,6 +119,7 @@ const Navbar = () => {
   const { navbar } = theme;
   const { currentUser, login, isLoadingUser } =
     useAuthContext();
+    const { locale, isLoadingLocale } = useLocaleContext();
   const [isOpen, setIsOpen] = useState(false);
   useScrollLock(isOpen);
 
@@ -121,6 +128,12 @@ const Navbar = () => {
   const closeNavDropdown = () => setIsOpen(false);
 
   useEscapeKeyClose(closeNavDropdown);
+
+  if (isLoadingLocale) return null;
+
+  const text = Object.keys(localizationJson[locale]).length
+  ? localizationJson[locale].navbar
+  : localizationJson['en'].navbar;
 
   return (
     <NavbarContainer>
@@ -136,9 +149,9 @@ const Navbar = () => {
             <Image src={navbar.logo} height="60px" width="auto" />
           </LogoContainer>
           <NavLinks>
-            {navbar.navLinks.map((link) => (
-              <Link key={link.title} href={link.link}>
-                {link.title}
+            {navbar.navLinks.map((_, index) => (
+              <Link key={text.navLinks[index]} href={text.navLinks[index]}>
+                {text.navLinks[index]}
               </Link>
             ))}
           </NavLinks>
@@ -157,7 +170,7 @@ const Navbar = () => {
             />
           </AvatarContainer>
         ) : (
-          <LoginButton onClick={login}>Connect Wallet</LoginButton>
+          <LoginButton onClick={login}>{text.loginText}</LoginButton>
         )}
         <Dropdown isOpen={isOpen} closeNavDropdown={closeNavDropdown} />
         <GradientBackground isOpen={isOpen} onClick={closeNavDropdown} />
