@@ -9,12 +9,11 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <>
     <AuthProvider>
-    <LocaleProvider>
-      <Navbar />
-      <Component {...pageProps} />
-      <Footer />
-    </LocaleProvider>
-
+      <LocaleProvider>
+        <Navbar />
+        <Component {...pageProps} />
+        <Footer />
+      </LocaleProvider>
     </AuthProvider>
     </>
   );
