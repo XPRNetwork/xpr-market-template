@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import {
   Container,
   Details,
@@ -8,13 +8,13 @@ import {
   Price,
   Edition,
   Description,
-  Button,
 } from './NftDetails.styled';
 import { Row } from '../../styles/index.styled';
 import { Template } from '../../services/templates';
 
-export const NftDetails: FC<{ template: Template }> = ({
+export const NftDetails: FC<{ template: Template; children: ReactNode }> = ({
   template: { lowestPrice, max_supply, collection, immutable_data },
+  children,
 }) => (
   <Container>
     <Details>
@@ -30,6 +30,6 @@ export const NftDetails: FC<{ template: Template }> = ({
       </Row>
       <Description>{immutable_data.desc}</Description>
     </Details>
-    <Button>BUY NOW</Button>
+    {children}
   </Container>
 );
