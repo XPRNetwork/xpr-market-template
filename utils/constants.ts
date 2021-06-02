@@ -6,8 +6,14 @@ export const SHORTENED_TOKEN_PRECISION = 2;
 export const DEFAULT_COLLECTION = 'monsters';
 export const PRICE_OF_RAM_IN_XPR = 0.0222;
 export const PAGINATION_LIMIT = 8;
+<<<<<<< HEAD
 export const IPFS_RESOLVER = 'https://ipfs.io/ipfs/';
 
+=======
+export const IPFS_RESOLVER_IMAGE = 'https://ipfs.io/ipfs/';
+export const IPFS_RESOLVER_VIDEO = 'https://ipfs.io/ipfs/';
+export const RESIZER_IMAGE_SM = 'https://bloks.io/cdn-cgi/image/width=250/';
+>>>>>>> 4bda308 (template card finished)
 export const DEFAULT_SCHEMA = {
   series: 'uint16',
   name: 'string',
