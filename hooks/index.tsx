@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+export { useFetchNft } from './useFetchNft';
 
 export const useScrollLock = (isActive: boolean): void => {
   useEffect(() => {
