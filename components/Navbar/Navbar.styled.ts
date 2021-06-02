@@ -4,7 +4,7 @@ import { Image } from '../../styles/index.styled';
 import { MaxWidth } from '../../styles/MaxWidth.styled';
 import { breakpoint } from '../../styles/Breakpoints';
 
-const { navbar } = customizationJson;
+const { navbar, typography } = customizationJson;
 
 export type GradientBackgroundProps = {
   isOpen: boolean;
@@ -75,6 +75,9 @@ export const LoginButton = styled.button`
   color: ${navbar.buttonFontColor};
   background-color: ${navbar.buttonBackgroundColor};
   cursor: pointer;
+  font-family: ${typography[navbar.buttonFontType].font};
+  font-size: ${typography[navbar.buttonFontType].size};
+  font-weight: ${typography[navbar.buttonFontType].fontWeight};
 `;
 
 export const MobileOnlySection = styled.section`
@@ -90,6 +93,9 @@ export const NavLinks = styled.section`
   width: 45%;
   display: flex;
   justify-content: space-between;
+  font-family: ${typography[navbar.navLinkFontType].font};
+  font-size: ${typography[navbar.navLinkFontType].size};
+  font-weight: ${typography[navbar.navLinkFontType].fontWeight};
 `;
 
 export const MobileHeaderWrapper = styled.div`
