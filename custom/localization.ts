@@ -18,6 +18,7 @@ const localizationJson = {
       editionLabelText: 'EDITION SIZE',
       buyButtonText: 'BUY NOW',
       placeholderPriceText: 'NOT FOR SALE',
+      placeholderDropdownText: 'NO ASSETS',
       viewProtonMarketText: 'VIEW ON PROTON MARKET',
       sellButtonText: 'SELL ON PROTON MARKET',
       cancelSaleButtonText: 'CANCEL SALE ON PROTON MARKET',

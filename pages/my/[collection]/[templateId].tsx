@@ -74,6 +74,7 @@ const MyNftDetailPage: FC = () => {
           salePrices={salePrices}
           selectedAssetId={selectedAssetId}
           setSelectedAssetId={setSelectedAssetId}
+          placeholderDropdownText={detailPageText.placeholderDropdownText}
         />
         <ButtonLink
           href={`http://protonmarket.com/details/${owner}/${collection}/${templateId}`}
