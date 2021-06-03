@@ -6,6 +6,7 @@ import { useFetchNft } from '../../hooks';
 import {
   NftPageContainer,
   Button,
+  ButtonLink,
   ErrorMessage,
 } from '../../styles/templateId.styled';
 import ProtonSDK from '../../services/proton';
@@ -82,7 +83,16 @@ const NftDetailPage: FC = () => {
     <NftPageContainer>
       <Nft name={name} image={image} video={video} />
       <NftDetails template={template} detailPageText={detailPageText}>
-        <Button onClick={buyAsset}>{detailPageText.buyButtonText}</Button>
+        {template.lowestPrice ? (
+          <Button onClick={buyAsset}>{detailPageText.buyButtonText}</Button>
+        ) : (
+          <ButtonLink
+            href={`http://protonmarket.com/${collection}/${templateId}`}
+            target="_blank"
+            rel="noreferrer">
+            {detailPageText.viewProtonMarketText}
+          </ButtonLink>
+        )}
         {purchasingError ? (
           <ErrorMessage>{purchasingError}</ErrorMessage>
         ) : null}
