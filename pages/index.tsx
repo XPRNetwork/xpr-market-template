@@ -7,8 +7,10 @@ import {
   formatTemplatesWithPriceAndSaleData,
 } from '../services/templates';
 import { FC } from 'react';
-import { Card, LoadingPage, Header } from '../components';
+import { Card, LoadingPage, Header, FeaturedSection } from '../components';
 import { useLocaleContext } from '../components/Provider';
+import customizationJson from '../custom/customization';
+const { collection, owner } = customizationJson;
 
 const HomePage: FC = () => {
   const [isLoadingTemplates, setIsLoadingTemplates] = useState<boolean>(true);
@@ -20,18 +22,19 @@ const HomePage: FC = () => {
   useEffect(() => {
     (async () => {
       try {
-        let templates = await getTemplatesByCollection({ type: 'killerz' });
+        let templates = await getTemplatesByCollection({ type: collection });
         setTemplates(templates);
         setIsLoadingTemplates(false);
 
         const prices = await getLowestPricesForAllCollectionTemplates({
-          type: 'killerz',
-          owner: 'killerz',
+          type: collection,
+          owner,
         });
         const assetsForSale = await getAllTemplatesForUserWithAssetCount({
-          owner: 'killerz',
-          collection: 'killerz',
+          owner,
+          collection,
         });
+
         templates = formatTemplatesWithPriceAndSaleData(
           templates,
           prices,
@@ -53,7 +56,9 @@ const HomePage: FC = () => {
   return (
     <div>
       <Header />
-      <Card template={templates[0]} />
+      <FeaturedSection>
+        <Card template={templates[0]} />
+      </FeaturedSection>
     </div>
   );
 };

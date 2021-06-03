@@ -324,5 +324,5 @@ export const formatTemplatesWithPriceAndSaleData = (
   templates.map((template) => ({
     ...template,
     lowestPrice: lowestPrices[template.template_id] || '',
-    assetsForSale: assetsForSale[template.template_id] || '',
+    assetsForSale: assetsForSale[template.template_id] || '0',
   }));
