@@ -61,8 +61,6 @@ export const TemplateImage: FC<Props> = ({
     fallbackImgSrc = '/placeholder-template-image.png';
   }
 
-  console.log('templateImage: ', templateImgSrc);
-
   return (
     <ImageContainer className="template-image-container">
       <TemplateImageChild

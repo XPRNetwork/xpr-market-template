@@ -19,26 +19,30 @@ const HomePage: FC = () => {
 
   useEffect(() => {
     (async () => {
-      let templates = await getTemplatesByCollection({ type: 'killerz' });
-      setTemplates(templates);
-      setIsLoadingTemplates(false);
+      try {
+        let templates = await getTemplatesByCollection({ type: 'killerz' });
+        setTemplates(templates);
+        setIsLoadingTemplates(false);
 
-      const prices = await getLowestPricesForAllCollectionTemplates({
-        type: 'killerz',
-        owner: 'killerz',
-      });
-      const assetsForSale = await getAllTemplatesForUserWithAssetCount({
-        owner: 'killerz',
-        collection: 'killerz',
-      });
-      templates = formatTemplatesWithPriceAndSaleData(
-        templates,
-        prices,
-        assetsForSale
-      );
+        const prices = await getLowestPricesForAllCollectionTemplates({
+          type: 'killerz',
+          owner: 'killerz',
+        });
+        const assetsForSale = await getAllTemplatesForUserWithAssetCount({
+          owner: 'killerz',
+          collection: 'killerz',
+        });
+        templates = formatTemplatesWithPriceAndSaleData(
+          templates,
+          prices,
+          assetsForSale
+        );
 
-      setTemplates(templates);
-      setIsLoadingPriceAndSales(false);
+        setTemplates(templates);
+        setIsLoadingPriceAndSales(false);
+      } catch (e) {
+        setTemplates([]);
+      }
     })();
   }, []);
 
@@ -46,7 +50,6 @@ const HomePage: FC = () => {
     return <LoadingPage />;
   }
 
-  console.log('templates: ', templates);
   return (
     <div>
       <Header />
