@@ -1,4 +1,6 @@
 const customizationJson = {
+  collection: 'monsters',
+  owner: 'monsters',
   typography: {
     h1: {
       font: 'bebas',

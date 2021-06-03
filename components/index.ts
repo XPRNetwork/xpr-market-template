@@ -21,3 +21,4 @@ export { Spinner } from './Spinner/Spinner';
 export { LoadingPage } from './LoadingPage/LoadingPage';
 export { TemplateImage } from './TemplateImage/TemplateImage';
 export { TemplateVideo } from './TemplateVideo/TemplateVideo';
+export { FeaturedSection } from './FeaturedSection/FeaturedSection';

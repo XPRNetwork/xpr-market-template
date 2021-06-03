@@ -24,6 +24,7 @@ export const Card: FC<Props> = ({ template }) => {
     collection: { collection_name },
     immutable_data: { name, image, video },
   } = template;
+
   const { locale } = useLocaleContext();
   const text = Object.keys(localizationJson[locale]).length
     ? localizationJson[locale].nftCard
@@ -61,11 +62,11 @@ export const Card: FC<Props> = ({ template }) => {
 
       <Name>{name}</Name>
       <CollectionName>{collection_name}</CollectionName>
-      {lowestPrice ? (
-        <Price>{lowestPrice}</Price>
-      ) : (
+      {lowestPrice === undefined ? (
         <ShimmerBlock position="flex-start" />
-      )}
+      ) : lowestPrice ? (
+        <Price>{lowestPrice}</Price>
+      ) : null }
     </CardContainer>
   );
 };
