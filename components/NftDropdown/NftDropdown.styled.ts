@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 const inputCSS = css`
   font-size: 16px;
-  margin-bottom: 12px;
+  margin: 64px 0 0;
   padding: 0 16px;
   width: 100%;
   height: 48px;
@@ -14,10 +14,6 @@ const inputCSS = css`
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-
-  &:hover {
-    border: 1px solid #e6e6e6;
-  }
 `;
 
 export const DisabledInput = styled.input`
@@ -28,6 +24,6 @@ export const DropdownMenu = styled.select`
   ${inputCSS}
   background: url('/down-arrow.svg');
   background-repeat: no-repeat;
-  background-position: top 5px right 15px;
+  background-position: top 50% right 15px;
   cursor: pointer;
 `;
