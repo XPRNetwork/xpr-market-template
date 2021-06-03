@@ -91,14 +91,14 @@ const customizationJson = {
   },
   nftCard: {
     mainBackgroundColor: '#ffffff',
-    secondaryBackgroundColor: '#000000',
+    secondaryBackgroundColor: 'lightgrey',
     priceFont: {
       type: 'h4',
       color: '#000000',
     },
     countFont: {
       type: 'label',
-      color: '#f0f0f0',
+      color: 'black',
     },
     titleFont: {
       type: 'h4',
@@ -106,10 +106,10 @@ const customizationJson = {
     },
     collectionNameFont: {
       type: 'label',
-      color: '#f0f0f0',
+      color: 'gray',
     },
-    borderColor: '#0f0f0f',
-    borderRadius: '4px',
+    borderColor: 'gray',
+    borderRadius: '8px',
   },
   featuredLayoutSection: {
     carousel: false,
