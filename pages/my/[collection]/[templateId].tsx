@@ -10,7 +10,7 @@ import {
 import localizationJson from '../../../custom/localization';
 import { RouterQuery } from '../../../utils/constants';
 
-const NftSellPage: FC = () => {
+const MyNftDetailPage: FC = () => {
   const { currentUser, isLoadingUser } = useAuthContext();
   const owner = currentUser ? currentUser.actor : '';
 
@@ -88,4 +88,4 @@ const NftSellPage: FC = () => {
   );
 };
 
-export default NftSellPage;
+export default MyNftDetailPage;
