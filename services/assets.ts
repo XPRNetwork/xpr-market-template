@@ -3,7 +3,7 @@ import { Collection } from './collections';
 import { toQueryString } from '../utils';
 import { getFromApi } from '../utils/browser-fetch';
 
-export interface Asset {
+export type Asset = {
   name: string;
   data: Record<string, unknown>;
   owner: string;
@@ -32,7 +32,7 @@ export interface Asset {
   schema?: Schema;
   isForSale?: boolean;
   salePrice?: string;
-}
+};
 
 /**
  * Gets a list of all user owned assets of a specific template
