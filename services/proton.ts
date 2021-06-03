@@ -1,6 +1,7 @@
 import { ConnectWallet } from '@proton/web-sdk';
 import { LinkSession, Link } from '@proton/link';
 import proton from './proton-rpc';
+import fees from './fees';
 import logoUrl from '../public/mlb-logo.png';
 
 export interface User {
@@ -38,9 +39,22 @@ interface SetMarketFeeOptions {
   market_fee: string;
 }
 
+interface CreateSaleOptions {
+  seller: string;
+  asset_id: string;
+  price: string;
+  currency: string;
+  listing_fee: number;
+}
+
 interface PurchaseSaleOptions {
   buyer: string;
   amount: string;
+  sale_id: string;
+}
+
+interface CancelSaleOptions {
+  actor: string;
   sale_id: string;
 }
 
@@ -589,6 +603,144 @@ class ProtonSDK {
         success: false,
         error:
           message || 'An error has occurred while trying to purchase an item.',
+      };
+    }
+  };
+
+  /**
+   * Announce an asset sale and create an initial offer for the asset on atomic market.
+   *
+   * @param {string}   seller       Chain account of the asset's current owner.
+   * @param {string}   asset_id     ID of the asset to sell.
+   * @param {string}   price        Listing price of the sale (i.e. '1.000000').
+   * @param {string}   currency     Token precision (number of decimal points) and token symbol that the sale will be paid in (i.e. '6,XUSDC').
+   * @param {string}   listing_fee  Ram payment when a user does not have enough ram to transact.
+   * @return {Response}             Returns an object indicating the success of the transaction and transaction ID.
+   */
+
+  createSale = async ({
+    seller,
+    asset_id,
+    price,
+    currency,
+    listing_fee,
+  }: CreateSaleOptions): Promise<Response> => {
+    const ramActions = this.generateSaleRamActions({
+      listing_fee,
+      seller,
+    });
+
+    const actions = [
+      ...ramActions,
+      {
+        account: 'atomicmarket',
+        name: 'announcesale',
+        authorization: [
+          {
+            actor: seller,
+            permission: 'active',
+          },
+        ],
+        data: {
+          seller,
+          asset_ids: [asset_id],
+          maker_marketplace: 'fees.market',
+          listing_price: price,
+          settlement_symbol: currency,
+        },
+      },
+      {
+        account: 'atomicassets',
+        name: 'createoffer',
+        authorization: [
+          {
+            actor: seller,
+            permission: 'active',
+          },
+        ],
+        data: {
+          sender: seller,
+          recipient: 'atomicmarket',
+          sender_asset_ids: [asset_id],
+          recipient_asset_ids: [],
+          memo: 'sale',
+        },
+      },
+    ];
+
+    try {
+      if (!this.session) {
+        throw new Error('Unable to create a sale offer without logging in.');
+      }
+
+      const result = await this.session.transact(
+        { actions: actions },
+        { broadcast: true }
+      );
+
+      await fees.refreshRamInfoForUser(seller);
+
+      return {
+        success: true,
+        transactionId: result.processed.id,
+      };
+    } catch (e) {
+      return {
+        success: false,
+        error:
+          e.message || 'An error has occurred while creating the sale offer.',
+      };
+    }
+  };
+
+  /**
+   * Cancel the announcement of an asset sale and its initial offer on atomic market.
+   *
+   * @param {string}   actor     Chain account of the asset's current owner.
+   * @param {string}   sale_id   ID of the sale to cancel.
+   * @return {Response}      Returns an object indicating the success of the transaction and transaction ID.
+   */
+
+  cancelSale = async ({
+    actor,
+    sale_id,
+  }: CancelSaleOptions): Promise<Response> => {
+    const actions = [
+      {
+        account: 'atomicmarket',
+        name: 'cancelsale',
+        authorization: [
+          {
+            actor,
+            permission: 'active',
+          },
+        ],
+        data: {
+          sale_id,
+        },
+      },
+    ];
+
+    try {
+      if (!this.session) {
+        throw new Error('Unable to cancel a sale without logging in.');
+      }
+
+      const result = await this.session.transact(
+        { actions: actions },
+        { broadcast: true }
+      );
+
+      await fees.refreshRamInfoForUser(actor);
+
+      return {
+        success: true,
+        transactionId: result.processed.id,
+      };
+    } catch (e) {
+      return {
+        success: false,
+        error: e.message || 'An error has occurred while cancelling the sale.',
       };
     }
   };

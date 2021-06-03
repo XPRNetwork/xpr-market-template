@@ -17,6 +17,8 @@ const localizationJson = {
       priceLabelText: 'PRICE',
       editionLabelText: 'EDITION SIZE',
       buyButtonText: 'BUY NOW',
+      sellButtonText: 'SELL ON PROTON MARKET',
+      cancelSaleButtonText: 'CANCEL SALE',
     },
     nftCard: {
       nftsLeft: 'LEFT',

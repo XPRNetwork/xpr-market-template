@@ -1,8 +1,8 @@
-import { getFromApi } from '../utils/browser-fetch';
-import { toQueryString } from '../utils';
-import { TOKEN_SYMBOL } from '../utils/constants';
 import { Asset } from './assets';
 import { Collection } from './collections';
+import { addPrecisionDecimal, toQueryString } from '../utils';
+import { getFromApi } from '../utils/browser-fetch';
+import { TOKEN_SYMBOL } from '../utils/constants';
 
 type Price = {
   token_contract: string;
@@ -10,6 +10,15 @@ type Price = {
   token_precision: number;
   median: number | null;
   amount: number;
+};
+
+export type SaleData = {
+  saleIds: {
+    [asset_id: string]: string;
+  };
+  salePrices: {
+    [asset_id: string]: string;
+  };
 };
 
 export type Sale = {
@@ -60,6 +69,80 @@ export const getLowestPriceAsset = async (
     }
 
     return saleRes.data;
+  } catch (e) {
+    throw new Error(e);
+  }
+};
+
+/**
+ * Get the unfulfilled sales for a specific template
+ * Mostly used in purchasing an asset of a specific template
+ * @param  {string} templateId     The template id of an asset you want to purchase
+ * @return {SaleData}       Returns a SaleData including a record of sale IDs by asset ID and a record of sales price by asset ID
+ */
+
+export const getSaleDataForTemplate = async (
+  template_id: string,
+  owner: string
+): Promise<SaleData> => {
+  try {
+    const limit = 100;
+    let sales = [];
+    let hasResults = true;
+    let page = 1;
+
+    while (hasResults) {
+      const queryObject = {
+        state: 1,
+        sort: 'template_mint',
+        order: 'asc',
+        symbol: TOKEN_SYMBOL,
+        template_id,
+        page,
+        owner,
+        limit,
+      };
+      const queryParams = toQueryString(queryObject);
+      const result = await getFromApi<Asset[]>(
+        `${process.env.NEXT_PUBLIC_NFT_ENDPOINT}/atomicmarket/v1/sales?${queryParams}`
+      );
+
+      if (!result.success) {
+        throw new Error(result.message as unknown as string);
+      }
+
+      if (result.data.length < limit) {
+        hasResults = false;
+      }
+
+      sales = sales.concat(result.data);
+      page += 1;
+    }
+
+    const salePrices = {};
+    const saleIds = {};
+    for (const sale of sales) {
+      const {
+        assets,
+        listing_price,
+        listing_symbol,
+        sale_id,
+        price: { token_precision },
+      } = sale;
+
+      assets.forEach(({ asset_id }) => {
+        saleIds[asset_id] = sale_id;
+        salePrices[asset_id] = `${addPrecisionDecimal(
+          listing_price,
+          token_precision
+        )} ${listing_symbol}`;
+      });
+    }
+
+    return {
+      saleIds,
+      salePrices,
+    };
   } catch (e) {
     throw new Error(e);
   }

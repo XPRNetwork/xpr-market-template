@@ -73,26 +73,22 @@ const NftDetailPage: FC = () => {
     }
   };
 
-  const getContent = () => {
-    if (isLoadingUser || isLoadingLocale || isLoading || error) {
-      return null;
-    }
+  if (isLoadingUser || isLoadingLocale || isLoading || error) {
+    return null;
+  }
 
-    const { name, image, video } = template.immutable_data;
-    return (
-      <>
-        <Nft name={name} image={image} video={video} />
-        <NftDetails template={template} detailPageText={detailPageText}>
-          <Button onClick={buyAsset}>{detailPageText.buyButtonText}</Button>
-          {purchasingError ? (
-            <ErrorMessage>{purchasingError}</ErrorMessage>
-          ) : null}
-        </NftDetails>
-      </>
-    );
-  };
-
-  return <NftPageContainer>{getContent()}</NftPageContainer>;
+  const { name, image, video } = template.immutable_data;
+  return (
+    <NftPageContainer>
+      <Nft name={name} image={image} video={video} />
+      <NftDetails template={template} detailPageText={detailPageText}>
+        <Button onClick={buyAsset}>{detailPageText.buyButtonText}</Button>
+        {purchasingError ? (
+          <ErrorMessage>{purchasingError}</ErrorMessage>
+        ) : null}
+      </NftDetails>
+    </NftPageContainer>
+  );
 };
 
 export default NftDetailPage;
