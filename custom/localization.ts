@@ -16,12 +16,12 @@ const localizationJson = {
     detailPage: {
       priceLabelText: 'PRICE',
       editionLabelText: 'EDITION SIZE',
-      buyButtonText: 'BUY NOW',
       placeholderPriceText: 'NOT FOR SALE',
       placeholderDropdownText: 'NO ASSETS',
-      viewProtonMarketText: 'VIEW ON PROTON MARKET',
+      buyButtonText: 'BUY NOW',
       sellButtonText: 'SELL ON PROTON MARKET',
       cancelSaleButtonText: 'CANCEL SALE ON PROTON MARKET',
+      viewProtonMarketButtonText: 'VIEW ON PROTON MARKET',
     },
     nftCard: {
       nftsLeft: 'LEFT',
