@@ -44,6 +44,12 @@ const NftSellPage: FC = () => {
   const [selectedAssetId, setSelectedAssetId] = useState<string>('');
 
   useEffect(() => {
+    if (!currentUser && !isLoadingUser) {
+      router.push(`/${collection}/${templateId}`);
+    }
+  }, [currentUser, isLoadingUser]);
+
+  useEffect(() => {
     setSelectedAssetId(assets[0] ? assets[0].asset_id : '');
   }, [assets]);
 
