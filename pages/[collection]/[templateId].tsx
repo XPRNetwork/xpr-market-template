@@ -90,7 +90,7 @@ const NftDetailPage: FC = () => {
             href={`http://protonmarket.com/${collection}/${templateId}`}
             target="_blank"
             rel="noreferrer">
-            {detailPageText.viewProtonMarketText}
+            {detailPageText.viewButtonText}
           </ButtonLink>
         )}
         {purchasingError ? (
