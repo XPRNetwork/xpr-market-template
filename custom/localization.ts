@@ -19,9 +19,9 @@ const localizationJson = {
       placeholderPriceText: 'NOT FOR SALE',
       placeholderDropdownText: 'NO ASSETS',
       buyButtonText: 'BUY NOW',
+      viewButtonText: 'VIEW ON PROTON MARKET',
       sellButtonText: 'SELL ON PROTON MARKET',
       cancelSaleButtonText: 'CANCEL SALE ON PROTON MARKET',
-      viewProtonMarketButtonText: 'VIEW ON PROTON MARKET',
     },
     nftCard: {
       nftsLeft: 'LEFT',
