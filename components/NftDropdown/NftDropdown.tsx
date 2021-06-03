@@ -1,5 +1,5 @@
 import { Dispatch, FC, SetStateAction } from 'react';
-import { DropdownMenu, DisabledInput } from './NftSaleDropdown.styled';
+import { DropdownMenu, DisabledInput } from './NftDropdown.styled';
 import { Asset } from '../../services/assets';
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
   setSelectedAssetId: Dispatch<SetStateAction<string>>;
 };
 
-export const NftSaleDropdown: FC<Props> = ({
+export const NftDropdown: FC<Props> = ({
   assets,
   salePrices,
   selectedAssetId,

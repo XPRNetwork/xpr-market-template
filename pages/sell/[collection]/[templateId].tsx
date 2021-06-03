@@ -1,6 +1,6 @@
 import { FC, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { Nft, NftDetails, NftSaleDropdown } from '../../../components';
+import { Nft, NftDetails, NftDropdown } from '../../../components';
 import { useAuthContext, useLocaleContext } from '../../../components/Provider';
 import { useFetchNft, useFetchOwnedNfts } from '../../../hooks';
 import { NftPageContainer, Button } from '../../../styles/templateId.styled';
@@ -63,7 +63,7 @@ const NftSellPage: FC = () => {
     <NftPageContainer>
       <Nft name={name} image={image} video={video} />
       <NftDetails template={template} detailPageText={detailPageText}>
-        <NftSaleDropdown
+        <NftDropdown
           assets={assets}
           salePrices={salePrices}
           selectedAssetId={selectedAssetId}

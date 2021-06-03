@@ -14,7 +14,7 @@ export { Footer } from './Footer/Footer';
 export { Header } from './Header/Header';
 export { Nft } from './Nft/Nft';
 export { NftDetails } from './NftDetails/NftDetails';
-export { NftSaleDropdown } from './NftSaleDropdown/NftSaleDropdown';
+export { NftDropdown } from './NftDropdown/NftDropdown';
 export { NftMeta } from './NftMeta/NftMeta';
 export { default as Navbar } from './Navbar/Navbar';
 export { Card } from './Card/Card';
