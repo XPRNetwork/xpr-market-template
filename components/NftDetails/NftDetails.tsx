@@ -18,11 +18,12 @@ export const NftDetails: FC<{
   detailPageText: {
     priceLabelText: string;
     editionLabelText: string;
+    placeholderPriceText: string;
   };
 }> = ({
   children,
   template: { lowestPrice, max_supply, collection, immutable_data },
-  detailPageText: { priceLabelText, editionLabelText },
+  detailPageText: { priceLabelText, editionLabelText, placeholderPriceText },
 }) => (
   <Container>
     <NftMeta
@@ -41,7 +42,7 @@ export const NftDetails: FC<{
         <PriceEditionLabel>{editionLabelText}</PriceEditionLabel>
       </Row>
       <Row>
-        <Price>{lowestPrice}</Price>
+        <Price>{lowestPrice || placeholderPriceText}</Price>
         <Edition>{max_supply}</Edition>
       </Row>
       <Description>{immutable_data.desc}</Description>
