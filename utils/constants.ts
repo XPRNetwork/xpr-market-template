@@ -25,10 +25,6 @@ export const META = {
     'Start creating and selling your own NFTs! The best way to monetize your talent. Free to get started.',
 };
 
-export const RAM_AMOUNTS = {
-  LIST_SALE: 768,
-};
-
 export interface RouterQuery {
   [query: string]: string;
 }

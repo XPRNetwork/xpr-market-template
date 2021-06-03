@@ -1,21 +1,14 @@
 import { FC, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Nft, NftDetails, NftSaleDropdown } from '../../../components';
-import {
-  useAuthContext,
-  useLocaleContext,
-  useModalContext,
-  MODAL_TYPES,
-} from '../../../components/Provider';
+import { useAuthContext, useLocaleContext } from '../../../components/Provider';
 import { useFetchNft, useFetchOwnedNfts } from '../../../hooks';
 import { NftPageContainer, Button } from '../../../styles/templateId.styled';
-import ProtonSDK from '../../../services/proton';
 import localizationJson from '../../../custom/localization';
 import { RouterQuery } from '../../../utils/constants';
 
 const NftSellPage: FC = () => {
   const { currentUser, isLoadingUser } = useAuthContext();
-  const { openModal, setModalProps } = useModalContext();
 
   const { locale, isLoadingLocale } = useLocaleContext();
   const detailPageText = localizationJson[locale]
@@ -50,24 +43,9 @@ const NftSellPage: FC = () => {
     setSelectedAssetId(assets[0] ? assets[0].asset_id : '');
   }, [assets]);
 
-  const createSale = () => {
-    setModalProps({
-      reloadPage: () => setTimeout(() => router.reload, 1000),
-      assetId: selectedAssetId,
-    });
-    openModal(MODAL_TYPES.CREATE_SALE);
-  };
+  const createSale = () => console.log('create');
 
-  const cancelSale = async () => {
-    const res = await ProtonSDK.cancelSale({
-      actor: currentUser ? currentUser.actor : '',
-      sale_id: saleIds[selectedAssetId],
-    });
-
-    if (res.success) {
-      setTimeout(() => router.reload, 1000);
-    }
-  };
+  const cancelSale = () => console.log('cancel');
 
   if (
     isLoadingUser ||
