@@ -18,6 +18,9 @@ const localizationJson = {
       editionLabelText: 'EDITION SIZE',
       buyButtonText: 'BUY NOW',
     },
+    nftCard: {
+      nftsLeft: 'LEFT',
+    },
   },
 };
 

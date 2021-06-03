@@ -7,7 +7,7 @@ export const DEFAULT_COLLECTION = 'monsters';
 export const PRICE_OF_RAM_IN_XPR = 0.0222;
 export const PAGINATION_LIMIT = 8;
 export const IPFS_RESOLVER = 'https://ipfs.io/ipfs/';
-
+export const RESIZER_IMAGE_SM = 'https://bloks.io/cdn-cgi/image/width=250/';
 export const DEFAULT_SCHEMA = {
   series: 'uint16',
   name: 'string',
