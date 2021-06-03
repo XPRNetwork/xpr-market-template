@@ -1,8 +1,8 @@
+import { getFromApi } from '../utils/browser-fetch';
+import { addPrecisionDecimal, toQueryString } from '../utils';
+import { TOKEN_SYMBOL } from '../utils/constants';
 import { Asset } from './assets';
 import { Collection } from './collections';
-import { addPrecisionDecimal, toQueryString } from '../utils';
-import { getFromApi } from '../utils/browser-fetch';
-import { TOKEN_SYMBOL } from '../utils/constants';
 
 type Price = {
   token_contract: string;
