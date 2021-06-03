@@ -3,12 +3,16 @@ import { useRouter } from 'next/router';
 import { Nft, NftDetails, NftDropdown } from '../../../components';
 import { useAuthContext, useLocaleContext } from '../../../components/Provider';
 import { useFetchNft, useFetchOwnedNfts } from '../../../hooks';
-import { NftPageContainer, Button } from '../../../styles/templateId.styled';
+import {
+  NftPageContainer,
+  ButtonLink,
+} from '../../../styles/templateId.styled';
 import localizationJson from '../../../custom/localization';
 import { RouterQuery } from '../../../utils/constants';
 
 const NftSellPage: FC = () => {
   const { currentUser, isLoadingUser } = useAuthContext();
+  const owner = currentUser ? currentUser.actor : '';
 
   const { locale, isLoadingLocale } = useLocaleContext();
   const detailPageText = localizationJson[locale]
@@ -34,7 +38,7 @@ const NftSellPage: FC = () => {
     error: saleDataError,
   } = useFetchOwnedNfts({
     templateId,
-    owner: currentUser ? currentUser.actor : '',
+    owner,
   });
 
   const [selectedAssetId, setSelectedAssetId] = useState<string>('');
@@ -42,10 +46,6 @@ const NftSellPage: FC = () => {
   useEffect(() => {
     setSelectedAssetId(assets[0] ? assets[0].asset_id : '');
   }, [assets]);
-
-  const createSale = () => console.log('create');
-
-  const cancelSale = () => console.log('cancel');
 
   if (
     isLoadingUser ||
@@ -69,11 +69,14 @@ const NftSellPage: FC = () => {
           selectedAssetId={selectedAssetId}
           setSelectedAssetId={setSelectedAssetId}
         />
-        <Button onClick={saleIds[selectedAssetId] ? cancelSale : createSale}>
+        <ButtonLink
+          href={`http://protonmarket.com/details/${owner}/${collection}/${templateId}`}
+          target="_blank"
+          rel="noreferrer">
           {saleIds[selectedAssetId]
             ? detailPageText.cancelSaleButtonText
             : detailPageText.sellButtonText}
-        </Button>
+        </ButtonLink>
       </NftDetails>
     </NftPageContainer>
   );

@@ -1,5 +1,5 @@
-// styled component for /pages/[collection]/[templateId].tsx
-import styled from 'styled-components';
+// styled component for /pages/[templateId].tsx
+import styled, { css } from 'styled-components';
 import customizationJson from '../custom/customization';
 import { breakpoint } from './Breakpoints';
 import { MaxWidth } from './MaxWidth.styled';
@@ -8,6 +8,22 @@ const {
   typography,
   detailPage: { imagePlacement, button, errorFont },
 } = customizationJson;
+
+const buttonCSS = css`
+  width: 100%;
+  height: 56px;
+  margin-top: 32px;
+  padding: 0;
+  background-color: ${button.backgroundColor};
+  font-family: ${typography[button.textFont].font};
+  color: ${button.textColor};
+  border: none;
+  cursor: pointer;
+
+  ${breakpoint.tablet`
+    font-size: 14px;
+  `}
+`;
 
 export const NftPageContainer = styled(MaxWidth).attrs({ as: 'main' })`
   display: flex;
@@ -26,19 +42,14 @@ export const NftPageContainer = styled(MaxWidth).attrs({ as: 'main' })`
 `;
 
 export const Button = styled.button`
-  width: 100%;
-  height: 56px;
-  margin-top: 32px;
-  padding: 0;
-  background-color: ${button.backgroundColor};
-  font-family: ${typography[button.textFont].font};
-  color: ${button.textColor};
-  border: none;
-  cursor: pointer;
+  ${buttonCSS}
+`;
 
-  ${breakpoint.tablet`
-    font-size: 14px;
-  `}
+export const ButtonLink = styled.a`
+  ${buttonCSS}
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const ErrorMessage = styled.p`
