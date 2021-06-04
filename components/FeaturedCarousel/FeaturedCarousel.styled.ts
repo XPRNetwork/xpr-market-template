@@ -40,12 +40,12 @@ type ButtonProps = {
 export const ButtonNextContainer = styled.div<ButtonProps>`
   display: ${({ display }) => (display ? 'block' : 'none')};
   position: absolute;
-  left: calc(100% - 36px);
-  top: calc(50% - 30px);
+  left: calc(100% - 42px);
+  top: calc(50% - 24px);
 
   button {
-    width: 32px;
-    height: 32px;
+    width: 48px;
+    height: 48px;
     background-color: white;
     border-radius: 100%;
     display: flex;
@@ -68,12 +68,12 @@ export const ButtonNextContainer = styled.div<ButtonProps>`
 export const ButtonBackContainer = styled.div<ButtonProps>`
   display: ${({ display }) => (display ? 'block' : 'none')};
   position: absolute;
-  right: calc(100% - 16px);
-  top: calc(50% - 30px);
+  right: calc(100% - 24px);
+  top: calc(50% - 24px);
 
   button {
-    width: 32px;
-    height: 32px;
+    width: 48px;
+    height: 48px;
     background-color: white;
     border-radius: 100%;
     display: flex;

@@ -114,10 +114,10 @@ const customizationJson = {
     borderRadius: '8px',
   },
   featuredSection: {
-    carousel: false,
+    carousel: true,
     titleFont: {
       type: 'h2',
-      color: '#ffffff',
+      color: '#000000',
     },
     backgroundColor: '#f2f2f2',
   },
