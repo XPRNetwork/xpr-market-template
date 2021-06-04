@@ -18,7 +18,7 @@ const customizationJson = {
       font: 'Bebas Neue',
       size: '24px',
       fontWeight: '400',
-      isItalic: false,
+      isItalic: true,
     },
     h4: {
       font: 'Roboto',
@@ -232,15 +232,17 @@ export const generateFontImportLink = (): string => {
     const styles = stylesByFont[font];
     let shouldLoadItalic = false;
 
-    const stylesString = Object.keys(styles)
-      .map((weight) => {
-        const iItalic = styles[weight].shouldLoadItalic;
-        if (iItalic) {
-          shouldLoadItalic = true;
-        }
-        return iItalic ? `0,${weight};1,${weight}` : `0,${weight}`;
-      })
-      .join(';');
+    const partialStyleStrings = Object.keys(styles).map((weight) => {
+      const iItalic = styles[weight].shouldLoadItalic;
+      if (iItalic) {
+        shouldLoadItalic = true;
+      }
+      return iItalic ? `${weight};1,${weight}` : `${weight}`;
+    });
+
+    const stylesString = shouldLoadItalic
+      ? partialStyleStrings.map((string) => `0,${string}`).join(';')
+      : partialStyleStrings.join(';');
 
     return `family=${font.replace(/\s/g, '+')}:${
       shouldLoadItalic ? 'ital,' : ''
