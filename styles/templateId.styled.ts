@@ -1,4 +1,4 @@
-// styled component for /pages/[templateId].tsx
+// styled component for /pages/[templateId].tsx and /pages/my/[templateId].tsx
 import styled, { css } from 'styled-components';
 import customizationJson from '../custom/customization';
 import { breakpoint } from './Breakpoints';
