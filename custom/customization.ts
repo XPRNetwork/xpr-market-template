@@ -113,13 +113,13 @@ const customizationJson = {
     borderColor: 'gray',
     borderRadius: '8px',
   },
-  featuredLayoutSection: {
+  featuredSection: {
     carousel: false,
     titleFont: {
       type: 'h2',
       color: '#ffffff',
     },
-    backgroundColor: 'grey',
+    backgroundColor: '#f2f2f2',
   },
   header: {
     image: '/header-image.png',

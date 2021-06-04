@@ -16,6 +16,7 @@
     "@proton/web-sdk": "^2.7.23",
     "dayjs": "^1.10.5",
     "next": "10.2.3",
+    "pure-react-carousel": "^1.27.6",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-lazyload": "^3.2.0",

@@ -7,7 +7,7 @@ import {
   formatTemplatesWithPriceAndSaleData,
 } from '../services/templates';
 import { FC } from 'react';
-import { Card, LoadingPage, Header, FeaturedSection } from '../components';
+import { LoadingPage, Header, FeaturedSection } from '../components';
 import { useLocaleContext } from '../components/Provider';
 import customizationJson from '../custom/customization';
 const { collection, owner } = customizationJson;
@@ -56,9 +56,7 @@ const HomePage: FC = () => {
   return (
     <div>
       <Header />
-      <FeaturedSection>
-        <Card template={templates[0]} />
-      </FeaturedSection>
+      <FeaturedSection templates={templates} />
     </div>
   );
 };
