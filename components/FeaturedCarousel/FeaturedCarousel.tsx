@@ -16,7 +16,6 @@ import {
   ButtonNextContainer,
 } from './FeaturedCarousel.styled';
 import { useWindowSize } from '../../hooks';
-import customizationJson from '../../custom/customization';
 
 type FeaturedCarouselProps = {
   templates: Template[];
