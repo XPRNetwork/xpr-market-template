@@ -14,8 +14,6 @@ const { collection, owner } = customizationJson;
 
 const HomePage: FC = () => {
   const [isLoadingTemplates, setIsLoadingTemplates] = useState<boolean>(true);
-  const [isLoadingPriceAndSales, setIsLoadingPriceAndSales] =
-    useState<boolean>(true);
   const [templates, setTemplates] = useState<Template[]>([]);
   const { isLoadingLocale } = useLocaleContext();
 
@@ -42,7 +40,6 @@ const HomePage: FC = () => {
         );
 
         setTemplates(templates);
-        setIsLoadingPriceAndSales(false);
       } catch (e) {
         setTemplates([]);
       }
