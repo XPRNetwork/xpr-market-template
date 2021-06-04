@@ -12,6 +12,9 @@ import {
 import ProtonSDK from '../services/proton';
 import { RouterQuery } from '../utils/constants';
 import localizationJson from '../custom/localization';
+import customizationJson from '../custom/customization';
+
+const { collection } = customizationJson;
 
 const NftDetailPage: FC = () => {
   const {
