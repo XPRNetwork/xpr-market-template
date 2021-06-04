@@ -12,9 +12,6 @@ import {
 import ProtonSDK from '../services/proton';
 import { RouterQuery } from '../utils/constants';
 import localizationJson from '../custom/localization';
-import customizationJson from '../custom/customization';
-
-const { collection } = customizationJson;
 
 const NftDetailPage: FC = () => {
   const {
@@ -32,10 +29,7 @@ const NftDetailPage: FC = () => {
   const router = useRouter();
   const { templateId } = router.query as RouterQuery;
 
-  const { template, isLoading, error } = useFetchNft({
-    collection,
-    templateId,
-  });
+  const { template, isLoading, error } = useFetchNft(templateId);
 
   const [purchasingError, setPurchasingError] = useState<string>('');
 
