@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import customizationJson from '../../custom/customization';
 const { featuredSection } = customizationJson;
-const { carouselButtonsBackgroundColor, carouselButtonsBorderColor } = featuredSection;
+const { carouselButtonsBackgroundColor, carouselButtonsBorderColor } =
+  featuredSection;
 
 export const CarouselStyleFix = styled.div`
   width: 100%;
