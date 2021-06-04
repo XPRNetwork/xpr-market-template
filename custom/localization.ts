@@ -23,7 +23,7 @@ const localizationJson = {
     },
     featuredSection: {
       heading: 'BREAKING NOW',
-    }
+    },
   },
 };
 
