@@ -1,17 +1,20 @@
 import { FC, useState } from 'react';
 import { useRouter } from 'next/router';
-import { Nft, NftDetails } from '../../components';
-import { useAuthContext, useLocaleContext } from '../../components/Provider';
-import { useFetchNft } from '../../hooks';
+import { Nft, NftDetails } from '../components';
+import { useAuthContext, useLocaleContext } from '../components/Provider';
+import { useFetchNft } from '../hooks';
 import {
   NftPageContainer,
   Button,
   ButtonLink,
   ErrorMessage,
-} from '../../styles/templateId.styled';
-import ProtonSDK from '../../services/proton';
-import { RouterQuery } from '../../utils/constants';
-import localizationJson from '../../custom/localization';
+} from '../styles/templateId.styled';
+import ProtonSDK from '../services/proton';
+import { RouterQuery } from '../utils/constants';
+import localizationJson from '../custom/localization';
+import customizationJson from '../custom/customization';
+
+const { collection } = customizationJson;
 
 const NftDetailPage: FC = () => {
   const {
@@ -27,10 +30,10 @@ const NftDetailPage: FC = () => {
     : localizationJson['en'].detailPage;
 
   const router = useRouter();
-  const { collection, templateId } = router.query as RouterQuery;
+  const { templateId } = router.query as RouterQuery;
 
   const { template, isLoading, error } = useFetchNft({
-    collection: collection ? collection.toLowerCase() : '',
+    collection,
     templateId,
   });
 
