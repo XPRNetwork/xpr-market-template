@@ -24,7 +24,6 @@ type FeaturedCarouselProps = {
 export const FeaturedCarousel: FC<FeaturedCarouselProps> = ({ templates }) => {
   const [slideStep, setSlideStep] = useState<number>(4);
   const [visibleSlides, setVisibleSlides] = useState<number>(4);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
   const { isDesktop, isLaptop, isTablet, isMobile } = useWindowSize();
 
   useEffect(() => {
