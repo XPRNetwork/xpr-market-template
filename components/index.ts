@@ -22,3 +22,5 @@ export { LoadingPage } from './LoadingPage/LoadingPage';
 export { TemplateImage } from './TemplateImage/TemplateImage';
 export { TemplateVideo } from './TemplateVideo/TemplateVideo';
 export { FeaturedSection } from './FeaturedSection/FeaturedSection';
+export { FeaturedCarousel } from './FeaturedCarousel/FeaturedCarousel';
+export { FeaturedGrid } from './FeaturedGrid/FeaturedGrid';

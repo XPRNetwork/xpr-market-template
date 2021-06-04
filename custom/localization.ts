@@ -21,6 +21,9 @@ const localizationJson = {
     nftCard: {
       nftsLeft: 'LEFT',
     },
+    featuredSection: {
+      heading: 'BREAKING NOW',
+    }
   },
 };
 
