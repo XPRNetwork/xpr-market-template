@@ -1,3 +1,4 @@
+// styled component for /pages/[collection]/[templateId].tsx
 import styled from 'styled-components';
 import customizationJson from '../custom/customization';
 import { breakpoint } from './Breakpoints';
