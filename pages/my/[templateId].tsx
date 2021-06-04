@@ -1,14 +1,14 @@
 import { FC, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { Nft, NftDetails, NftDropdown } from '../../../components';
-import { useAuthContext, useLocaleContext } from '../../../components/Provider';
-import { useFetchNft, useFetchOwnedNfts } from '../../../hooks';
-import {
-  NftPageContainer,
-  ButtonLink,
-} from '../../../styles/templateId.styled';
-import localizationJson from '../../../custom/localization';
-import { RouterQuery } from '../../../utils/constants';
+import { Nft, NftDetails, NftDropdown } from '../../components';
+import { useAuthContext, useLocaleContext } from '../../components/Provider';
+import { useFetchNft, useFetchOwnedNfts } from '../../hooks';
+import { NftPageContainer, ButtonLink } from '../../styles/templateId.styled';
+import localizationJson from '../../custom/localization';
+import customizationJson from '../../custom/customization';
+import { RouterQuery } from '../../utils/constants';
+
+const { collection } = customizationJson;
 
 const MyNftDetailPage: FC = () => {
   const { currentUser, isLoadingUser } = useAuthContext();
@@ -20,14 +20,14 @@ const MyNftDetailPage: FC = () => {
     : localizationJson['en'].detailPage;
 
   const router = useRouter();
-  const { collection, templateId } = router.query as RouterQuery;
+  const { templateId } = router.query as RouterQuery;
 
   const {
     template,
     isLoading: isTemplateLoading,
     error: templateError,
   } = useFetchNft({
-    collection: collection ? collection.toLowerCase() : '',
+    collection,
     templateId,
   });
 
