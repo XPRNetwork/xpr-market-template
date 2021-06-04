@@ -29,7 +29,7 @@ export const FeaturedSection: FC<FeaturedSectionProps> = ({ templates }) => {
         {featuredSection.carousel ? (
           <FeaturedCarousel templates={templates} />
         ) : (
-          <FeaturedGrid templates={templates} />
+          <FeaturedGrid templates={templates} type="featured" />
         )}
       </FeaturedSectionWrapper>
     </FeaturedSectionContainer>
