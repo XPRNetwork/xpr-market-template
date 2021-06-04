@@ -1,16 +1,20 @@
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { Nft, NftDetails } from '../../components';
-import { useAuthContext, useLocaleContext } from '../../components/Provider';
-import { useFetchNft } from '../../hooks';
+import { Nft, NftDetails } from '../components';
+import { useAuthContext, useLocaleContext } from '../components/Provider';
+import { useFetchNft } from '../hooks';
 import {
   NftPageContainer,
   Button,
+  ButtonLink,
   ErrorMessage,
-} from '../../styles/templateId.styled';
-import ProtonSDK from '../../services/proton';
-import { RouterQuery } from '../../utils/constants';
-import localizationJson from '../../custom/localization';
+} from '../styles/templateId.styled';
+import ProtonSDK from '../services/proton';
+import { RouterQuery } from '../utils/constants';
+import localizationJson from '../custom/localization';
+import customizationJson from '../custom/customization';
+
+const { collection } = customizationJson;
 
 const NftDetailPage: FC = () => {
   const {
@@ -26,14 +30,17 @@ const NftDetailPage: FC = () => {
     : localizationJson['en'].detailPage;
 
   const router = useRouter();
-  const { collection, templateId } = router.query as RouterQuery;
+  const { templateId } = router.query as RouterQuery;
 
-  const { template, isLoading, error } = useFetchNft({
-    collection: collection ? collection.toLowerCase() : '',
-    templateId,
-  });
+  const { template, isLoading, error } = useFetchNft(templateId);
 
   const [purchasingError, setPurchasingError] = useState<string>('');
+
+  useEffect(() => {
+    if (error.includes('not found')) {
+      router.push('/');
+    }
+  }, [error]);
 
   const buyAsset = async () => {
     try {
@@ -73,26 +80,31 @@ const NftDetailPage: FC = () => {
     }
   };
 
-  const getContent = () => {
-    if (isLoadingUser || isLoadingLocale || isLoading || error) {
-      return null;
-    }
+  if (isLoadingUser || isLoadingLocale || isLoading || error) {
+    return null;
+  }
 
-    const { name, image, video } = template.immutable_data;
-    return (
-      <>
-        <Nft name={name} image={image} video={video} />
-        <NftDetails template={template} detailPageText={detailPageText}>
+  const { name, image, video } = template.immutable_data;
+  return (
+    <NftPageContainer>
+      <Nft name={name} image={image} video={video} />
+      <NftDetails template={template} detailPageText={detailPageText}>
+        {template.lowestPrice ? (
           <Button onClick={buyAsset}>{detailPageText.buyButtonText}</Button>
-          {purchasingError ? (
-            <ErrorMessage>{purchasingError}</ErrorMessage>
-          ) : null}
-        </NftDetails>
-      </>
-    );
-  };
-
-  return <NftPageContainer>{getContent()}</NftPageContainer>;
+        ) : (
+          <ButtonLink
+            href={`http://protonmarket.com/${collection}/${templateId}`}
+            target="_blank"
+            rel="noreferrer">
+            {detailPageText.viewButtonText}
+          </ButtonLink>
+        )}
+        {purchasingError ? (
+          <ErrorMessage>{purchasingError}</ErrorMessage>
+        ) : null}
+      </NftDetails>
+    </NftPageContainer>
+  );
 };
 
 export default NftDetailPage;

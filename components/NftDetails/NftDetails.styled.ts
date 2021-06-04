@@ -20,7 +20,7 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 50%;
-  height: 55vh;
+  height: 50vh;
   margin-left: ${imagePlacement === 'left' ? '48px' : '0'};
   margin-right: ${imagePlacement === 'left' ? '0' : '48px'};
 

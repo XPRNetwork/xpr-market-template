@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Template, getTemplateDetails } from '../services/templates';
+import customizationJson from '../custom/customization';
+
+const { collection } = customizationJson;
 
 const defaultTemplate = {
   lowestPrice: '',
@@ -18,13 +21,9 @@ const defaultTemplate = {
   },
 };
 
-export const useFetchNft = ({
-  collection,
-  templateId,
-}: {
-  collection: string;
-  templateId: string;
-}): {
+export const useFetchNft = (
+  templateId: string
+): {
   template: Template;
   isLoading: boolean;
   error: string;

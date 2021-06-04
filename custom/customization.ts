@@ -156,6 +156,7 @@ const customizationJson = {
   detailPage: {
     imagePlacement: 'left',
     imageBackgroundColor: '#efefef',
+    imageShadow: false,
     cardTitleFont: {
       type: 'h1',
       color: 'black',
@@ -191,7 +192,7 @@ const customizationJson = {
     },
     dropdown: {
       borderColor: '#f2f2f2',
-      arrowDropdownColor: '#000000',
+      arrowDropdownColor: '#666',
       textColor: 'black',
       textFont: 'caption',
     },
