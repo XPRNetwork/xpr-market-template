@@ -73,13 +73,12 @@ export const Card: FC<Props> = ({ template, type }) => {
 };
 
 const PriceSection = ({ lowestPrice, type }) => {
-  if (type === 'user') {
-    return null;
-  } else if (lowestPrice === undefined) {
-    return <ShimmerBlock position="flex-start" />;
-  } else if (!lowestPrice) {
-    return null;
+  if (type === 'featured') {
+    if (lowestPrice === undefined) {
+      return <ShimmerBlock position="flex-start" />;
+    }
+    return lowestPrice ? <Price>{lowestPrice}</Price> : null;
   } else {
-    return <Price>{lowestPrice}</Price>;
+    return null;
   }
 };
