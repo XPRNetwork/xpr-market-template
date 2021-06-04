@@ -267,8 +267,6 @@ export const getAllTemplatesForUserWithSaleCount = async ({
       `${process.env.NEXT_PUBLIC_NFT_ENDPOINT}/atomicassets/v1/accounts/${owner}?&collection_whitelist=${collection}`
     );
 
-    console.log('account response: ', accountResponse);
-
     if (!accountResponse.success) {
       throw new Error(accountResponse.message as unknown as string);
     }
