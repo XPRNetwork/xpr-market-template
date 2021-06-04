@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Nft, NftDetails } from '../components';
 import { useAuthContext, useLocaleContext } from '../components/Provider';
@@ -35,6 +35,12 @@ const NftDetailPage: FC = () => {
   const { template, isLoading, error } = useFetchNft(templateId);
 
   const [purchasingError, setPurchasingError] = useState<string>('');
+
+  useEffect(() => {
+    if (error.includes('not found')) {
+      router.push('/');
+    }
+  }, [error]);
 
   const buyAsset = async () => {
     try {
