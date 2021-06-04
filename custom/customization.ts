@@ -3,39 +3,46 @@ const customizationJson = {
   owner: 'monsters',
   typography: {
     h1: {
-      font: 'bebas',
+      font: 'Bebas Neue',
       size: '64px',
       fontWeight: '400',
+      isItalic: false,
     },
     h2: {
-      font: 'bebas',
+      font: 'Bebas Neue',
       size: '32px',
       fontWeight: '400',
+      isItalic: false,
     },
     h3: {
-      font: 'bebas',
+      font: 'Bebas Neue',
       size: '24px',
       fontWeight: '400',
+      isItalic: true,
     },
     h4: {
-      font: 'avenir',
+      font: 'Roboto',
       size: '18px',
       fontWeight: '400',
+      isItalic: false,
     },
     paragraph: {
-      font: 'avenir',
+      font: 'Roboto',
       size: '12px',
       fontWeight: '400',
+      isItalic: false,
     },
     label: {
-      font: 'avenir',
+      font: 'Roboto',
       size: '14px',
       fontWeight: '600',
+      isItalic: false,
     },
     caption: {
-      font: 'avenir',
+      font: 'Roboto',
       size: '14px',
       fontWeight: '400',
+      isItalic: false,
     },
   },
   navbar: {
@@ -201,7 +208,49 @@ const customizationJson = {
   },
 };
 
-export default customizationJson;
+export const generateFontImportLink = (): string => {
+  const stylesByFont = {};
+  Object.values(customizationJson.typography).forEach(
+    ({ font, fontWeight, isItalic }) => {
+      if (!stylesByFont[font] || !stylesByFont[font][fontWeight]) {
+        stylesByFont[font] = {
+          [fontWeight]: {
+            shouldLoadItalic: isItalic,
+          },
+        };
+      }
+
+      if (isItalic) {
+        stylesByFont[font][fontWeight] = {
+          shouldLoadItalic: true,
+        };
+      }
+    }
+  );
+
+  const fonts = Object.keys(stylesByFont).map((font) => {
+    const styles = stylesByFont[font];
+    let shouldLoadItalic = false;
+
+    const partialStyleStrings = Object.keys(styles).map((weight) => {
+      const iItalic = styles[weight].shouldLoadItalic;
+      if (iItalic) {
+        shouldLoadItalic = true;
+      }
+      return iItalic ? `${weight};1,${weight}` : `${weight}`;
+    });
+
+    const stylesString = shouldLoadItalic
+      ? partialStyleStrings.map((string) => `0,${string}`).join(';')
+      : partialStyleStrings.join(';');
+
+    return `family=${font.replace(/\s/g, '+')}:${
+      shouldLoadItalic ? 'ital,' : ''
+    }wght@${stylesString}`;
+  });
+
+  return `https://fonts.googleapis.com/css2?${fonts.join('&')}&display=swap`;
+};
 
 export type ThemeProps = {
   theme: {
@@ -210,36 +259,43 @@ export type ThemeProps = {
         font: string;
         size: string;
         fontWeight: string;
+        isItalic: boolean;
       };
       h2: {
         font: string;
         size: string;
         fontWeight: string;
+        isItalic: boolean;
       };
       h3: {
         font: string;
         size: string;
         fontWeight: string;
+        isItalic: boolean;
       };
       h4: {
         font: string;
         size: string;
         fontWeight: string;
+        isItalic: boolean;
       };
       paragraph: {
         font: string;
         size: string;
         fontWeight: string;
+        isItalic: boolean;
       };
       label: {
         font: string;
         size: string;
         fontWeight: string;
+        isItalic: boolean;
       };
       caption: {
         font: string;
         size: string;
         fontWeight: string;
+        isItalic: boolean;
       };
     };
     navbar: {
@@ -366,3 +422,5 @@ export type ThemeProps = {
     };
   };
 };
+
+export default customizationJson;
