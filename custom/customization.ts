@@ -120,6 +120,8 @@ const customizationJson = {
       color: '#000000',
     },
     backgroundColor: '#f2f2f2',
+    carouselButtonsBackgroundColor: '#ffffff',
+    carouselButtonsBorderColor: '#000000',
   },
   header: {
     image: '/header-image.png',

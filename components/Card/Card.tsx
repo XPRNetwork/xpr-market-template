@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { useRouter } from 'next/router';
 import {
   CardContainer,
   QuantityText,
@@ -21,9 +22,11 @@ export const Card: FC<Props> = ({ template }) => {
   const {
     assetsForSale,
     lowestPrice,
+    template_id,
     collection: { collection_name },
     immutable_data: { name, image, video },
   } = template;
+  const router = useRouter();
 
   const { locale } = useLocaleContext();
   const text = Object.keys(localizationJson[locale]).length
@@ -41,7 +44,7 @@ export const Card: FC<Props> = ({ template }) => {
   const fallbackImageSrc = image ? `${IPFS_RESOLVER}${image}` : '';
 
   return (
-    <CardContainer>
+    <CardContainer onClick={() => router.push(`/${template_id}`)}>
       <QuantityText>
         {formattedSaleCount ? (
           `${formattedSaleCount} ${text.nftsLeft}`
