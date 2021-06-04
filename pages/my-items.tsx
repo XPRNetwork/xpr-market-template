@@ -17,6 +17,7 @@ import localizationJson from '../custom/localization';
 
 const MyItemsPage: FC = () => {
   const [templates, setTemplates] = useState<Template[]>([]);
+  const [isLoadingTemplates, setIsLoadingTemplates] = useState<boolean>(true);
   const { isLoadingUser, currentUser } = useAuthContext();
   const { isLoadingLocale, locale } = useLocaleContext();
   const router = useRouter();
@@ -49,14 +50,16 @@ const MyItemsPage: FC = () => {
             assetCount
           );
           setTemplates(templatesWithAssetCount);
+          setIsLoadingTemplates(false);
         } catch (e) {
+          setIsLoadingTemplates(false);
           setTemplates([]);
         }
       }
     })();
   }, [isLoadingUser]);
 
-  if (isLoadingUser || isLoadingLocale) {
+  if (isLoadingUser || isLoadingLocale || isLoadingTemplates) {
     return <LoadingPage />;
   }
 
