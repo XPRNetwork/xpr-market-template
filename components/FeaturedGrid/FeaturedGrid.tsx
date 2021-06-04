@@ -5,13 +5,14 @@ import { Card } from '../../components';
 
 type FeaturedGridProps = {
   templates: Template[];
+  type: 'user' | 'featured';
 };
 
-export const FeaturedGrid: FC<FeaturedGridProps> = ({ templates }) => {
+export const FeaturedGrid: FC<FeaturedGridProps> = ({ templates, type }) => {
   return (
     <Container>
       {templates.map((template) => (
-        <Card key={template.template_id} template={template} />
+        <Card key={template.template_id} template={template} type={type} />
       ))}
     </Container>
   );

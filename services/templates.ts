@@ -253,7 +253,7 @@ export const getLowestPricesForAllCollectionTemplates = async ({
  * @return @return {{ [templateId: string]: string}}      // returns number of assets for sale by template id
  */
 
-export const getAllTemplatesForUserWithAssetCount = async ({
+export const getAllTemplatesForUserWithSaleCount = async ({
   owner,
   collection,
 }: {
@@ -266,6 +266,8 @@ export const getAllTemplatesForUserWithAssetCount = async ({
     const accountResponse = await getFromApi<Account>(
       `${process.env.NEXT_PUBLIC_NFT_ENDPOINT}/atomicassets/v1/accounts/${owner}?&collection_whitelist=${collection}`
     );
+
+    console.log('account response: ', accountResponse);
 
     if (!accountResponse.success) {
       throw new Error(accountResponse.message as unknown as string);
@@ -325,4 +327,114 @@ export const formatTemplatesWithPriceAndSaleData = (
     ...template,
     lowestPrice: lowestPrices[template.template_id] || '',
     assetsForSale: assetsForSale[template.template_id] || '0',
+  }));
+
+/***
+ * Gets number of assets for owned by template id for owner
+ * @param {string} owner Owner of assets to look up
+ * @return @return {{ [templateId: string]: string}}      // returns number of assets for sale by template id
+ */
+
+export const getAllTemplatesForUserWithAssetCount = async ({
+  owner,
+  collection,
+}: {
+  owner: string;
+  collection: string;
+}): Promise<{
+  [templateId: string]: string;
+}> => {
+  try {
+    const accountResponse = await getFromApi<Account>(
+      `${process.env.NEXT_PUBLIC_NFT_ENDPOINT}/atomicassets/v1/accounts/${owner}?&collection_whitelist=${collection}`
+    );
+
+    if (!accountResponse.success) {
+      throw new Error(accountResponse.message as unknown as string);
+    }
+
+    const userAssetsByTemplateId = {};
+    accountResponse.data.templates.map(({ assets, template_id }) => {
+      userAssetsByTemplateId[template_id] = parseInt(assets);
+    });
+
+    const numberOfAssetsOwned = {};
+
+    for (const templateId in userAssetsByTemplateId) {
+      numberOfAssetsOwned[templateId] =
+        userAssetsByTemplateId[templateId].toFixed(0);
+    }
+
+    return numberOfAssetsOwned;
+  } catch (e) {
+    throw new Error(e);
+  }
+};
+
+/**
+ * Function to get templates using an array of tempalte ids as reference
+ * @param templateIds templatesIds to grab templates for
+ * @returns {Template[]}
+ */
+
+export const getTemplatesFromTemplateIds = async (
+  templateIds: string[]
+): Promise<Template[]> => {
+  // Organize pagination with an object (key: page number, value: array of templateIds)
+  const pages: { [page: number]: string[] } = {};
+  for (let i = 0; i <= Math.ceil(templateIds.length / 100) - 1; i++) {
+    const startIdx = i * 100;
+    const endIdx = (i + 1) * 100;
+    pages[i + 1] = templateIds.slice(startIdx, endIdx);
+  }
+  let templates = [];
+  let page = 1;
+  let hasResults = true;
+
+  while (hasResults) {
+    try {
+      const templatesQueryObject = {
+        symbol: TOKEN_SYMBOL,
+        ids: pages[page].join(','),
+        has_assets: true,
+      };
+
+      const templatesQueryParams = toQueryString(templatesQueryObject);
+      const templatesResponse = await getFromApi<Template[]>(
+        `${process.env.NEXT_PUBLIC_NFT_ENDPOINT}/atomicassets/v1/templates?${templatesQueryParams}`
+      );
+
+      if (!templatesResponse.success) {
+        throw new Error(templatesResponse.message as unknown as string);
+      }
+
+      if (!pages[page + 1]) {
+        hasResults = false;
+      }
+
+      page += 1;
+      templates = templates.concat(templatesResponse.data);
+    } catch (e) {
+      throw new Error(e);
+    }
+  }
+
+  return templates;
+};
+
+/**
+ * Formats an array of templates with a custom 'assetsOwned' flag
+ * Mostly used to display the lowest price of any of the templates with assets for sale in the collection
+ * @param  {string} templates         Array of templates to format
+ * @param  {string} assetCount        Object of count of assets owned of each template in collection
+ * @return {Template[]}               Returns array of templates with an additional 'totalAssets' flag
+ */
+
+export const formatTemplatesWithTotalAssets = (
+  templates: Template[],
+  assetCount: { [id: string]: string }
+): Template[] =>
+  templates.map((template) => ({
+    ...template,
+    assetsForSale: assetCount[template.template_id] || '0',
   }));
