@@ -6,36 +6,43 @@ const customizationJson = {
       font: 'Bebas Neue',
       size: '64px',
       fontWeight: '400',
+      isItalic: false,
     },
     h2: {
       font: 'Bebas Neue',
       size: '32px',
       fontWeight: '400',
+      isItalic: false,
     },
     h3: {
       font: 'Bebas Neue',
       size: '24px',
       fontWeight: '400',
+      isItalic: false,
     },
     h4: {
       font: 'Roboto',
       size: '18px',
       fontWeight: '400',
+      isItalic: false,
     },
     paragraph: {
       font: 'Roboto',
       size: '12px',
       fontWeight: '400',
+      isItalic: false,
     },
     label: {
       font: 'Roboto',
       size: '14px',
       fontWeight: '600',
+      isItalic: false,
     },
     caption: {
       font: 'Roboto',
       size: '14px',
       fontWeight: '400',
+      isItalic: false,
     },
   },
   navbar: {
@@ -202,13 +209,44 @@ const customizationJson = {
 };
 
 export const generateFontImportLink = (): string => {
-  const fonts = [
-    ...new Set(
-      Object.values(customizationJson.typography).map(
-        ({ font }) => `family=${font.replace(/\s/g, '+')}`
-      )
-    ),
-  ];
+  const stylesByFont = {};
+  Object.values(customizationJson.typography).forEach(
+    ({ font, fontWeight, isItalic }) => {
+      if (!stylesByFont[font] || !stylesByFont[font][fontWeight]) {
+        stylesByFont[font] = {
+          [fontWeight]: {
+            shouldLoadItalic: isItalic,
+          },
+        };
+      }
+
+      if (isItalic) {
+        stylesByFont[font][fontWeight] = {
+          shouldLoadItalic: true,
+        };
+      }
+    }
+  );
+
+  const fonts = Object.keys(stylesByFont).map((font) => {
+    const styles = stylesByFont[font];
+    let shouldLoadItalic = false;
+
+    const stylesString = Object.keys(styles)
+      .map((weight) => {
+        const iItalic = styles[weight].shouldLoadItalic;
+        if (iItalic) {
+          shouldLoadItalic = true;
+        }
+        return iItalic ? `0,${weight};1,${weight}` : `0,${weight}`;
+      })
+      .join(';');
+
+    return `family=${font.replace(/\s/g, '+')}:${
+      shouldLoadItalic ? 'ital,' : ''
+    }wght@${stylesString}`;
+  });
+
   return `https://fonts.googleapis.com/css2?${fonts.join('&')}&display=swap`;
 };
 
