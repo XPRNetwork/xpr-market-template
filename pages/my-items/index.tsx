@@ -2,18 +2,18 @@ import { FC, useEffect, useState } from 'react';
 import {
   PageContainer,
   HeaderText,
-} from '../components/MyItemsPage/MyItemsPage.styled';
+} from '../../components/MyItemsPage/MyItemsPage.styled';
 import { useRouter } from 'next/router';
-import { FeaturedGrid, LoadingPage } from '../components';
-import { useAuthContext, useLocaleContext } from '../components/Provider';
+import { FeaturedGrid, LoadingPage } from '../../components';
+import { useAuthContext, useLocaleContext } from '../../components/Provider';
 import {
   formatTemplatesWithTotalAssets,
   getAllTemplatesForUserWithAssetCount,
   getTemplatesFromTemplateIds,
   Template,
-} from '../services/templates';
-import customizationJson from '../custom/customization';
-import localizationJson from '../custom/localization';
+} from '../../services/templates';
+import customizationJson from '../../custom/customization';
+import localizationJson from '../../custom/localization';
 
 const MyItemsPage: FC = () => {
   const [templates, setTemplates] = useState<Template[]>([]);
