@@ -26,9 +26,7 @@ export const CardContainer = styled.div`
   border: 1px solid ${borderColor};
   background-color: ${mainBackgroundColor};
   padding: 0 24px 24px;
-
-  // remove later, since all cards will be within a grid/carousel
-  width: 300px;
+  cursor: pointer;
 `;
 
 export const QuantityText = styled.p`
