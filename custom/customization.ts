@@ -3,37 +3,37 @@ const customizationJson = {
   owner: 'monsters',
   typography: {
     h1: {
-      font: 'bebas',
+      font: 'Bebas Neue',
       size: '64px',
       fontWeight: '400',
     },
     h2: {
-      font: 'bebas',
+      font: 'Bebas Neue',
       size: '32px',
       fontWeight: '400',
     },
     h3: {
-      font: 'bebas',
+      font: 'Bebas Neue',
       size: '24px',
       fontWeight: '400',
     },
     h4: {
-      font: 'avenir',
+      font: 'Roboto',
       size: '18px',
       fontWeight: '400',
     },
     paragraph: {
-      font: 'avenir',
+      font: 'Roboto',
       size: '12px',
       fontWeight: '400',
     },
     label: {
-      font: 'avenir',
+      font: 'Roboto',
       size: '14px',
       fontWeight: '600',
     },
     caption: {
-      font: 'avenir',
+      font: 'Roboto',
       size: '14px',
       fontWeight: '400',
     },
@@ -201,7 +201,16 @@ const customizationJson = {
   },
 };
 
-export default customizationJson;
+export const generateFontImportLink = (): string => {
+  const fonts = [
+    ...new Set(
+      Object.values(customizationJson.typography).map(
+        ({ font }) => `family=${font.replace(/\s/g, '+')}`
+      )
+    ),
+  ];
+  return `https://fonts.googleapis.com/css2?${fonts.join('&')}&display=swap`;
+};
 
 export type ThemeProps = {
   theme: {
@@ -366,3 +375,5 @@ export type ThemeProps = {
     };
   };
 };
+
+export default customizationJson;
