@@ -259,36 +259,43 @@ export type ThemeProps = {
         font: string;
         size: string;
         fontWeight: string;
+        isItalic: boolean;
       };
       h2: {
         font: string;
         size: string;
         fontWeight: string;
+        isItalic: boolean;
       };
       h3: {
         font: string;
         size: string;
         fontWeight: string;
+        isItalic: boolean;
       };
       h4: {
         font: string;
         size: string;
         fontWeight: string;
+        isItalic: boolean;
       };
       paragraph: {
         font: string;
         size: string;
         fontWeight: string;
+        isItalic: boolean;
       };
       label: {
         font: string;
         size: string;
         fontWeight: string;
+        isItalic: boolean;
       };
       caption: {
         font: string;
         size: string;
         fontWeight: string;
+        isItalic: boolean;
       };
     };
     navbar: {
