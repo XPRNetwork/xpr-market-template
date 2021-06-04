@@ -156,6 +156,7 @@ const customizationJson = {
   detailPage: {
     imagePlacement: 'left',
     imageBackgroundColor: '#efefef',
+    imageShadow: false,
     cardTitleFont: {
       type: 'h1',
       color: 'black',
