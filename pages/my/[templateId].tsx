@@ -5,10 +5,7 @@ import { useAuthContext, useLocaleContext } from '../../components/Provider';
 import { useFetchNft, useFetchOwnedNfts } from '../../hooks';
 import { NftPageContainer, ButtonLink } from '../../styles/templateId.styled';
 import localizationJson from '../../custom/localization';
-import customizationJson from '../../custom/customization';
 import { RouterQuery } from '../../utils/constants';
-
-const { collection } = customizationJson;
 
 const MyNftDetailPage: FC = () => {
   const { currentUser, isLoadingUser } = useAuthContext();
@@ -26,10 +23,7 @@ const MyNftDetailPage: FC = () => {
     template,
     isLoading: isTemplateLoading,
     error: templateError,
-  } = useFetchNft({
-    collection,
-    templateId,
-  });
+  } = useFetchNft(templateId);
 
   const {
     assets,
@@ -45,9 +39,9 @@ const MyNftDetailPage: FC = () => {
 
   useEffect(() => {
     if (!currentUser && !isLoadingUser) {
-      router.push(`/${collection}/${templateId}`);
+      router.push(`/${templateId}`);
     }
-  }, [currentUser, isLoadingUser]);
+  }, [currentUser, isLoadingUser, templateId]);
 
   useEffect(() => {
     setSelectedAssetId(assets[0] ? assets[0].asset_id : '');
@@ -64,7 +58,11 @@ const MyNftDetailPage: FC = () => {
     return null;
   }
 
-  const { name, image, video } = template.immutable_data;
+  const {
+    template_id,
+    collection: { collection_name },
+    immutable_data: { name, image, video },
+  } = template;
   return (
     <NftPageContainer>
       <Nft name={name} image={image} video={video} />
@@ -77,7 +75,7 @@ const MyNftDetailPage: FC = () => {
           placeholderDropdownText={detailPageText.placeholderDropdownText}
         />
         <ButtonLink
-          href={`http://protonmarket.com/details/${owner}/${collection}/${templateId}`}
+          href={`http://protonmarket.com/details/${owner}/${collection_name}/${template_id}`}
           target="_blank"
           rel="noreferrer">
           {saleIds[selectedAssetId]
