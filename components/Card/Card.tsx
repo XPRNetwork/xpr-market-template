@@ -66,7 +66,7 @@ export const Card: FC<Props> = ({ template }) => {
         <ShimmerBlock position="flex-start" />
       ) : lowestPrice ? (
         <Price>{lowestPrice}</Price>
-      ) : null }
+      ) : null}
     </CardContainer>
   );
 };

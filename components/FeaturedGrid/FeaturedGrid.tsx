@@ -11,7 +11,7 @@ export const FeaturedGrid: FC<FeaturedGridProps> = ({ templates }) => {
   return (
     <Container>
       {templates.map((template) => (
-        <Card template={template} />
+        <Card key={template.template_id} template={template} />
       ))}
     </Container>
   );

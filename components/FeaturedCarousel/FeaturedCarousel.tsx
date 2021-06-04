@@ -22,9 +22,7 @@ type FeaturedCarouselProps = {
   templates: Template[];
 };
 
-export const FeaturedCarousel: FC<FeaturedCarouselProps> = ({
-  templates,
-}) => {
+export const FeaturedCarousel: FC<FeaturedCarouselProps> = ({ templates }) => {
   const [slideStep, setSlideStep] = useState<number>(4);
   const [visibleSlides, setVisibleSlides] = useState<number>(4);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -60,26 +58,20 @@ export const FeaturedCarousel: FC<FeaturedCarouselProps> = ({
           totalSlides={templates.length}
           dragEnabled={true}>
           <Slider>
-            {templates.map(
-              (template,
-                i
-              ) => {
-                return (
-                  <Slide index={i} key={template.template_id}>
-                    <Card template={template} />
-                  </Slide>
-                );
-              }
-            )}
+            {templates.map((template, i) => {
+              return (
+                <Slide index={i} key={template.template_id}>
+                  <Card template={template} />
+                </Slide>
+              );
+            })}
           </Slider>
-          <ButtonBackContainer
-            display={templates.length > visibleSlides}>
+          <ButtonBackContainer display={templates.length > visibleSlides}>
             <ButtonBack>
               <Arrow />
             </ButtonBack>
           </ButtonBackContainer>
-          <ButtonNextContainer
-            display={templates.length > visibleSlides}>
+          <ButtonNextContainer display={templates.length > visibleSlides}>
             <ButtonNext>
               <Arrow />
             </ButtonNext>
