@@ -7,15 +7,13 @@ import { AuthProvider, LocaleProvider } from '../components/Provider';
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
-    <>
-      <AuthProvider>
-        <LocaleProvider>
-          <Navbar />
-          <Component {...pageProps} />
-          <Footer />
-        </LocaleProvider>
-      </AuthProvider>
-    </>
+    <AuthProvider>
+      <LocaleProvider>
+        <Navbar />
+        <Component {...pageProps} />
+        <Footer />
+      </LocaleProvider>
+    </AuthProvider>
   );
 }
 export default MyApp;

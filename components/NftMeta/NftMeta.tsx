@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import Head from 'next/head';
 import { IPFS_RESOLVER } from '../../utils/constants';
+import { capitalize } from '../../utils';
 
 type Props = {
   templateName?: string;
@@ -118,6 +119,9 @@ export const NftMeta: FC<Props> = ({
 
   return (
     <Head>
+      <title>
+        {capitalize(collectionName)} - {templateName}
+      </title>
       {metas.map((meta) => (
         <meta key={meta.key} name={meta.name} content={meta.content} />
       ))}
