@@ -29,7 +29,7 @@ export const CardContainer = styled.div`
   cursor: pointer;
 `;
 
-export const QuantityText = styled.p`
+export const QuantityText = styled.div`
   color: ${countFont.color};
   font-family: ${typography[countFont.type].font};
   font-size: ${typography[countFont.type].size};
