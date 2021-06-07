@@ -53,7 +53,7 @@ export const Name = styled.div`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    height: ${titleFont.height};
+    height: ${titleFont.carouselHeight};
     `
     : 'line-height: 1.78;'}
   align-self: flex-start;

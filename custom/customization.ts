@@ -115,7 +115,7 @@ const customizationJson = {
     titleFont: {
       type: 'h4',
       color: '#000000',
-      height: '32px',
+      carouselHeight: '32px',
     },
     collectionNameFont: {
       type: 'label',
@@ -342,7 +342,7 @@ export type ThemeProps = {
       titleFont: {
         type: string;
         color: string;
-        height: string;
+        carouselHeight: string;
       };
       collectionNameFont: {
         type: string;
