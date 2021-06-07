@@ -84,7 +84,7 @@ export const addPrecisionDecimal = (
 
 export const formatPrice = (
   priceString: string,
-  tokenPrecision?: string
+  tokenPrecision?: number
 ): string => {
   if (!priceString) return '';
   const [price, currency] = priceString.split(' ');
