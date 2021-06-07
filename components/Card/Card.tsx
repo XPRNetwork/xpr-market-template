@@ -24,7 +24,7 @@ export const Card: FC<Props> = ({ template, type }) => {
     assetsForSale,
     lowestPrice,
     template_id,
-    collection: { collection_name },
+    collection: { collection_name, name: collectionName },
     immutable_data: { name, image, video },
   } = template;
   const router = useRouter();
@@ -66,18 +66,25 @@ export const Card: FC<Props> = ({ template, type }) => {
       )}
 
       <Name>{name}</Name>
-      <CollectionName>{collection_name}</CollectionName>
-      <PriceSection lowestPrice={lowestPrice} type={type} />
+      <CollectionName>{collectionName || collection_name}</CollectionName>
+      <PriceSection
+        lowestPrice={lowestPrice}
+        type={type}
+        text={text}
+        saleCount={formattedSaleCount}
+      />
     </CardContainer>
   );
 };
 
-const PriceSection = ({ lowestPrice, type }) => {
+const PriceSection = ({ lowestPrice, type, text, saleCount }) => {
   if (type === 'featured') {
     if (lowestPrice === undefined) {
       return <ShimmerBlock position="flex-start" />;
     }
-    return lowestPrice ? <Price>{lowestPrice}</Price> : null;
+    return lowestPrice || saleCount == '0' ? (
+      <Price>{lowestPrice || text.soldOut}</Price>
+    ) : null;
   } else {
     return null;
   }
