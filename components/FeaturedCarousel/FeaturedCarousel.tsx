@@ -59,7 +59,7 @@ export const FeaturedCarousel: FC<FeaturedCarouselProps> = ({ templates }) => {
             {templates.map((template, i) => {
               return (
                 <Slide index={i} key={template.template_id}>
-                  <Card template={template} />
+                  <Card template={template} type="featured" />
                 </Slide>
               );
             })}
