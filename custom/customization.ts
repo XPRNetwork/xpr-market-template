@@ -328,6 +328,9 @@ export type ThemeProps = {
     nftCard: {
       mainBackgroundColor: string;
       secondaryBackgroundColor: string;
+      borderColor: string;
+      borderRadius: string;
+      minWidth: string;
       priceFont: {
         type: string;
         color: string;
@@ -345,8 +348,6 @@ export type ThemeProps = {
         type: string;
         color: string;
       };
-      borderColor: string;
-      borderRadius: string;
     };
     featuredLayoutSection: {
       carousel: boolean;
