@@ -101,6 +101,9 @@ const customizationJson = {
   nftCard: {
     mainBackgroundColor: '#ffffff',
     secondaryBackgroundColor: 'lightgrey',
+    borderColor: 'gray',
+    borderRadius: '8px',
+    minWidth: '300px',
     priceFont: {
       type: 'h4',
       color: '#000000',
@@ -112,13 +115,12 @@ const customizationJson = {
     titleFont: {
       type: 'h4',
       color: '#000000',
+      height: '32px',
     },
     collectionNameFont: {
       type: 'label',
       color: 'gray',
     },
-    borderColor: 'gray',
-    borderRadius: '8px',
   },
   featuredSection: {
     carousel: true,
@@ -337,6 +339,7 @@ export type ThemeProps = {
       titleFont: {
         type: string;
         color: string;
+        height: string;
       };
       collectionNameFont: {
         type: string;

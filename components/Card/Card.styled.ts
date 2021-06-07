@@ -1,16 +1,20 @@
 import styled, { keyframes } from 'styled-components';
 import customizationJson from '../../custom/customization';
 
-const { nftCard, typography } = customizationJson;
 const {
-  mainBackgroundColor,
-  priceFont,
-  countFont,
-  titleFont,
-  collectionNameFont,
-  borderColor,
-  borderRadius,
-} = nftCard;
+  typography,
+  featuredSection: { carousel },
+  nftCard: {
+    mainBackgroundColor,
+    priceFont,
+    countFont,
+    titleFont,
+    collectionNameFont,
+    borderColor,
+    borderRadius,
+    minWidth,
+  },
+} = customizationJson;
 
 type ShimmerBlockProps = {
   width?: string;
@@ -18,7 +22,7 @@ type ShimmerBlockProps = {
 };
 
 export const CardContainer = styled.div`
-  min-width: 300px;
+  min-width: ${minWidth};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,13 +42,21 @@ export const QuantityText = styled.div`
   line-height: 1.71;
 `;
 
-export const Name = styled.p`
+export const Name = styled.div`
+  width: calc(${minWidth} - 48px);
   color: ${titleFont.color};
   font-family: ${typography[titleFont.type].font};
   font-size: ${typography[titleFont.type].size};
   font-weight: ${typography[titleFont.type].fontWeight};
+  ${carousel
+    ? `
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: ${titleFont.height};
+    `
+    : 'line-height: 1.78;'}
   align-self: flex-start;
-  line-height: 1.78;
 `;
 
 export const CollectionName = styled.p`
