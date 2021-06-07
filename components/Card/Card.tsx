@@ -24,7 +24,7 @@ export const Card: FC<Props> = ({ template, type }) => {
     assetsForSale,
     lowestPrice,
     template_id,
-    collection: { collection_name, name: collectionName },
+    collection: { collection_name, name: displayName },
     immutable_data: { name, image, video },
   } = template;
   const router = useRouter();
@@ -66,7 +66,7 @@ export const Card: FC<Props> = ({ template, type }) => {
       )}
 
       <Name>{name}</Name>
-      <CollectionName>{collectionName || collection_name}</CollectionName>
+      <CollectionName>{displayName || collection_name}</CollectionName>
       <PriceSection
         lowestPrice={lowestPrice}
         type={type}
