@@ -3,7 +3,7 @@ import {
   getTemplatesByCollection,
   Template,
   getLowestPricesForAllCollectionTemplates,
-  getAllTemplatesForUserWithAssetCount,
+  getAllTemplatesForUserWithSaleCount,
   formatTemplatesWithPriceAndSaleData,
 } from '../services/templates';
 import { FC } from 'react';
@@ -28,7 +28,7 @@ const HomePage: FC = () => {
           type: collection,
           owner,
         });
-        const assetsForSale = await getAllTemplatesForUserWithAssetCount({
+        const assetsForSale = await getAllTemplatesForUserWithSaleCount({
           owner,
           collection,
         });

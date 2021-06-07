@@ -25,9 +25,13 @@ const localizationJson = {
     },
     nftCard: {
       nftsLeft: 'LEFT',
+      nftsOwned: 'OWNED',
     },
     featuredSection: {
       heading: 'BREAKING NOW',
+    },
+    myItemsPage: {
+      header: 'MY ITEMS',
     },
   },
 };

@@ -16,9 +16,10 @@ import { IPFS_RESOLVER, RESIZER_IMAGE_SM } from '../../utils/constants';
 
 type Props = {
   template: Template;
+  type: 'user' | 'featured';
 };
 
-export const Card: FC<Props> = ({ template }) => {
+export const Card: FC<Props> = ({ template, type }) => {
   const {
     assetsForSale,
     lowestPrice,
@@ -42,12 +43,13 @@ export const Card: FC<Props> = ({ template }) => {
     ? image
     : `${RESIZER_IMAGE_SM}${IPFS_RESOLVER}${image}`;
   const fallbackImageSrc = image ? `${IPFS_RESOLVER}${image}` : '';
+  const cardHeaderText = type === 'featured' ? text.nftsLeft : text.nftsOwned;
 
   return (
     <CardContainer onClick={() => router.push(`/${template_id}`)}>
       <QuantityText>
         {formattedSaleCount ? (
-          `${formattedSaleCount} ${text.nftsLeft}`
+          `${formattedSaleCount} ${cardHeaderText}`
         ) : (
           <ShimmerBlock width="75px" />
         )}
@@ -65,11 +67,18 @@ export const Card: FC<Props> = ({ template }) => {
 
       <Name>{name}</Name>
       <CollectionName>{collection_name}</CollectionName>
-      {lowestPrice === undefined ? (
-        <ShimmerBlock position="flex-start" />
-      ) : lowestPrice ? (
-        <Price>{lowestPrice}</Price>
-      ) : null}
+      <PriceSection lowestPrice={lowestPrice} type={type} />
     </CardContainer>
   );
+};
+
+const PriceSection = ({ lowestPrice, type }) => {
+  if (type === 'featured') {
+    if (lowestPrice === undefined) {
+      return <ShimmerBlock position="flex-start" />;
+    }
+    return lowestPrice ? <Price>{lowestPrice}</Price> : null;
+  } else {
+    return null;
+  }
 };
