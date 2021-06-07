@@ -64,12 +64,12 @@ export const FeaturedCarousel: FC<FeaturedCarouselProps> = ({ templates }) => {
               );
             })}
           </Slider>
-          <ButtonBackContainer display={templates.length > visibleSlides}>
+          <ButtonBackContainer isVisible={templates.length > visibleSlides}>
             <ButtonBack>
               <Arrow />
             </ButtonBack>
           </ButtonBackContainer>
-          <ButtonNextContainer display={templates.length > visibleSlides}>
+          <ButtonNextContainer isVisible={templates.length > visibleSlides}>
             <ButtonNext>
               <Arrow />
             </ButtonNext>

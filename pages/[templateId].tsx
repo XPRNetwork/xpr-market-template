@@ -10,7 +10,8 @@ import {
   ErrorMessage,
 } from '../styles/templateId.styled';
 import ProtonSDK from '../services/proton';
-import { RouterQuery } from '../utils/constants';
+import { formatPrice } from '../utils';
+import { RouterQuery, TOKEN_PRECISION } from '../utils/constants';
 import localizationJson from '../custom/localization';
 import customizationJson from '../custom/customization';
 
@@ -21,6 +22,7 @@ const NftDetailPage: FC = () => {
     currentUser,
     currentUserBalance,
     isLoadingUser,
+    login,
     updateCurrentUserBalance,
   } = useAuthContext();
 
@@ -65,7 +67,7 @@ const NftDetailPage: FC = () => {
       const chainAccount = currentUser.actor;
       const purchaseResult = await ProtonSDK.purchaseSale({
         buyer: chainAccount,
-        amount: template.lowestPrice,
+        amount: formatPrice(template.lowestPrice, TOKEN_PRECISION),
         sale_id: template.lowestPriceSaleId,
       });
 
@@ -90,7 +92,9 @@ const NftDetailPage: FC = () => {
       <Nft name={name} image={image} video={video} />
       <NftDetails template={template} detailPageText={detailPageText}>
         {template.lowestPrice ? (
-          <Button onClick={buyAsset}>{detailPageText.buyButtonText}</Button>
+          <Button onClick={currentUser ? buyAsset : login}>
+            {detailPageText.buyButtonText}
+          </Button>
         ) : (
           <ButtonLink
             href={`http://protonmarket.com/${collection}/${templateId}`}
