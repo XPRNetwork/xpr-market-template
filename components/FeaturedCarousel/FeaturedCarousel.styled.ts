@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import customizationJson from '../../custom/customization';
+import { breakpoint } from '../../styles/Breakpoints';
 const { featuredSection } = customizationJson;
 const { carouselButtonsBackgroundColor, carouselButtonsBorderColor } =
   featuredSection;
@@ -66,6 +67,11 @@ export const ButtonNextContainer = styled.div<ButtonProps>`
     :hover {
       cursor: pointer;
     }
+
+    ${breakpoint.mobile`
+      width: 40px;
+      height: 40px;
+    `}
   }
 `;
 
@@ -95,5 +101,10 @@ export const ButtonBackContainer = styled.div<ButtonProps>`
     :hover {
       cursor: pointer;
     }
+
+    ${breakpoint.mobile`
+      width: 40px;
+      height: 40px;
+    `}
   }
 `;
