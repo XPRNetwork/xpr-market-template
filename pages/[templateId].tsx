@@ -92,7 +92,7 @@ const NftDetailPage: FC = () => {
       <Nft name={name} image={image} video={video} />
       <NftDetails template={template} detailPageText={detailPageText}>
         {template.lowestPrice ? (
-          <Button onClick={currentUser ? buyAsset : login}>
+          <Button onClick={currentUser && !isLoadingUser ? buyAsset : login}>
             {detailPageText.buyButtonText}
           </Button>
         ) : (
