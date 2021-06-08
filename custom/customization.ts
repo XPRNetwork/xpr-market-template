@@ -100,8 +100,8 @@ const customizationJson = {
   },
   nftCard: {
     mainBackgroundColor: '#ffffff',
-    secondaryBackgroundColor: 'lightgrey',
-    borderColor: 'gray',
+    secondaryBackgroundColor: 'transprent',
+    borderColor: 'lightgrey',
     borderRadius: '8px',
     minWidth: '300px',
     priceFont: {
@@ -130,7 +130,7 @@ const customizationJson = {
     },
     backgroundColor: '#f2f2f2',
     carouselButtonsBackgroundColor: '#ffffff',
-    carouselButtonsBorderColor: '#000000',
+    carouselButtonsBorderColor: 'lightgrey',
   },
   header: {
     image: '/header-image.png',
@@ -166,7 +166,7 @@ const customizationJson = {
   },
   detailPage: {
     imagePlacement: 'left',
-    imageBackgroundColor: '#efefef',
+    imageBackgroundColor: 'transparent',
     imageShadow: false,
     cardTitleFont: {
       type: 'h1',
