@@ -13,7 +13,6 @@ import { Template } from '../../services/templates';
 import localizationJson from '../../custom/localization';
 import { TemplateImage, TemplateVideo } from '../index';
 import { IPFS_RESOLVER, RESIZER_IMAGE_SM } from '../../utils/constants';
-import { redirect } from 'next/dist/next-server/server/api-utils';
 
 type Props = {
   template: Template;
