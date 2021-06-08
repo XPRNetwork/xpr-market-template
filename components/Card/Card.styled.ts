@@ -12,9 +12,9 @@ const {
     collectionNameFont,
     borderColor,
     borderRadius,
-    minWidth,
   },
 } = customizationJson;
+const minWidth = '300px';
 
 type ShimmerBlockProps = {
   width?: string;
