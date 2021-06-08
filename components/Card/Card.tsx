@@ -13,6 +13,7 @@ import { Template } from '../../services/templates';
 import localizationJson from '../../custom/localization';
 import { TemplateImage, TemplateVideo } from '../index';
 import { IPFS_RESOLVER, RESIZER_IMAGE_SM } from '../../utils/constants';
+import { redirect } from 'next/dist/next-server/server/api-utils';
 
 type Props = {
   template: Template;
@@ -44,9 +45,11 @@ export const Card: FC<Props> = ({ template, type }) => {
     : `${RESIZER_IMAGE_SM}${IPFS_RESOLVER}${image}`;
   const fallbackImageSrc = image ? `${IPFS_RESOLVER}${image}` : '';
   const cardHeaderText = type === 'featured' ? text.nftsLeft : text.nftsOwned;
+  const onClickRoute =
+    type === 'featured' ? `/${template_id}` : `/my-items/${template_id}`;
 
   return (
-    <CardContainer onClick={() => router.push(`/${template_id}`)}>
+    <CardContainer onClick={() => router.push(onClickRoute)}>
       <QuantityText>
         {formattedSaleCount ? (
           `${formattedSaleCount} ${cardHeaderText}`

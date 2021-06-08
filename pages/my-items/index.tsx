@@ -23,7 +23,7 @@ const MyItemsPage: FC = () => {
   const router = useRouter();
   const actor = currentUser ? currentUser.actor : '';
 
-  const { collection, owner } = customizationJson;
+  const { collection } = customizationJson;
   const text =
     locale && Object.keys(localizationJson[locale]).length
       ? localizationJson[locale].myItemsPage
@@ -40,7 +40,7 @@ const MyItemsPage: FC = () => {
       if (!isLoadingUser && actor) {
         try {
           const assetCount = await getAllTemplatesForUserWithAssetCount({
-            owner,
+            owner: actor,
             collection,
           });
           const templateIds = Object.keys(assetCount);
