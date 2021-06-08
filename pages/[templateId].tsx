@@ -76,7 +76,7 @@ const NftDetailPage: FC = () => {
       }
 
       updateCurrentUserBalance(chainAccount);
-      setTimeout(() => router.push('/'), 1000); // TODO: Redirect to user's items page
+      setTimeout(() => router.push('/my-items'), 1000);
     } catch (e) {
       setPurchasingError(e.message);
     }
