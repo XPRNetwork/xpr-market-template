@@ -70,6 +70,7 @@ const customizationJson = {
         color: '#000000',
       },
     ],
+    balanceSubtitleFontType: 'label',
     buttonFontColor: '#000000',
     buttonBackgroundColor: 'transparent',
     buttonBorderColor: '#000000',

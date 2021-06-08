@@ -93,9 +93,12 @@ export const NavLinks = styled.section`
   width: 45%;
   display: flex;
   justify-content: space-between;
-  font-family: ${typography[navbar.navLinkFontType].font};
-  font-size: ${typography[navbar.navLinkFontType].size};
-  font-weight: ${typography[navbar.navLinkFontType].fontWeight};
+
+  a {
+    font-family: ${typography[navbar.navLinkFontType].font};
+    font-size: ${typography[navbar.navLinkFontType].size};
+    font-weight: ${typography[navbar.navLinkFontType].fontWeight};
+  }
 `;
 
 export const MobileHeaderWrapper = styled.div`
@@ -173,9 +176,9 @@ export const GradientBackground = styled.div<GradientBackgroundProps>`
 `;
 
 export const Name = styled.span`
-  font-family: CircularStdBold;
-  color: #1a1a1a;
-  font-size: 14px;
+  font-family: ${typography[navbar.navLinkFontType].font};
+  font-size: ${typography[navbar.navLinkFontType].size};
+  font-weight: ${typography[navbar.navLinkFontType].fontWeight};
   line-height: 24px;
   margin: 16px 16px 11px;
 
@@ -196,7 +199,9 @@ export const Subtitle = styled.span`
 `;
 
 export const Balance = styled(Name)`
-  font-size: 18px;
+  font-family: ${typography[navbar.balanceSubtitleFontType].font};
+  font-size: ${typography[navbar.balanceSubtitleFontType].size};
+  font-weight: ${typography[navbar.balanceSubtitleFontType].fontWeight};
   line-height: 24px;
   border-bottom: 1px solid #e6e6e6;
   margin: 0 16px 8px;
@@ -208,6 +213,9 @@ export const Balance = styled(Name)`
 `;
 
 export const DropdownLink = styled.a<DropdownLinkProps>`
+  font-family: ${typography[navbar.navLinkFontType].font};
+  font-size: ${typography[navbar.navLinkFontType].size};
+  font-weight: ${typography[navbar.navLinkFontType].fontWeight};
   color: ${({ color }) => color};
   font-size: 14px;
   line-height: 24px;
