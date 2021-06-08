@@ -8,7 +8,3 @@ export const LoadingPage = (): JSX.Element => {
     </Container>
   );
 };
-
-LoadingPage.defaultProps = {
-  margin: '25vh 0',
-};
