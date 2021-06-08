@@ -9,7 +9,7 @@ const localizationJson = {
       buttonText: 'Label',
     },
     navbar: {
-      navLinks: ['LINK 01', 'LINK 02', 'LINK 03', 'LINK 04'],
+      navLinks: ['BIO', 'BUSINESS', 'AUCTIONS', 'MY ITEMS'],
       balanceText: 'Balance',
       loginText: 'Connect Wallet',
     },
@@ -26,6 +26,7 @@ const localizationJson = {
     nftCard: {
       nftsLeft: 'LEFT',
       nftsOwned: 'OWNED',
+      soldOut: 'SOLD OUT',
     },
     featuredSection: {
       heading: 'BREAKING NOW',

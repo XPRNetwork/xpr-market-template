@@ -25,8 +25,10 @@ export const HeaderContent = styled(MaxWidth)`
   display: flex;
   flex-direction: ${imagePlacement === 'right' ? 'row' : 'row-reverse'};
   height: 640px;
+  padding-top: 12px;
 
   ${breakpoint.tablet`
+    padding-top: 0;
     flex-direction: column;
     height: 100%;
   `}

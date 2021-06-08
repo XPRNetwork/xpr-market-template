@@ -165,8 +165,8 @@ const Navbar: FC = () => {
             <Image src={navbar.logo} height="60px" width="auto" />
           </LogoContainer>
           <NavLinks>
-            {navbar.navLinks.map((_, index) => (
-              <Link key={text.navLinks[index]} href={text.navLinks[index]}>
+            {theme.navbar.navLinks.map(({ link }, index) => (
+              <Link key={text.navLinks[index]} href={link}>
                 {text.navLinks[index]}
               </Link>
             ))}

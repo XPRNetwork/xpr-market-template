@@ -70,6 +70,7 @@ const customizationJson = {
         color: '#000000',
       },
     ],
+    balanceSubtitleFontType: 'label',
     buttonFontColor: '#000000',
     buttonBackgroundColor: 'transparent',
     buttonBorderColor: '#000000',
@@ -100,7 +101,10 @@ const customizationJson = {
   },
   nftCard: {
     mainBackgroundColor: '#ffffff',
-    secondaryBackgroundColor: 'lightgrey',
+    secondaryBackgroundColor: 'transprent',
+    borderColor: 'lightgrey',
+    borderRadius: '8px',
+    minWidth: '300px',
     priceFont: {
       type: 'h4',
       color: '#000000',
@@ -112,13 +116,12 @@ const customizationJson = {
     titleFont: {
       type: 'h4',
       color: '#000000',
+      carouselHeight: '32px',
     },
     collectionNameFont: {
       type: 'label',
       color: 'gray',
     },
-    borderColor: 'gray',
-    borderRadius: '8px',
   },
   featuredSection: {
     carousel: true,
@@ -128,7 +131,7 @@ const customizationJson = {
     },
     backgroundColor: '#f2f2f2',
     carouselButtonsBackgroundColor: '#ffffff',
-    carouselButtonsBorderColor: '#000000',
+    carouselButtonsBorderColor: 'lightgrey',
   },
   header: {
     image: '/header-image.png',
@@ -164,7 +167,7 @@ const customizationJson = {
   },
   detailPage: {
     imagePlacement: 'left',
-    imageBackgroundColor: '#efefef',
+    imageBackgroundColor: 'transparent',
     imageShadow: false,
     cardTitleFont: {
       type: 'h1',
@@ -326,6 +329,9 @@ export type ThemeProps = {
     nftCard: {
       mainBackgroundColor: string;
       secondaryBackgroundColor: string;
+      borderColor: string;
+      borderRadius: string;
+      minWidth: string;
       priceFont: {
         type: string;
         color: string;
@@ -337,13 +343,12 @@ export type ThemeProps = {
       titleFont: {
         type: string;
         color: string;
+        carouselHeight: string;
       };
       collectionNameFont: {
         type: string;
         color: string;
       };
-      borderColor: string;
-      borderRadius: string;
     };
     featuredLayoutSection: {
       carousel: boolean;
