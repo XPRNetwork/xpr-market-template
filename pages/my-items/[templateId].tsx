@@ -1,6 +1,6 @@
 import { FC, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { Nft, NftDetails, NftDropdown } from '../../components';
+import { LoadingPage, Nft, NftDetails, NftDropdown } from '../../components';
 import { useAuthContext, useLocaleContext } from '../../components/Provider';
 import { useFetchNft, useFetchOwnedNfts } from '../../hooks';
 import { NftPageContainer, ButtonLink } from '../../styles/templateId.styled';
@@ -55,7 +55,7 @@ const MyNftDetailPage: FC = () => {
     saleDataError ||
     templateError
   ) {
-    return null;
+    return <LoadingPage />;
   }
 
   const {
@@ -63,6 +63,7 @@ const MyNftDetailPage: FC = () => {
     collection: { collection_name },
     immutable_data: { name, image, video },
   } = template;
+
   return (
     <NftPageContainer>
       <Nft name={name} image={image} video={video} />

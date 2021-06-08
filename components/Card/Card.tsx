@@ -24,7 +24,7 @@ export const Card: FC<Props> = ({ template, type }) => {
     assetsForSale,
     lowestPrice,
     template_id,
-    collection: { collection_name },
+    collection: { collection_name, name: displayName },
     immutable_data: { name, image, video },
   } = template;
   const router = useRouter();
@@ -44,9 +44,11 @@ export const Card: FC<Props> = ({ template, type }) => {
     : `${RESIZER_IMAGE_SM}${IPFS_RESOLVER}${image}`;
   const fallbackImageSrc = image ? `${IPFS_RESOLVER}${image}` : '';
   const cardHeaderText = type === 'featured' ? text.nftsLeft : text.nftsOwned;
+  const onClickRoute =
+    type === 'featured' ? `/${template_id}` : `/my-items/${template_id}`;
 
   return (
-    <CardContainer onClick={() => router.push(`/${template_id}`)}>
+    <CardContainer onClick={() => router.push(onClickRoute)}>
       <QuantityText>
         {formattedSaleCount ? (
           `${formattedSaleCount} ${cardHeaderText}`
@@ -66,18 +68,25 @@ export const Card: FC<Props> = ({ template, type }) => {
       )}
 
       <Name>{name}</Name>
-      <CollectionName>{collection_name}</CollectionName>
-      <PriceSection lowestPrice={lowestPrice} type={type} />
+      <CollectionName>{displayName || collection_name}</CollectionName>
+      <PriceSection
+        lowestPrice={lowestPrice}
+        type={type}
+        text={text}
+        saleCount={formattedSaleCount}
+      />
     </CardContainer>
   );
 };
 
-const PriceSection = ({ lowestPrice, type }) => {
+const PriceSection = ({ lowestPrice, type, text, saleCount }) => {
   if (type === 'featured') {
     if (lowestPrice === undefined) {
       return <ShimmerBlock position="flex-start" />;
     }
-    return lowestPrice ? <Price>{lowestPrice}</Price> : null;
+    return lowestPrice || saleCount == '0' ? (
+      <Price>{lowestPrice || text.soldOut}</Price>
+    ) : null;
   } else {
     return null;
   }

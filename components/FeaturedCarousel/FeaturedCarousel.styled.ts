@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import customizationJson from '../../custom/customization';
+import { breakpoint } from '../../styles/Breakpoints';
 const { featuredSection } = customizationJson;
 const { carouselButtonsBackgroundColor, carouselButtonsBorderColor } =
   featuredSection;
@@ -38,11 +39,11 @@ export const CarouselContainer = styled.div`
 `;
 
 type ButtonProps = {
-  display: boolean;
+  isVisible: boolean;
 };
 
 export const ButtonNextContainer = styled.div<ButtonProps>`
-  display: ${({ display }) => (display ? 'block' : 'none')};
+  display: ${({ isVisible }) => (isVisible ? 'block' : 'none')};
   position: absolute;
   left: calc(100% - 24px);
   top: calc(50% - 24px);
@@ -66,11 +67,16 @@ export const ButtonNextContainer = styled.div<ButtonProps>`
     :hover {
       cursor: pointer;
     }
+
+    ${breakpoint.mobile`
+      width: 40px;
+      height: 40px;
+    `}
   }
 `;
 
 export const ButtonBackContainer = styled.div<ButtonProps>`
-  display: ${({ display }) => (display ? 'block' : 'none')};
+  display: ${({ isVisible }) => (isVisible ? 'block' : 'none')};
   position: absolute;
   right: calc(100% - 24px);
   top: calc(50% - 24px);
@@ -95,5 +101,10 @@ export const ButtonBackContainer = styled.div<ButtonProps>`
     :hover {
       cursor: pointer;
     }
+
+    ${breakpoint.mobile`
+      width: 40px;
+      height: 40px;
+    `}
   }
 `;

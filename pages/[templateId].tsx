@@ -1,6 +1,6 @@
 import { FC, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { Nft, NftDetails } from '../components';
+import { Nft, NftDetails, LoadingPage } from '../components';
 import { useAuthContext, useLocaleContext } from '../components/Provider';
 import { useFetchNft } from '../hooks';
 import {
@@ -10,7 +10,8 @@ import {
   ErrorMessage,
 } from '../styles/templateId.styled';
 import ProtonSDK from '../services/proton';
-import { RouterQuery } from '../utils/constants';
+import { formatPrice } from '../utils';
+import { RouterQuery, TOKEN_PRECISION } from '../utils/constants';
 import localizationJson from '../custom/localization';
 import customizationJson from '../custom/customization';
 
@@ -21,6 +22,7 @@ const NftDetailPage: FC = () => {
     currentUser,
     currentUserBalance,
     isLoadingUser,
+    login,
     updateCurrentUserBalance,
   } = useAuthContext();
 
@@ -65,7 +67,7 @@ const NftDetailPage: FC = () => {
       const chainAccount = currentUser.actor;
       const purchaseResult = await ProtonSDK.purchaseSale({
         buyer: chainAccount,
-        amount: template.lowestPrice,
+        amount: formatPrice(template.lowestPrice, TOKEN_PRECISION),
         sale_id: template.lowestPriceSaleId,
       });
 
@@ -74,14 +76,14 @@ const NftDetailPage: FC = () => {
       }
 
       updateCurrentUserBalance(chainAccount);
-      setTimeout(() => router.push('/'), 1000); // TODO: Redirect to user's items page
+      setTimeout(() => router.push('/my-items'), 1000);
     } catch (e) {
       setPurchasingError(e.message);
     }
   };
 
   if (isLoadingUser || isLoadingLocale || isLoading || error) {
-    return null;
+    return <LoadingPage />;
   }
 
   const { name, image, video } = template.immutable_data;
@@ -90,7 +92,9 @@ const NftDetailPage: FC = () => {
       <Nft name={name} image={image} video={video} />
       <NftDetails template={template} detailPageText={detailPageText}>
         {template.lowestPrice ? (
-          <Button onClick={buyAsset}>{detailPageText.buyButtonText}</Button>
+          <Button onClick={currentUser && !isLoadingUser ? buyAsset : login}>
+            {detailPageText.buyButtonText}
+          </Button>
         ) : (
           <ButtonLink
             href={`http://protonmarket.com/${collection}/${templateId}`}
