@@ -104,7 +104,6 @@ const customizationJson = {
     secondaryBackgroundColor: 'transprent',
     borderColor: 'lightgrey',
     borderRadius: '8px',
-    minWidth: '300px',
     priceFont: {
       type: 'h4',
       color: '#000000',
@@ -331,7 +330,6 @@ export type ThemeProps = {
       secondaryBackgroundColor: string;
       borderColor: string;
       borderRadius: string;
-      minWidth: string;
       priceFont: {
         type: string;
         color: string;
