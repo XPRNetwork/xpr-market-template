@@ -1,6 +1,6 @@
 import { FC, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { Nft, NftDetails } from '../components';
+import { Nft, NftDetails, LoadingPage } from '../components';
 import { useAuthContext, useLocaleContext } from '../components/Provider';
 import { useFetchNft } from '../hooks';
 import {
@@ -83,7 +83,7 @@ const NftDetailPage: FC = () => {
   };
 
   if (isLoadingUser || isLoadingLocale || isLoading || error) {
-    return null;
+    return <LoadingPage />;
   }
 
   const { name, image, video } = template.immutable_data;
