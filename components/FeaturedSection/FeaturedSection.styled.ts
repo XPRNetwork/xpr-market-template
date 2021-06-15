@@ -2,11 +2,13 @@ import styled from 'styled-components';
 import { MaxWidth } from '../../styles/MaxWidth.styled';
 import customizationJson from '../../custom/customization';
 
-const { featuredSection, typography } = customizationJson;
-const { titleFont, backgroundColor } = featuredSection;
-export const FeaturedSectionContainer = styled.section`
+const { typography } = customizationJson;
+
+export const FeaturedSectionContainer = styled.section<{
+  backgroundColor: string;
+}>`
   width: 100%;
-  background-color: ${backgroundColor};
+  background-color: ${({ backgroundColor }) => backgroundColor};
 `;
 
 export const FeaturedSectionWrapper = styled(MaxWidth).attrs({ as: 'section' })`
@@ -15,11 +17,11 @@ export const FeaturedSectionWrapper = styled(MaxWidth).attrs({ as: 'section' })`
   flex-direction: column;
 `;
 
-export const HeadingText = styled.h2`
+export const HeadingText = styled.h2<{ type: string; color: string }>`
   text-align: center;
   margin-bottom: 60px;
-  font-family: ${typography[titleFont.type].font};
-  font-weight: ${typography[titleFont.type].fontWeight};
-  font-size: ${typography[titleFont.type].size};
-  color: ${titleFont.color};
+  font-family: ${(props) => typography[props.type].font};
+  font-weight: ${(props) => typography[props.type].fontWeight};
+  font-size: ${(props) => typography[props.type].size};
+  color: ${(props) => props.color};
 `;

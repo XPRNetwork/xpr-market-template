@@ -1,33 +1,30 @@
 import { FC } from 'react';
-import { useLocaleContext } from '../Provider';
 import {
   FeaturedSectionWrapper,
   FeaturedSectionContainer,
   HeadingText,
 } from './FeaturedSection.styled';
-import { FeaturedCarousel, FeaturedGrid } from '../../components';
+import { FeaturedCarousel } from '../FeaturedCarousel/FeaturedCarousel';
+import { FeaturedGrid } from '../FeaturedGrid/FeaturedGrid';
+import { Text } from '../../custom/localization';
+import { FeaturedSectionProps } from '../../custom/customization';
 import { Template } from '../../services/templates';
-import localizationJson from '../../custom/localization';
-import customizationJson from '../../custom/customization';
-const { featuredSection } = customizationJson;
 
-type FeaturedSectionProps = {
+type Props = {
+  styles: FeaturedSectionProps;
+  text: Text;
   templates: Template[];
 };
 
-export const FeaturedSection: FC<FeaturedSectionProps> = ({ templates }) => {
-  const { locale } = useLocaleContext();
-
-  const text = Object.keys(localizationJson[locale]).length
-    ? localizationJson[locale].featuredSection
-    : localizationJson['en'].featuredSection;
-
+export const FeaturedSection: FC<Props> = ({ styles, text, templates }) => {
   return (
-    <FeaturedSectionContainer>
+    <FeaturedSectionContainer backgroundColor={styles.backgroundColor}>
       <FeaturedSectionWrapper>
-        <HeadingText>{text.heading}</HeadingText>
-        {featuredSection.carousel ? (
-          <FeaturedCarousel templates={templates} />
+        <HeadingText {...styles.titleFont}>
+          {text.featuredSection.heading}
+        </HeadingText>
+        {styles.carousel ? (
+          <FeaturedCarousel templates={templates} styles={styles} />
         ) : (
           <FeaturedGrid templates={templates} type="featured" />
         )}
