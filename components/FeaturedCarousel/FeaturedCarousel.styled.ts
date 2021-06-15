@@ -1,9 +1,5 @@
 import styled from 'styled-components';
-import customizationJson from '../../custom/customization';
 import { breakpoint } from '../../styles/Breakpoints';
-const { featuredSection } = customizationJson;
-const { carouselButtonsBackgroundColor, carouselButtonsBorderColor } =
-  featuredSection;
 
 export const CarouselStyleFix = styled.div`
   width: 100%;
@@ -40,6 +36,8 @@ export const CarouselContainer = styled.div`
 
 type ButtonProps = {
   isVisible: boolean;
+  carouselButtonsBackgroundColor: string;
+  carouselButtonsBorderColor: string;
 };
 
 export const ButtonNextContainer = styled.div<ButtonProps>`
@@ -51,13 +49,15 @@ export const ButtonNextContainer = styled.div<ButtonProps>`
   button {
     width: 48px;
     height: 48px;
-    background-color: ${carouselButtonsBackgroundColor};
+    background-color: ${({ carouselButtonsBackgroundColor }) =>
+      carouselButtonsBackgroundColor};
     border-radius: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     outline: none;
-    border: 1px solid ${carouselButtonsBorderColor};
+    border: 1px solid
+      ${({ carouselButtonsBorderColor }) => carouselButtonsBorderColor};
     box-shadow: 0px 2px 5px rgb(210, 210, 210);
 
     :disabled {
@@ -84,12 +84,14 @@ export const ButtonBackContainer = styled.div<ButtonProps>`
   button {
     width: 48px;
     height: 48px;
-    background-color: ${carouselButtonsBackgroundColor};
+    background-color: ${({ carouselButtonsBackgroundColor }) =>
+      carouselButtonsBackgroundColor};
     border-radius: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid ${carouselButtonsBorderColor};
+    border: 1px solid
+      ${({ carouselButtonsBorderColor }) => carouselButtonsBorderColor};
     transform: rotate(180deg);
     outline: none;
     box-shadow: 0px -2px 5px rgb(210, 210, 210);
