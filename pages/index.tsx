@@ -7,15 +7,22 @@ import {
   formatTemplatesWithPriceAndSaleData,
 } from '../services/templates';
 import { FC } from 'react';
-import { LoadingPage, Header, FeaturedSection } from '../components';
+import {
+  LoadingPage,
+  Header,
+  FeaturedSection,
+  FeaturedCarousel,
+  FeaturedGrid,
+} from '../components';
 import { useLocaleContext } from '../components/Provider';
 import customizationJson from '../custom/customization';
-const { collection, owner } = customizationJson;
+import localizationJson from '../custom/localization';
+const { collection, owner, header, featuredSection } = customizationJson;
 
 const HomePage: FC = () => {
   const [isLoadingTemplates, setIsLoadingTemplates] = useState<boolean>(true);
   const [templates, setTemplates] = useState<Template[]>([]);
-  const { isLoadingLocale } = useLocaleContext();
+  const { isLoadingLocale, locale } = useLocaleContext();
 
   useEffect(() => {
     (async () => {
@@ -50,10 +57,14 @@ const HomePage: FC = () => {
     return <LoadingPage />;
   }
 
+  const text = Object.keys(localizationJson[locale]).length
+    ? localizationJson[locale]
+    : localizationJson['en'];
+
   return (
     <div>
-      <Header />
-      <FeaturedSection templates={templates} />
+      <Header styles={header} text={text} />
+      <FeaturedSection text={text} styles={featuredSection} />
     </div>
   );
 };

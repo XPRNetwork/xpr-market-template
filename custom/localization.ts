@@ -37,4 +37,40 @@ const localizationJson = {
   },
 };
 
+export interface Text {
+  header: {
+    highlightText: string;
+    headerLine1: string;
+    headerLine2: string;
+    description: string;
+    buttonText: string;
+  };
+  navbar: {
+    navLinks: string[];
+    balanceText: string;
+    loginText: string;
+  };
+  detailPage: {
+    priceLabelText: string;
+    editionLabelText: string;
+    placeholderPriceText: string;
+    placeholderDropdownText: string;
+    buyButtonText: string;
+    viewButtonText: string;
+    sellButtonText: string;
+    cancelSaleButtonText: string;
+  };
+  nftCard: {
+    nftsLeft: string;
+    nftsOwned: string;
+    soldOut: string;
+  };
+  featuredSection: {
+    heading: string;
+  };
+  myItemsPage: {
+    header: string;
+  };
+}
+
 export default localizationJson;

@@ -3,27 +3,20 @@ import customizationJson from '../../custom/customization';
 import { MaxWidth } from '../../styles/MaxWidth.styled';
 import { breakpoint } from '../../styles/Breakpoints';
 
-const { typography, header } = customizationJson;
-const {
-  imagePlacement,
-  backgroundColor,
-  highlightFont,
-  mainHeadingFont,
-  subheadingFont,
-  button,
-} = header;
+const { typography } = customizationJson;
 
-export const HeaderContainer = styled.div`
-  background-color: ${backgroundColor || 'blue'};
+export const HeaderContainer = styled.div<{ backgroundColor: string }>`
+  background-color: ${({ backgroundColor }) => backgroundColor || 'blue'};
 
   ${breakpoint.tablet`
     margin-top: 30px;
   `}
 `;
 
-export const HeaderContent = styled(MaxWidth)`
+export const HeaderContent = styled(MaxWidth)<{ imagePlacement: string }>`
   display: flex;
-  flex-direction: ${imagePlacement === 'right' ? 'row' : 'row-reverse'};
+  flex-direction: ${({ imagePlacement }) =>
+    imagePlacement === 'right' ? 'row' : 'row-reverse'};
   height: 640px;
   padding-top: 12px;
 
@@ -34,13 +27,15 @@ export const HeaderContent = styled(MaxWidth)`
   `}
 `;
 
-export const TextContainer = styled.div`
+export const TextContainer = styled.div<{ imagePlacement: string }>`
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: ${header.imagePlacement === 'right' ? 'flex-start' : 'flex-end'};
-  text-align: ${header.imagePlacement === 'right' ? 'left' : 'right'};
+  align-items: ${({ imagePlacement }) =>
+    imagePlacement === 'right' ? 'flex-start' : 'flex-end'};
+  text-align: ${({ imagePlacement }) =>
+    imagePlacement === 'right' ? 'left' : 'right'};
   line-height: 1.78;
 
   ${breakpoint.tablet`
@@ -62,12 +57,16 @@ export const ImageContainer = styled.div`
   `}
 `;
 
-export const HighlightText = styled.h3`
-  display: ${highlightFont.isShown ? 'block' : 'none'};
-  color: ${highlightFont.color};
-  font-family: ${typography[highlightFont.type].font};
-  font-size: ${typography[highlightFont.type].size};
-  font-weight: ${typography[highlightFont.type].fontWeight};
+export const HighlightText = styled.h3<{
+  isShown: boolean;
+  type: string;
+  color: string;
+}>`
+  display: ${(props) => (props.isShown ? 'block' : 'none')};
+  color: ${(props) => props.color};
+  font-family: ${(props) => typography[props.type].font};
+  font-size: ${(props) => typography[props.type].size};
+  font-weight: ${(props) => typography[props.type].fontWeight};
   margin-bottom: 8px;
 
   ${breakpoint.mobile`
@@ -75,11 +74,14 @@ export const HighlightText = styled.h3`
   `}
 `;
 
-export const HeaderText = styled.h1`
-  color: ${mainHeadingFont.color};
-  font-family: ${typography[mainHeadingFont.type].font};
-  font-size: ${typography[mainHeadingFont.type].size};
-  font-weight: ${typography[mainHeadingFont.type].fontWeight};
+export const HeaderText = styled.h1<{
+  type: string;
+  color: string;
+}>`
+  color: ${(props) => props.color};
+  font-family: ${(props) => typography[props.type].font};
+  font-size: ${(props) => typography[props.type].size};
+  font-weight: ${(props) => typography[props.type].fontWeight};
   margin: 0;
   line-height: 1.25;
 
@@ -92,11 +94,14 @@ export const HeaderText = styled.h1`
   `}
 `;
 
-export const SubHeaderText = styled.h2`
-  color: ${subheadingFont.color};
-  font-family: ${typography[subheadingFont.type].font};
-  font-size: ${typography[subheadingFont.type].size};
-  font-weight: ${typography[subheadingFont.type].fontWeight};
+export const SubHeaderText = styled.h2<{
+  type: string;
+  color: string;
+}>`
+  color: ${(props) => props.color};
+  font-family: ${(props) => typography[props.type].font};
+  font-size: ${(props) => typography[props.type].size};
+  font-weight: ${(props) => typography[props.type].fontWeight};
   margin-top: 16px;
   max-width: 550px;
 
@@ -107,7 +112,6 @@ export const SubHeaderText = styled.h2`
 `;
 
 export const ButtonWrapperAnchor = styled.a.attrs({
-  href: button.link,
   target: '_blank',
   rel: 'noreferrer',
 })`
@@ -116,14 +120,19 @@ export const ButtonWrapperAnchor = styled.a.attrs({
   `}
 `;
 
-export const Button = styled.button`
+export const Button = styled.button<{
+  isShown: boolean;
+  backgroundColor: string;
+  textFont: string;
+  textColor: string;
+}>`
   width: 208px;
   height: 56px;
   margin-top: 32px;
-  display: ${button.isShown ? 'block' : 'none'};
-  background-color: ${button.backgroundColor};
-  font-family: ${typography[button.textFont].font};
-  color: ${button.textColor};
+  display: ${(props) => (props.isShown ? 'block' : 'none')};
+  background-color: ${(props) => props.backgroundColor};
+  font-family: ${(props) => typography[props.textFont].font};
+  color: ${(props) => props.textColor};
   border: none;
   cursor: pointer;
 

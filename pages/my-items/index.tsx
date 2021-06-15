@@ -12,10 +12,12 @@ import {
   getTemplatesFromTemplateIds,
   Template,
 } from '../../services/templates';
-import customizationJson from '../../custom/customization';
+import customizationJson, {
+  MyItemsPageProps,
+} from '../../custom/customization';
 import localizationJson from '../../custom/localization';
 
-const MyItemsPage: FC = () => {
+const MyItemsPage: FC<{ styles: MyItemsPageProps }> = ({ styles }) => {
   const [templates, setTemplates] = useState<Template[]>([]);
   const [isLoadingTemplates, setIsLoadingTemplates] = useState<boolean>(true);
   const { isLoadingUser, currentUser } = useAuthContext();
@@ -64,9 +66,9 @@ const MyItemsPage: FC = () => {
   }
 
   return (
-    <PageContainer>
-      <HeaderText>{text.header}</HeaderText>
-      <FeaturedGrid templates={templates} type="user"></FeaturedGrid>
+    <PageContainer backgroundColor={styles.backgroundColor}>
+      <HeaderText {...styles.headerFont}>{text.header}</HeaderText>
+      <FeaturedGrid templates={templates} type="user" />
     </PageContainer>
   );
 };

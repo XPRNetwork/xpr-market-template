@@ -17,12 +17,9 @@ import {
   YoutubeIcon,
   MessengerIcon,
 } from '../SocialMediaIcons/SocialMediaIcons';
-import customizationJson from '../../custom/customization';
+import { FooterProps } from '../../custom/customization';
 
-const { footer } = customizationJson;
-const { socialMediaLinks } = footer;
-
-const getSocialMediaIcons = () => {
+const getSocialMediaIcons = (socialMediaLinks) => {
   return socialMediaLinks.map((link) => (
     <a href={link.link} target="_blank" rel="noreferrer" key={link.type}>
       {iconGetter(link.type)}
@@ -68,12 +65,17 @@ const iconGetter = (type) => {
   }
 };
 
-export const Footer: FC = () => {
+export const Footer: FC<{ styles: FooterProps }> = ({ styles }) => {
+  const { logo, socialMediaLinks, backgroundColor, borderColor } = styles;
   return (
-    <FooterContainer>
+    <FooterContainer
+      backgroundColor={backgroundColor}
+      borderColor={borderColor}>
       <FooterContent>
-        <Logo src={footer.logo} className="logo" />
-        <FooterIconsContainer>{getSocialMediaIcons()}</FooterIconsContainer>
+        <Logo src={logo} className="logo" />
+        <FooterIconsContainer>
+          {getSocialMediaIcons(socialMediaLinks)}
+        </FooterIconsContainer>
       </FooterContent>
     </FooterContainer>
   );

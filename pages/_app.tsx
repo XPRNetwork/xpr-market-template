@@ -6,6 +6,9 @@ import type { AppProps } from 'next/app';
 import { Footer, Navbar } from '../components';
 import { AuthProvider, LocaleProvider } from '../components/Provider';
 import { generateFontImportLink } from '../custom/customization';
+import customizationJson from '../custom/customization';
+
+const { footer, navbar } = customizationJson;
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   const fontImportLink = generateFontImportLink();
@@ -21,9 +24,9 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
       </Head>
       <AuthProvider>
         <LocaleProvider>
-          <Navbar />
+          <Navbar styles={navbar} />
           <Component {...pageProps} />
-          <Footer />
+          <Footer styles={footer} />
         </LocaleProvider>
       </AuthProvider>
     </>
