@@ -6,7 +6,6 @@ import {
   ButtonBack,
   ButtonNext,
 } from 'pure-react-carousel';
-import { ReactComponent as Arrow } from '../../public/chevron-right.svg';
 import { Template } from '../../services/templates';
 import { Card } from '../../components';
 import {
@@ -76,7 +75,7 @@ export const FeaturedCarousel: FC<FeaturedCarouselProps> = ({
             }
             carouselButtonsBorderColor={styles.carouselButtonsBorderColor}>
             <ButtonBack>
-              <Arrow />
+              <img src="/chevron-right.svg" alt="arrow" />
             </ButtonBack>
           </ButtonBackContainer>
           <ButtonNextContainer
@@ -86,7 +85,7 @@ export const FeaturedCarousel: FC<FeaturedCarouselProps> = ({
             }
             carouselButtonsBorderColor={styles.carouselButtonsBorderColor}>
             <ButtonNext>
-              <Arrow />
+              <img src="/chevron-right.svg" alt="arrow" />
             </ButtonNext>
           </ButtonNextContainer>
         </CarouselProvider>
