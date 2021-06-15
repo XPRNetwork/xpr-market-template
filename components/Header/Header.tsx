@@ -10,36 +10,37 @@ import {
   ButtonWrapperAnchor,
   Button,
 } from './Header.styled';
-import { useLocaleContext } from '../Provider';
-import customizationJson from '../../custom/customization';
-import localizationJson from '../../custom/localization';
+import { HeaderProps } from '../../custom/customization';
+import { Text } from '../../custom/localization';
 
-export const Header: FC = () => {
-  const {
-    header: { image },
-  } = customizationJson;
-  const { locale, isLoadingLocale } = useLocaleContext();
+interface Props {
+  styles: HeaderProps;
+  text: Text;
+}
 
-  if (isLoadingLocale) return null;
-
-  const text = Object.keys(localizationJson[locale]).length
-    ? localizationJson[locale].header
-    : localizationJson['en'].header;
-
+export const Header: FC<Props> = ({ styles, text }) => {
   return (
-    <HeaderContainer>
-      <HeaderContent>
-        <TextContainer>
-          <HighlightText>{text.highlightText}</HighlightText>
-          <HeaderText>{text.headerLine1}</HeaderText>
-          <HeaderText>{text.headerLine2}</HeaderText>
-          <SubHeaderText>{text.description}</SubHeaderText>
-          <ButtonWrapperAnchor>
-            <Button>{text.buttonText}</Button>
+    <HeaderContainer backgroundColor={styles.backgroundColor}>
+      <HeaderContent imagePlacement={styles.imagePlacement}>
+        <TextContainer imagePlacement={styles.imagePlacement}>
+          <HighlightText {...styles.highlightFont}>
+            {text.header.highlightText}
+          </HighlightText>
+          <HeaderText {...styles.mainHeadingFont}>
+            {text.header.headerLine1}
+          </HeaderText>
+          <HeaderText {...styles.mainHeadingFont}>
+            {text.header.headerLine2}
+          </HeaderText>
+          <SubHeaderText {...styles.subheadingFont}>
+            {text.header.description}
+          </SubHeaderText>
+          <ButtonWrapperAnchor href={styles.button.link}>
+            <Button {...styles.button}>{text.header.buttonText}</Button>
           </ButtonWrapperAnchor>
         </TextContainer>
         <ImageContainer>
-          <img src={image} alt="mlb" />
+          <img src={styles.image} alt="mlb" />
         </ImageContainer>
       </HeaderContent>
     </HeaderContainer>

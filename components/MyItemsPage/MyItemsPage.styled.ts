@@ -3,13 +3,10 @@ import { MaxWidth } from '../../styles/MaxWidth.styled';
 import customizationJson from '../../custom/customization';
 import { breakpoint } from '../../styles/Breakpoints';
 
-const {
-  myItemsPage: { backgroundColor, headerFont },
-  typography,
-} = customizationJson;
+const { typography } = customizationJson;
 
-export const PageContainer = styled(MaxWidth)`
-  background-color: ${backgroundColor};
+export const PageContainer = styled(MaxWidth)<{ backgroundColor: string }>`
+  background-color: ${({ backgroundColor }) => backgroundColor};
   flex-direction: column;
   justify-content: flex-start;
   min-height: calc(100vh - 96px - 96px);
@@ -20,10 +17,10 @@ export const PageContainer = styled(MaxWidth)`
   `}
 `;
 
-export const HeaderText = styled.span`
-  font-family: ${typography[headerFont.type].font};
-  font-size: ${typography[headerFont.type].size};
-  color: ${headerFont.color};
+export const HeaderText = styled.span<{ type: string; color: string }>`
+  font-family: ${(props) => typography[props.type].font};
+  font-size: ${(props) => typography[props.type].size};
+  color: ${(props) => props.color};
   align-self: flex-start;
   margin-top: 56px;
   margin-bottom: 65px;
