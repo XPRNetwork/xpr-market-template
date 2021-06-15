@@ -7,13 +7,7 @@ import {
   formatTemplatesWithPriceAndSaleData,
 } from '../services/templates';
 import { FC } from 'react';
-import {
-  LoadingPage,
-  Header,
-  FeaturedSection,
-  FeaturedCarousel,
-  FeaturedGrid,
-} from '../components';
+import { LoadingPage, Header, FeaturedSection } from '../components';
 import { useLocaleContext } from '../components/Provider';
 import customizationJson from '../custom/customization';
 import localizationJson from '../custom/localization';
@@ -64,7 +58,11 @@ const HomePage: FC = () => {
   return (
     <div>
       <Header styles={header} text={text} />
-      <FeaturedSection text={text} styles={featuredSection} />
+      <FeaturedSection
+        templates={templates}
+        text={text}
+        styles={featuredSection}
+      />
     </div>
   );
 };
