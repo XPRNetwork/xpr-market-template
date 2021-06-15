@@ -66,7 +66,7 @@ const customizationJson = {
         color: '#000000',
       },
       {
-        link: 'https://google.com',
+        link: '/my-items', // always recommended to keep
         color: '#000000',
       },
     ],
