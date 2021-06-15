@@ -4,8 +4,7 @@ import {
   FeaturedSectionContainer,
   HeadingText,
 } from './FeaturedSection.styled';
-import { FeaturedCarousel } from '../FeaturedCarousel/FeaturedCarousel';
-import { FeaturedGrid } from '../FeaturedGrid/FeaturedGrid';
+import { FeaturedCarousel, FeaturedGrid } from '../../components';
 import { Text } from '../../custom/localization';
 import { FeaturedSectionProps } from '../../custom/customization';
 import { Template } from '../../services/templates';

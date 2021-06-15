@@ -8,7 +8,7 @@ import {
 } from 'pure-react-carousel';
 import { ReactComponent as Arrow } from '../../public/chevron-right.svg';
 import { Template } from '../../services/templates';
-import { Card } from '../Card/Card';
+import { Card } from '../../components';
 import {
   CarouselContainer,
   CarouselStyleFix,
