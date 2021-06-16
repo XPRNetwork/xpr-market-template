@@ -16,15 +16,18 @@ import {
 } from './FeaturedCarousel.styled';
 import { useWindowSize } from '../../hooks';
 import { FeaturedSectionProps } from '../../custom/customization';
+import { NftCardTextProps } from '../../custom/localization';
 
 type FeaturedCarouselProps = {
   templates: Template[];
   styles: FeaturedSectionProps;
+  nftCardText: NftCardTextProps;
 };
 
 export const FeaturedCarousel: FC<FeaturedCarouselProps> = ({
   templates,
   styles,
+  nftCardText,
 }) => {
   const [slideStep, setSlideStep] = useState<number>(4);
   const [visibleSlides, setVisibleSlides] = useState<number>(4);
@@ -63,7 +66,11 @@ export const FeaturedCarousel: FC<FeaturedCarouselProps> = ({
             {templates.map((template, i) => {
               return (
                 <Slide index={i} key={template.template_id}>
-                  <Card template={template} type="featured" />
+                  <Card
+                    nftCardText={nftCardText}
+                    template={template}
+                    type="featured"
+                  />
                 </Slide>
               );
             })}

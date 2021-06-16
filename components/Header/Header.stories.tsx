@@ -13,6 +13,6 @@ const Template: Story = (args) => <Header {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  text: localizationJson['en'],
-  styles: customizationJson.header,
+  headerText: localizationJson['en'].header,
+  headerStyles: customizationJson.header,
 };

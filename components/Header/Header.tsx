@@ -11,36 +11,36 @@ import {
   Button,
 } from './Header.styled';
 import { HeaderProps } from '../../custom/customization';
-import { Text } from '../../custom/localization';
+import { HeaderTextProps } from '../../custom/localization';
 
 interface Props {
-  styles: HeaderProps;
-  text: Text;
+  headerStyles: HeaderProps;
+  headerText: HeaderTextProps;
 }
 
-export const Header: FC<Props> = ({ styles, text }) => {
+export const Header: FC<Props> = ({ headerStyles, headerText }) => {
   return (
-    <HeaderContainer backgroundColor={styles.backgroundColor}>
-      <HeaderContent imagePlacement={styles.imagePlacement}>
-        <TextContainer imagePlacement={styles.imagePlacement}>
-          <HighlightText {...styles.highlightFont}>
-            {text.header.highlightText}
+    <HeaderContainer backgroundColor={headerStyles.backgroundColor}>
+      <HeaderContent imagePlacement={headerStyles.imagePlacement}>
+        <TextContainer imagePlacement={headerStyles.imagePlacement}>
+          <HighlightText {...headerStyles.highlightFont}>
+            {headerText.highlightText}
           </HighlightText>
-          <HeaderText {...styles.mainHeadingFont}>
-            {text.header.headerLine1}
+          <HeaderText {...headerStyles.mainHeadingFont}>
+            {headerText.headerLine1}
           </HeaderText>
-          <HeaderText {...styles.mainHeadingFont}>
-            {text.header.headerLine2}
+          <HeaderText {...headerStyles.mainHeadingFont}>
+            {headerText.headerLine2}
           </HeaderText>
-          <SubHeaderText {...styles.subheadingFont}>
-            {text.header.description}
+          <SubHeaderText {...headerStyles.subheadingFont}>
+            {headerText.description}
           </SubHeaderText>
-          <ButtonWrapperAnchor href={styles.button.link}>
-            <Button {...styles.button}>{text.header.buttonText}</Button>
+          <ButtonWrapperAnchor href={headerStyles.button.link}>
+            <Button {...headerStyles.button}>{headerText.buttonText}</Button>
           </ButtonWrapperAnchor>
         </TextContainer>
         <ImageContainer>
-          <img src={styles.image} alt="mlb" />
+          <img src={headerStyles.image} alt="mlb" />
         </ImageContainer>
       </HeaderContent>
     </HeaderContainer>

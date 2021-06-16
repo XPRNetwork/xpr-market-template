@@ -13,19 +13,20 @@ const Template: Story = (args) => <FeaturedSection {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  styles: customizationJson.featuredSection,
-  text: localizationJson['en'],
-  // templates: [
-  //   {
-  //     assetsForSale: '?',
-  //     lowestPrice: '? XUSDC',
-  //     template_id: '?',
-  //     collection: {
-  //       collection_name: 'Collection Name',
-  //       name: 'Collection Display Name',
-  //     },
-  //     immutable_data: { name: 'Template Name', image: '', video: '' },
-  //   },
-  // ],
-  templates: [],
+  featuredSectionStyles: customizationJson.featuredSection,
+  featuredSectionText: localizationJson['en'].featuredSection,
+  nftCardText: localizationJson['en'].nftCard,
+  templates: [
+    {
+      assetsForSale: '?',
+      lowestPrice: '? XUSDC',
+      template_id: '?',
+      collection: {
+        collection_name: 'Collection Name',
+        name: 'Collection Display Name',
+      },
+      immutable_data: { name: 'Template Name', image: '', video: '' },
+    },
+  ],
+  // templates: [],
 };

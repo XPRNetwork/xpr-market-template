@@ -1,4 +1,4 @@
-const customizationJson = {
+const customizationJson: ThemeProps = {
   collection: 'monsters',
   owner: 'monsters',
   typography: {
@@ -290,8 +290,10 @@ export interface NavbarProps {
     link: string;
     color: string;
   }[];
+  balanceSubtitleFontType: string;
   buttonFontColor: string;
   buttonBackgroundColor: string;
+  buttonBorderColor: string;
   buttonFontType: string;
   bottomBorderColor: string;
 }
@@ -353,6 +355,7 @@ export interface NftCardProps {
 export interface DetailPageProps {
   imagePlacement: string;
   imageBackgroundColor: string;
+  imageShadow: boolean;
   cardTitleFont: {
     type: string;
     color: string;
@@ -365,11 +368,19 @@ export interface DetailPageProps {
     type: string;
     color: string;
   };
-  priceEditionFont: {
+  priceFont: {
+    type: string;
+    color: string;
+  };
+  editionFont: {
     type: string;
     color: string;
   };
   cardDescriptionFont: {
+    type: string;
+    color: string;
+  };
+  errorFont: {
     type: string;
     color: string;
   };
@@ -387,59 +398,59 @@ export interface DetailPageProps {
 }
 
 export type ThemeProps = {
-  theme: {
-    typography: {
-      h1: {
-        font: string;
-        size: string;
-        fontWeight: string;
-        isItalic: boolean;
-      };
-      h2: {
-        font: string;
-        size: string;
-        fontWeight: string;
-        isItalic: boolean;
-      };
-      h3: {
-        font: string;
-        size: string;
-        fontWeight: string;
-        isItalic: boolean;
-      };
-      h4: {
-        font: string;
-        size: string;
-        fontWeight: string;
-        isItalic: boolean;
-      };
-      paragraph: {
-        font: string;
-        size: string;
-        fontWeight: string;
-        isItalic: boolean;
-      };
-      label: {
-        font: string;
-        size: string;
-        fontWeight: string;
-        isItalic: boolean;
-      };
-      caption: {
-        font: string;
-        size: string;
-        fontWeight: string;
-        isItalic: boolean;
-      };
+  collection: string;
+  owner: string;
+  typography: {
+    h1: {
+      font: string;
+      size: string;
+      fontWeight: string;
+      isItalic: boolean;
     };
-    navbar: NavbarProps;
-    footer: FooterProps;
-    nftCard: NftCardProps;
-    featuredSection: FeaturedSectionProps;
-    header: HeaderProps;
-    myItemsPage: MyItemsPageProps;
-    detailPage: DetailPageProps;
+    h2: {
+      font: string;
+      size: string;
+      fontWeight: string;
+      isItalic: boolean;
+    };
+    h3: {
+      font: string;
+      size: string;
+      fontWeight: string;
+      isItalic: boolean;
+    };
+    h4: {
+      font: string;
+      size: string;
+      fontWeight: string;
+      isItalic: boolean;
+    };
+    paragraph: {
+      font: string;
+      size: string;
+      fontWeight: string;
+      isItalic: boolean;
+    };
+    label: {
+      font: string;
+      size: string;
+      fontWeight: string;
+      isItalic: boolean;
+    };
+    caption: {
+      font: string;
+      size: string;
+      fontWeight: string;
+      isItalic: boolean;
+    };
   };
+  navbar: NavbarProps;
+  footer: FooterProps;
+  nftCard: NftCardProps;
+  featuredSection: FeaturedSectionProps;
+  header: HeaderProps;
+  myItemsPage: MyItemsPageProps;
+  detailPage: DetailPageProps;
 };
 
 export default customizationJson;

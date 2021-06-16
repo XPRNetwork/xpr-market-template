@@ -23,15 +23,15 @@ import {
 import { Image } from '../../styles/index.styled';
 import { NavbarProps } from '../../custom/customization';
 import { ReactComponent as CloseIcon } from '../../public/icon-light-close-16-px.svg';
-import { useAuthContext, useLocaleContext } from '../Provider';
+import { useAuthContext } from '../Provider';
 import { useScrollLock, useEscapeKeyClose, useWindowSize } from '../../hooks';
 import { TOKEN_SYMBOL } from '../../utils/constants';
-import localizationJson, { Text } from '../../custom/localization';
+import { NavbarTextProps } from '../../custom/localization';
 
 type DropdownProps = {
   isOpen: boolean;
   styles: NavbarProps;
-  text: Text;
+  text: NavbarTextProps;
   closeNavDropdown: () => void;
 };
 
@@ -51,7 +51,7 @@ const Dropdown: FC<DropdownProps> = ({
   if (isMobile || isTablet) {
     styles.navLinks.forEach((link, index) => {
       routes.push({
-        name: text.navbar.navLinks[index],
+        name: text.navLinks[index],
         path: link.link,
         color: link.color || styles.buttonFontColor,
         onClick: () => {
@@ -100,7 +100,7 @@ const Dropdown: FC<DropdownProps> = ({
           {isLoggedIn ? (
             <>
               <Name>{currentUser ? currentUser.name : ''}</Name>
-              <Subtitle>{text.navbar.balanceText}</Subtitle>
+              <Subtitle>{text.balanceText}</Subtitle>
               <Balance>{currentUserBalance || `0.00 ${TOKEN_SYMBOL}`}</Balance>
             </>
           ) : null}
@@ -130,13 +130,12 @@ const Dropdown: FC<DropdownProps> = ({
 };
 
 interface Props {
-  styles: NavbarProps;
-  text?: Text;
+  navbarStyles: NavbarProps;
+  navbarText: NavbarTextProps;
 }
 
-const Navbar: FC<Props> = ({ styles, text: textProps }) => {
+const Navbar: FC<Props> = ({ navbarStyles, navbarText }) => {
   const { currentUser, login, isLoadingUser } = useAuthContext();
-  const { locale, isLoadingLocale } = useLocaleContext();
   const [isOpen, setIsOpen] = useState(false);
   useScrollLock(isOpen);
 
@@ -145,13 +144,6 @@ const Navbar: FC<Props> = ({ styles, text: textProps }) => {
   const closeNavDropdown = () => setIsOpen(false);
 
   useEscapeKeyClose(closeNavDropdown);
-
-  if (isLoadingLocale) return null;
-
-  const text =
-    textProps || Object.keys(localizationJson[locale]).length
-      ? localizationJson[locale]
-      : localizationJson['en'];
 
   return (
     <NavbarContainer>
@@ -163,18 +155,18 @@ const Navbar: FC<Props> = ({ styles, text: textProps }) => {
             width="24px"
             onClick={toggleNavDropdown}
           />
-          <LogoContainer href={styles.logoLink}>
-            <Image src={styles.logo} height="42px" width="auto" />
+          <LogoContainer href={navbarStyles.logoLink}>
+            <Image src={navbarStyles.logo} height="42px" width="auto" />
           </LogoContainer>
         </MobileOnlySection>
         <DesktopOnlySection>
-          <LogoContainer href={styles.logoLink}>
-            <Image src={styles.logo} height="60px" width="auto" />
+          <LogoContainer href={navbarStyles.logoLink}>
+            <Image src={navbarStyles.logo} height="60px" width="auto" />
           </LogoContainer>
           <NavLinks>
-            {styles.navLinks.map(({ link }, index) => (
-              <Link key={text.navbar.navLinks[index]} href={link}>
-                {text.navbar.navLinks[index]}
+            {navbarStyles.navLinks.map(({ link }, index) => (
+              <Link key={navbarText.navLinks[index]} href={link}>
+                {navbarText.navLinks[index]}
               </Link>
             ))}
           </NavLinks>
@@ -185,7 +177,7 @@ const Navbar: FC<Props> = ({ styles, text: textProps }) => {
               onClick={toggleNavDropdown}
               src={
                 currentUser.avatar ||
-                styles.defaultAvatarImage ||
+                navbarStyles.defaultAvatarImage ||
                 '/default-avatar.png'
               }
               width="48px"
@@ -193,13 +185,13 @@ const Navbar: FC<Props> = ({ styles, text: textProps }) => {
             />
           </AvatarContainer>
         ) : (
-          <LoginButton onClick={login}>{text.navbar.loginText}</LoginButton>
+          <LoginButton onClick={login}>{navbarText.loginText}</LoginButton>
         )}
         <Dropdown
           isOpen={isOpen}
           closeNavDropdown={closeNavDropdown}
-          styles={styles}
-          text={text}
+          styles={navbarStyles}
+          text={navbarText}
         />
         <GradientBackground isOpen={isOpen} onClick={closeNavDropdown} />
       </Wrapper>
