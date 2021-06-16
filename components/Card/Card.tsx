@@ -24,6 +24,7 @@ export const Card: FC<Props> = ({ template, type, nftCardText }) => {
     assetsForSale,
     lowestPrice,
     template_id,
+    max_supply,
     collection: { collection_name, name: displayName },
     immutable_data: { name, image, video },
   } = template;
@@ -38,8 +39,6 @@ export const Card: FC<Props> = ({ template, type, nftCardText }) => {
     ? image
     : `${RESIZER_IMAGE_SM}${IPFS_RESOLVER}${image}`;
   const fallbackImageSrc = image ? `${IPFS_RESOLVER}${image}` : '';
-  const cardHeaderText =
-    type === 'featured' ? nftCardText.nftsLeft : nftCardText.nftsOwned;
   const onClickRoute =
     type === 'featured' ? `/${template_id}` : `/my-items/${template_id}`;
 
@@ -47,7 +46,11 @@ export const Card: FC<Props> = ({ template, type, nftCardText }) => {
     <CardContainer onClick={() => router.push(onClickRoute)}>
       <QuantityText>
         {formattedSaleCount ? (
-          `${formattedSaleCount} ${cardHeaderText}`
+          type === 'featured' ? (
+            `${formattedSaleCount} ${nftCardText.nftsLeft}`
+          ) : (
+            `${formattedSaleCount}/${max_supply} ${nftCardText.nftsOwnedForSale}`
+          )
         ) : (
           <ShimmerBlock width="75px" />
         )}
