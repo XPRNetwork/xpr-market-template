@@ -1,6 +1,6 @@
-const customizationJson = {
-  collection: 'monsters',
-  owner: 'monsters',
+const customizationJson: ThemeProps = {
+  collection: 'cryptocadets',
+  owner: 'cryptocadets',
   typography: {
     h1: {
       font: 'Bebas Neue',
@@ -46,7 +46,7 @@ const customizationJson = {
     },
   },
   navbar: {
-    logo: '/mlb-logo.png',
+    logo: '/logo.png',
     logoLink: '/',
     backgroundColor: '#ffffff',
     defaultAvatarImage: '/default-avatar.png',
@@ -78,7 +78,7 @@ const customizationJson = {
     bottomBorderColor: '#cccccc',
   },
   footer: {
-    logo: '/mlb-logo.png',
+    logo: '/logo.png',
     socialMediaLinks: [
       {
         link: 'https://facebook.com',
@@ -106,11 +106,11 @@ const customizationJson = {
     borderRadius: '8px',
     priceFont: {
       type: 'h4',
-      color: '#000000',
+      color: '#377EFF',
     },
     countFont: {
       type: 'label',
-      color: 'black',
+      color: '#000000',
     },
     titleFont: {
       type: 'h4',
@@ -119,7 +119,7 @@ const customizationJson = {
     },
     collectionNameFont: {
       type: 'label',
-      color: 'gray',
+      color: '#666666',
     },
   },
   featuredSection: {
@@ -139,7 +139,7 @@ const customizationJson = {
     highlightFont: {
       isShown: true,
       type: 'paragraph',
-      color: 'red',
+      color: '#377EFF',
     },
     mainHeadingFont: {
       type: 'h1',
@@ -254,176 +254,203 @@ export const generateFontImportLink = (): string => {
   return `https://fonts.googleapis.com/css2?${fonts.join('&')}&display=swap`;
 };
 
+export interface HeaderProps {
+  image: string;
+  imagePlacement: string;
+  backgroundColor: string;
+  highlightFont: {
+    isShown: boolean;
+    type: string;
+    color: string;
+  };
+  mainHeadingFont: {
+    type: string;
+    color: string;
+  };
+  subheadingFont: {
+    type: string;
+    color: string;
+  };
+  button: {
+    isShown: boolean;
+    textColor: string;
+    textFont: string;
+    backgroundColor: string;
+    link: string;
+  };
+}
+
+export interface NavbarProps {
+  logo: string;
+  logoLink: string;
+  backgroundColor: string;
+  defaultAvatarImage: string;
+  navLinkFontType: string;
+  navLinks: {
+    link: string;
+    color: string;
+  }[];
+  balanceSubtitleFontType: string;
+  buttonFontColor: string;
+  buttonBackgroundColor: string;
+  buttonBorderColor: string;
+  buttonFontType: string;
+  bottomBorderColor: string;
+}
+
+export interface FeaturedSectionProps {
+  carousel: boolean;
+  titleFont: {
+    type: string;
+    color: string;
+  };
+  backgroundColor: string;
+  carouselButtonsBackgroundColor: string;
+  carouselButtonsBorderColor: string;
+}
+
+export interface FooterProps {
+  logo: string;
+  socialMediaLinks: {
+    link: string;
+    type: string;
+    color: string;
+  }[];
+  backgroundColor: string;
+  borderColor: string;
+}
+
+export interface MyItemsPageProps {
+  backgroundColor: string;
+  headerFont: {
+    type: string;
+    color: string;
+  };
+}
+
+export interface NftCardProps {
+  mainBackgroundColor: string;
+  secondaryBackgroundColor: string;
+  borderColor: string;
+  borderRadius: string;
+  priceFont: {
+    type: string;
+    color: string;
+  };
+  countFont: {
+    type: string;
+    color: string;
+  };
+  titleFont: {
+    type: string;
+    color: string;
+    carouselHeight: string;
+  };
+  collectionNameFont: {
+    type: string;
+    color: string;
+  };
+}
+
+export interface DetailPageProps {
+  imagePlacement: string;
+  imageBackgroundColor: string;
+  imageShadow: boolean;
+  cardTitleFont: {
+    type: string;
+    color: string;
+  };
+  collectionNameFont: {
+    type: string;
+    color: string;
+  };
+  priceEditionLabelFont: {
+    type: string;
+    color: string;
+  };
+  priceFont: {
+    type: string;
+    color: string;
+  };
+  editionFont: {
+    type: string;
+    color: string;
+  };
+  cardDescriptionFont: {
+    type: string;
+    color: string;
+  };
+  errorFont: {
+    type: string;
+    color: string;
+  };
+  button: {
+    textColor: string;
+    textFont: string;
+    backgroundColor: string;
+  };
+  dropdown: {
+    borderColor: string;
+    arrowDropdownColor: string;
+    textColor: string;
+    textFont: string;
+  };
+}
+
 export type ThemeProps = {
-  theme: {
-    typography: {
-      h1: {
-        font: string;
-        size: string;
-        fontWeight: string;
-        isItalic: boolean;
-      };
-      h2: {
-        font: string;
-        size: string;
-        fontWeight: string;
-        isItalic: boolean;
-      };
-      h3: {
-        font: string;
-        size: string;
-        fontWeight: string;
-        isItalic: boolean;
-      };
-      h4: {
-        font: string;
-        size: string;
-        fontWeight: string;
-        isItalic: boolean;
-      };
-      paragraph: {
-        font: string;
-        size: string;
-        fontWeight: string;
-        isItalic: boolean;
-      };
-      label: {
-        font: string;
-        size: string;
-        fontWeight: string;
-        isItalic: boolean;
-      };
-      caption: {
-        font: string;
-        size: string;
-        fontWeight: string;
-        isItalic: boolean;
-      };
+  collection: string;
+  owner: string;
+  typography: {
+    h1: {
+      font: string;
+      size: string;
+      fontWeight: string;
+      isItalic: boolean;
     };
-    navbar: {
-      logo: string;
-      backgroundColor: string;
-      defaultAvatarPng: string;
-      navLinkFontType: string;
-      navLinks: {
-        link: string;
-        title: string;
-        color: string;
-      }[];
-      buttonFontColor: string;
-      buttonBackgroundColor: string;
-      buttonFontType: string;
-      bottomBorderColor: string;
+    h2: {
+      font: string;
+      size: string;
+      fontWeight: string;
+      isItalic: boolean;
     };
-    footer: {
-      logo: string;
-      socialMediaLinks: {
-        link: string;
-        type: string;
-        color: string;
-      }[];
-      backgroundColor: string;
-      borderColor: string;
+    h3: {
+      font: string;
+      size: string;
+      fontWeight: string;
+      isItalic: boolean;
     };
-    nftCard: {
-      mainBackgroundColor: string;
-      secondaryBackgroundColor: string;
-      borderColor: string;
-      borderRadius: string;
-      priceFont: {
-        type: string;
-        color: string;
-      };
-      countFont: {
-        type: string;
-        color: string;
-      };
-      titleFont: {
-        type: string;
-        color: string;
-        carouselHeight: string;
-      };
-      collectionNameFont: {
-        type: string;
-        color: string;
-      };
+    h4: {
+      font: string;
+      size: string;
+      fontWeight: string;
+      isItalic: boolean;
     };
-    featuredLayoutSection: {
-      carousel: boolean;
-      titleFont: {
-        type: string;
-        color: string;
-      };
-      backgroundColor: string;
+    paragraph: {
+      font: string;
+      size: string;
+      fontWeight: string;
+      isItalic: boolean;
     };
-    header: {
-      image: string;
-      imagePlacement: string;
-      backgroundColor: string;
-      highlightFont: {
-        isShown: boolean;
-        type: string;
-        color: string;
-      };
-      mainHeadingFont: {
-        type: string;
-        color: string;
-      };
-      subheadingFont: {
-        type: string;
-        color: string;
-      };
-      button: {
-        isShown: boolean;
-        textColor: string;
-        textFont: string;
-        backgroundColor: string;
-        link: string;
-      };
+    label: {
+      font: string;
+      size: string;
+      fontWeight: string;
+      isItalic: boolean;
     };
-    myItemsPage: {
-      backgroundColor: string;
-      headerFont: {
-        type: string;
-        color: string;
-      };
-    };
-    detailPage: {
-      imagePlacement: string;
-      imageBackgroundColor: string;
-      cardTitleFont: {
-        type: string;
-        color: string;
-      };
-      collectionNameFont: {
-        type: string;
-        color: string;
-      };
-      priceEditionLabelFont: {
-        type: string;
-        color: string;
-      };
-      priceEditionFont: {
-        type: string;
-        color: string;
-      };
-      cardDescriptionFont: {
-        type: string;
-        color: string;
-      };
-      button: {
-        textColor: string;
-        textFont: string;
-        backgroundColor: string;
-      };
-      dropdown: {
-        borderColor: string;
-        arrowDropdownColor: string;
-        textColor: string;
-        textFont: string;
-      };
+    caption: {
+      font: string;
+      size: string;
+      fontWeight: string;
+      isItalic: boolean;
     };
   };
+  navbar: NavbarProps;
+  footer: FooterProps;
+  nftCard: NftCardProps;
+  featuredSection: FeaturedSectionProps;
+  header: HeaderProps;
+  myItemsPage: MyItemsPageProps;
+  detailPage: DetailPageProps;
 };
 
 export default customizationJson;

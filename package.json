@@ -9,7 +9,9 @@
     "lint": "eslint --fix .",
     "format": "prettier --write './**/*.{js,jsx, ts, tsx}' --config ./.prettierrc.js",
     "typecheck": "$(npm bin)/tsc --noEmit",
-    "check:all": "yarn lint && yarn format && yarn typecheck"
+    "check:all": "yarn lint && yarn format && yarn typecheck",
+    "storybook": "start-storybook -s ./public -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "@proton/js": "^22.0.64",
@@ -26,11 +28,16 @@
     "@babel/core": "^7.14.3",
     "@babel/preset-env": "^7.14.2",
     "@babel/preset-react": "^7.13.13",
+    "@storybook/addon-actions": "^6.2.9",
+    "@storybook/addon-essentials": "^6.2.9",
+    "@storybook/addon-links": "^6.2.9",
+    "@storybook/react": "^6.2.9",
     "@svgr/webpack": "^5.5.0",
     "@types/react": "17.0.6",
     "@types/styled-components": "^5.1.9",
     "@typescript-eslint/eslint-plugin": "^4.25.0",
     "@typescript-eslint/parser": "^4.25.0",
+    "babel-loader": "^8.2.2",
     "babel-plugin-styled-components": "^1.12.0",
     "eslint": "^7.27.0",
     "eslint-config-prettier": "^8.3.0",

@@ -21,37 +21,39 @@ import {
   MobileHeaderWrapper,
 } from '../Navbar/Navbar.styled';
 import { Image } from '../../styles/index.styled';
-import theme from '../../custom/customization';
+import { NavbarProps } from '../../custom/customization';
 import { ReactComponent as CloseIcon } from '../../public/icon-light-close-16-px.svg';
-import { useAuthContext, useLocaleContext } from '../Provider';
+import { useAuthContext } from '../Provider';
 import { useScrollLock, useEscapeKeyClose, useWindowSize } from '../../hooks';
 import { TOKEN_SYMBOL } from '../../utils/constants';
-import localizationJson from '../../custom/localization';
+import { NavbarTextProps } from '../../custom/localization';
 
 type DropdownProps = {
   isOpen: boolean;
+  styles: NavbarProps;
+  text: NavbarTextProps;
   closeNavDropdown: () => void;
 };
 
-const Dropdown: FC<DropdownProps> = ({ isOpen, closeNavDropdown }) => {
+const Dropdown: FC<DropdownProps> = ({
+  isOpen,
+  styles,
+  text,
+  closeNavDropdown,
+}) => {
   const router = useRouter();
   const { currentUser, currentUserBalance, logout } = useAuthContext();
-  const { locale } = useLocaleContext();
   const { isMobile, isTablet } = useWindowSize();
   useEscapeKeyClose(closeNavDropdown);
   const isLoggedIn = currentUser && currentUser.actor;
   const routes = [];
 
-  const text = Object.keys(localizationJson[locale]).length
-    ? localizationJson[locale].navbar
-    : localizationJson['en'].navbar;
-
   if (isMobile || isTablet) {
-    theme.navbar.navLinks.forEach((link, index) => {
+    styles.navLinks.forEach((link, index) => {
       routes.push({
         name: text.navLinks[index],
         path: link.link,
-        color: link.color || theme.navbar.buttonFontColor,
+        color: link.color || styles.buttonFontColor,
         onClick: () => {
           window.location.replace(link.link);
           closeNavDropdown();
@@ -127,10 +129,13 @@ const Dropdown: FC<DropdownProps> = ({ isOpen, closeNavDropdown }) => {
   return null;
 };
 
-const Navbar: FC = () => {
-  const { navbar } = theme;
+interface Props {
+  navbarStyles: NavbarProps;
+  navbarText: NavbarTextProps;
+}
+
+const Navbar: FC<Props> = ({ navbarStyles, navbarText }) => {
   const { currentUser, login, isLoadingUser } = useAuthContext();
-  const { locale, isLoadingLocale } = useLocaleContext();
   const [isOpen, setIsOpen] = useState(false);
   useScrollLock(isOpen);
 
@@ -139,12 +144,6 @@ const Navbar: FC = () => {
   const closeNavDropdown = () => setIsOpen(false);
 
   useEscapeKeyClose(closeNavDropdown);
-
-  if (isLoadingLocale) return null;
-
-  const text = Object.keys(localizationJson[locale]).length
-    ? localizationJson[locale].navbar
-    : localizationJson['en'].navbar;
 
   return (
     <NavbarContainer>
@@ -156,18 +155,18 @@ const Navbar: FC = () => {
             width="24px"
             onClick={toggleNavDropdown}
           />
-          <LogoContainer href={navbar.logoLink}>
-            <Image src={navbar.logo} height="42px" width="auto" />
+          <LogoContainer href={navbarStyles.logoLink}>
+            <Image src={navbarStyles.logo} height="42px" width="auto" />
           </LogoContainer>
         </MobileOnlySection>
         <DesktopOnlySection>
-          <LogoContainer href={navbar.logoLink}>
-            <Image src={navbar.logo} height="60px" width="auto" />
+          <LogoContainer href={navbarStyles.logoLink}>
+            <Image src={navbarStyles.logo} height="60px" width="auto" />
           </LogoContainer>
           <NavLinks>
-            {theme.navbar.navLinks.map(({ link }, index) => (
-              <Link key={text.navLinks[index]} href={link}>
-                {text.navLinks[index]}
+            {navbarStyles.navLinks.map(({ link }, index) => (
+              <Link key={navbarText.navLinks[index]} href={link}>
+                {navbarText.navLinks[index]}
               </Link>
             ))}
           </NavLinks>
@@ -178,7 +177,7 @@ const Navbar: FC = () => {
               onClick={toggleNavDropdown}
               src={
                 currentUser.avatar ||
-                navbar.defaultAvatarImage ||
+                navbarStyles.defaultAvatarImage ||
                 '/default-avatar.png'
               }
               width="48px"
@@ -186,9 +185,14 @@ const Navbar: FC = () => {
             />
           </AvatarContainer>
         ) : (
-          <LoginButton onClick={login}>{text.loginText}</LoginButton>
+          <LoginButton onClick={login}>{navbarText.loginText}</LoginButton>
         )}
-        <Dropdown isOpen={isOpen} closeNavDropdown={closeNavDropdown} />
+        <Dropdown
+          isOpen={isOpen}
+          closeNavDropdown={closeNavDropdown}
+          styles={navbarStyles}
+          text={navbarText}
+        />
         <GradientBackground isOpen={isOpen} onClick={closeNavDropdown} />
       </Wrapper>
     </NavbarContainer>

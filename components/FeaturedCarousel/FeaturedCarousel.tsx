@@ -6,7 +6,6 @@ import {
   ButtonBack,
   ButtonNext,
 } from 'pure-react-carousel';
-import { ReactComponent as Arrow } from '../../public/chevron-right.svg';
 import { Template } from '../../services/templates';
 import { Card } from '../../components';
 import {
@@ -16,12 +15,20 @@ import {
   ButtonNextContainer,
 } from './FeaturedCarousel.styled';
 import { useWindowSize } from '../../hooks';
+import { FeaturedSectionProps } from '../../custom/customization';
+import { NftCardTextProps } from '../../custom/localization';
 
 type FeaturedCarouselProps = {
   templates: Template[];
+  styles: FeaturedSectionProps;
+  nftCardText: NftCardTextProps;
 };
 
-export const FeaturedCarousel: FC<FeaturedCarouselProps> = ({ templates }) => {
+export const FeaturedCarousel: FC<FeaturedCarouselProps> = ({
+  templates,
+  styles,
+  nftCardText,
+}) => {
   const [slideStep, setSlideStep] = useState<number>(4);
   const [visibleSlides, setVisibleSlides] = useState<number>(4);
   const { isDesktop, isLaptop, isTablet, isMobile } = useWindowSize();
@@ -59,19 +66,33 @@ export const FeaturedCarousel: FC<FeaturedCarouselProps> = ({ templates }) => {
             {templates.map((template, i) => {
               return (
                 <Slide index={i} key={template.template_id}>
-                  <Card template={template} type="featured" />
+                  <Card
+                    nftCardText={nftCardText}
+                    template={template}
+                    type="featured"
+                  />
                 </Slide>
               );
             })}
           </Slider>
-          <ButtonBackContainer isVisible={templates.length > visibleSlides}>
+          <ButtonBackContainer
+            isVisible={templates.length > visibleSlides}
+            carouselButtonsBackgroundColor={
+              styles.carouselButtonsBackgroundColor
+            }
+            carouselButtonsBorderColor={styles.carouselButtonsBorderColor}>
             <ButtonBack>
-              <Arrow />
+              <img src="/chevron-right.svg" alt="arrow" />
             </ButtonBack>
           </ButtonBackContainer>
-          <ButtonNextContainer isVisible={templates.length > visibleSlides}>
+          <ButtonNextContainer
+            isVisible={templates.length > visibleSlides}
+            carouselButtonsBackgroundColor={
+              styles.carouselButtonsBackgroundColor
+            }
+            carouselButtonsBorderColor={styles.carouselButtonsBorderColor}>
             <ButtonNext>
-              <Arrow />
+              <img src="/chevron-right.svg" alt="arrow" />
             </ButtonNext>
           </ButtonNextContainer>
         </CarouselProvider>

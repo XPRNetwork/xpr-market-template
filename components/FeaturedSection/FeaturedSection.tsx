@@ -1,35 +1,49 @@
 import { FC } from 'react';
-import { useLocaleContext } from '../Provider';
 import {
   FeaturedSectionWrapper,
   FeaturedSectionContainer,
   HeadingText,
 } from './FeaturedSection.styled';
 import { FeaturedCarousel, FeaturedGrid } from '../../components';
+import {
+  NftCardTextProps,
+  FeaturedSectionTextProps,
+} from '../../custom/localization';
+import { FeaturedSectionProps } from '../../custom/customization';
 import { Template } from '../../services/templates';
-import localizationJson from '../../custom/localization';
-import customizationJson from '../../custom/customization';
-const { featuredSection } = customizationJson;
 
-type FeaturedSectionProps = {
+type Props = {
+  featuredSectionStyles: FeaturedSectionProps;
+  featuredSectionText: FeaturedSectionTextProps;
+  nftCardText: NftCardTextProps;
   templates: Template[];
 };
 
-export const FeaturedSection: FC<FeaturedSectionProps> = ({ templates }) => {
-  const { locale } = useLocaleContext();
-
-  const text = Object.keys(localizationJson[locale]).length
-    ? localizationJson[locale].featuredSection
-    : localizationJson['en'].featuredSection;
-
+export const FeaturedSection: FC<Props> = ({
+  featuredSectionStyles,
+  featuredSectionText,
+  nftCardText,
+  templates,
+}) => {
   return (
-    <FeaturedSectionContainer>
+    <FeaturedSectionContainer
+      backgroundColor={featuredSectionStyles.backgroundColor}>
       <FeaturedSectionWrapper>
-        <HeadingText>{text.heading}</HeadingText>
-        {featuredSection.carousel ? (
-          <FeaturedCarousel templates={templates} />
+        <HeadingText {...featuredSectionStyles.titleFont}>
+          {featuredSectionText.heading}
+        </HeadingText>
+        {featuredSectionStyles.carousel ? (
+          <FeaturedCarousel
+            templates={templates}
+            styles={featuredSectionStyles}
+            nftCardText={nftCardText}
+          />
         ) : (
-          <FeaturedGrid templates={templates} type="featured" />
+          <FeaturedGrid
+            templates={templates}
+            nftCardText={nftCardText}
+            type="featured"
+          />
         )}
       </FeaturedSectionWrapper>
     </FeaturedSectionContainer>
