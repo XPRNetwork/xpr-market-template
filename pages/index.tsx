@@ -8,14 +8,13 @@ import {
 } from '../services/templates';
 import { FC } from 'react';
 import { LoadingPage, Header, FeaturedSection } from '../components';
-import { useLocaleContext } from '../components/Provider';
 import customizationJson from '../custom/customization';
-const { collection, owner } = customizationJson;
+import { Text } from '../custom/localization';
+const { collection, owner, header, featuredSection } = customizationJson;
 
-const HomePage: FC = () => {
+const HomePage: FC<{ text: Text }> = ({ text }) => {
   const [isLoadingTemplates, setIsLoadingTemplates] = useState<boolean>(true);
   const [templates, setTemplates] = useState<Template[]>([]);
-  const { isLoadingLocale } = useLocaleContext();
 
   useEffect(() => {
     (async () => {
@@ -46,14 +45,19 @@ const HomePage: FC = () => {
     })();
   }, []);
 
-  if (isLoadingTemplates || isLoadingLocale) {
+  if (isLoadingTemplates) {
     return <LoadingPage />;
   }
 
   return (
     <div>
-      <Header />
-      <FeaturedSection templates={templates} />
+      <Header headerStyles={header} headerText={text.header} />
+      <FeaturedSection
+        templates={templates}
+        featuredSectionText={text.featuredSection}
+        nftCardText={text.nftCard}
+        featuredSectionStyles={featuredSection}
+      />
     </div>
   );
 };

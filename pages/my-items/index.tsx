@@ -5,7 +5,7 @@ import {
 } from '../../components/MyItemsPage/MyItemsPage.styled';
 import { useRouter } from 'next/router';
 import { FeaturedGrid, LoadingPage } from '../../components';
-import { useAuthContext, useLocaleContext } from '../../components/Provider';
+import { useAuthContext } from '../../components/Provider';
 import {
   formatTemplatesWithTotalAssets,
   getAllTemplatesForUserWithAssetCount,
@@ -13,21 +13,19 @@ import {
   Template,
 } from '../../services/templates';
 import customizationJson from '../../custom/customization';
-import localizationJson from '../../custom/localization';
+import { Text } from '../../custom/localization';
 
-const MyItemsPage: FC = () => {
+const {
+  collection,
+  myItemsPage: { backgroundColor, headerFont },
+} = customizationJson;
+
+const MyItemsPage: FC<{ text: Text }> = ({ text }) => {
   const [templates, setTemplates] = useState<Template[]>([]);
   const [isLoadingTemplates, setIsLoadingTemplates] = useState<boolean>(true);
   const { isLoadingUser, currentUser } = useAuthContext();
-  const { isLoadingLocale, locale } = useLocaleContext();
   const router = useRouter();
   const actor = currentUser ? currentUser.actor : '';
-
-  const { collection } = customizationJson;
-  const text =
-    locale && Object.keys(localizationJson[locale]).length
-      ? localizationJson[locale].myItemsPage
-      : localizationJson['en'].myItemsPage;
 
   useEffect(() => {
     if (!isLoadingUser && !actor) {
@@ -59,14 +57,18 @@ const MyItemsPage: FC = () => {
     })();
   }, [isLoadingUser]);
 
-  if (isLoadingUser || isLoadingLocale || isLoadingTemplates) {
+  if (isLoadingUser || isLoadingTemplates) {
     return <LoadingPage />;
   }
 
   return (
-    <PageContainer>
-      <HeaderText>{text.header}</HeaderText>
-      <FeaturedGrid templates={templates} type="user"></FeaturedGrid>
+    <PageContainer backgroundColor={backgroundColor}>
+      <HeaderText {...headerFont}>{text.myItemsPage.header}</HeaderText>
+      <FeaturedGrid
+        templates={templates}
+        nftCardText={text.nftCard}
+        type="user"
+      />
     </PageContainer>
   );
 };

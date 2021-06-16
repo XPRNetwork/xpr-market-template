@@ -1,15 +1,18 @@
 import styled from 'styled-components';
 import { MaxWidth } from '../../styles/MaxWidth.styled';
 import { breakpoint } from '../../styles/Breakpoints';
-import customizationJson from '../../custom/customization';
 
-const { footer } = customizationJson;
+type FooterContainerProps = {
+  backgroundColor: string;
+  borderColor: string;
+};
 
-export const FooterContainer = styled.div`
+export const FooterContainer = styled.div<FooterContainerProps>`
   height: 96px;
   width: 100%;
-  background-color: ${footer.backgroundColor || 'transparent'};
-  border-top: 1px solid ${footer.borderColor || 'transparent'};
+  background-color: ${({ backgroundColor }) =>
+    backgroundColor || 'transparent'};
+  border-top: 1px solid ${({ borderColor }) => borderColor || 'transparent'};
 
   ${breakpoint.mobile`
     height: 72px;
