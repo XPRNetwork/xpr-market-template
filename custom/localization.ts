@@ -1,12 +1,12 @@
 const localizationJson = {
   en: {
     header: {
-      highlightText: 'Exclusive',
-      headerLine1: 'Kenny Lofton',
-      headerLine2: 'Baseball Card NFTs',
+      highlightText: 'E X C L U S I V E',
+      headerLine1: 'CRYPTO CADETS',
+      headerLine2: 'COLLECTIBLE NFTS',
       description:
-        'Kenneth Lofton is an American former Major League Baseball centerfielder. Lofton was a six-time All-Star, four-time Gold Glove Award winner, and at retirement.',
-      buttonText: 'Label',
+        'These exclusive crypto cadets were created to help showcase the Proton Market.',
+      buttonText: 'LABEL',
     },
     navbar: {
       navLinks: ['BIO', 'BUSINESS', 'AUCTIONS', 'MY ITEMS'],
@@ -25,7 +25,7 @@ const localizationJson = {
     },
     nftCard: {
       nftsLeft: 'LEFT',
-      nftsOwned: 'OWNED',
+      nftsOwnedForSale: 'FOR SALE',
       soldOut: 'SOLD OUT',
     },
     featuredSection: {
@@ -47,7 +47,7 @@ export interface HeaderTextProps {
 
 export interface NftCardTextProps {
   nftsLeft: string;
-  nftsOwned: string;
+  nftsOwnedForSale: string;
   soldOut: string;
 }
 

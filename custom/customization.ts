@@ -1,6 +1,6 @@
 const customizationJson: ThemeProps = {
-  collection: 'monsters',
-  owner: 'monsters',
+  collection: 'cryptocadets',
+  owner: 'cryptocadets',
   typography: {
     h1: {
       font: 'Bebas Neue',
@@ -46,7 +46,7 @@ const customizationJson: ThemeProps = {
     },
   },
   navbar: {
-    logo: '/mlb-logo.png',
+    logo: '/logo.png',
     logoLink: '/',
     backgroundColor: '#ffffff',
     defaultAvatarImage: '/default-avatar.png',
@@ -78,7 +78,7 @@ const customizationJson: ThemeProps = {
     bottomBorderColor: '#cccccc',
   },
   footer: {
-    logo: '/mlb-logo.png',
+    logo: '/logo.png',
     socialMediaLinks: [
       {
         link: 'https://facebook.com',
@@ -106,11 +106,11 @@ const customizationJson: ThemeProps = {
     borderRadius: '8px',
     priceFont: {
       type: 'h4',
-      color: '#000000',
+      color: '#377EFF',
     },
     countFont: {
       type: 'label',
-      color: 'black',
+      color: '#000000',
     },
     titleFont: {
       type: 'h4',
@@ -119,7 +119,7 @@ const customizationJson: ThemeProps = {
     },
     collectionNameFont: {
       type: 'label',
-      color: 'gray',
+      color: '#666666',
     },
   },
   featuredSection: {
@@ -139,7 +139,7 @@ const customizationJson: ThemeProps = {
     highlightFont: {
       isShown: true,
       type: 'paragraph',
-      color: 'red',
+      color: '#377EFF',
     },
     mainHeadingFont: {
       type: 'h1',
