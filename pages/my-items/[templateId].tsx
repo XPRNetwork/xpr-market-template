@@ -1,20 +1,15 @@
 import { FC, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { LoadingPage, Nft, NftDetails, NftDropdown } from '../../components';
-import { useAuthContext, useLocaleContext } from '../../components/Provider';
+import { useAuthContext } from '../../components/Provider';
 import { useFetchNft, useFetchOwnedNfts } from '../../hooks';
 import { NftPageContainer, ButtonLink } from '../../styles/templateId.styled';
-import localizationJson from '../../custom/localization';
+import { Text } from '../../custom/localization';
 import { RouterQuery } from '../../utils/constants';
 
-const MyNftDetailPage: FC = () => {
+const MyNftDetailPage: FC<{ text: Text }> = ({ text }) => {
   const { currentUser, isLoadingUser } = useAuthContext();
   const owner = currentUser ? currentUser.actor : '';
-
-  const { locale, isLoadingLocale } = useLocaleContext();
-  const detailPageText = localizationJson[locale]
-    ? localizationJson[locale].detailPage
-    : localizationJson['en'].detailPage;
 
   const router = useRouter();
   const { templateId } = router.query as RouterQuery;
@@ -49,7 +44,6 @@ const MyNftDetailPage: FC = () => {
 
   if (
     isLoadingUser ||
-    isLoadingLocale ||
     isSaleDataLoading ||
     isTemplateLoading ||
     saleDataError ||
@@ -67,21 +61,21 @@ const MyNftDetailPage: FC = () => {
   return (
     <NftPageContainer>
       <Nft name={name} image={image} video={video} />
-      <NftDetails template={template} detailPageText={detailPageText}>
+      <NftDetails template={template} detailPageText={text.detailPage}>
         <NftDropdown
           assets={assets}
           salePrices={salePrices}
           selectedAssetId={selectedAssetId}
           setSelectedAssetId={setSelectedAssetId}
-          placeholderDropdownText={detailPageText.placeholderDropdownText}
+          placeholderDropdownText={text.detailPage.placeholderDropdownText}
         />
         <ButtonLink
           href={`http://protonmarket.com/details/${owner}/${collection_name}/${template_id}`}
           target="_blank"
           rel="noreferrer">
           {saleIds[selectedAssetId]
-            ? detailPageText.cancelSaleButtonText
-            : detailPageText.sellButtonText}
+            ? text.detailPage.cancelSaleButtonText
+            : text.detailPage.sellButtonText}
         </ButtonLink>
       </NftDetails>
     </NftPageContainer>

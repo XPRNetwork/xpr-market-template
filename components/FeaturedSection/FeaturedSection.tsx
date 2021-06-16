@@ -5,27 +5,45 @@ import {
   HeadingText,
 } from './FeaturedSection.styled';
 import { FeaturedCarousel, FeaturedGrid } from '../../components';
-import { Text } from '../../custom/localization';
+import {
+  NftCardTextProps,
+  FeaturedSectionTextProps,
+} from '../../custom/localization';
 import { FeaturedSectionProps } from '../../custom/customization';
 import { Template } from '../../services/templates';
 
 type Props = {
-  styles: FeaturedSectionProps;
-  text: Text;
+  featuredSectionStyles: FeaturedSectionProps;
+  featuredSectionText: FeaturedSectionTextProps;
+  nftCardText: NftCardTextProps;
   templates: Template[];
 };
 
-export const FeaturedSection: FC<Props> = ({ styles, text, templates }) => {
+export const FeaturedSection: FC<Props> = ({
+  featuredSectionStyles,
+  featuredSectionText,
+  nftCardText,
+  templates,
+}) => {
   return (
-    <FeaturedSectionContainer backgroundColor={styles.backgroundColor}>
+    <FeaturedSectionContainer
+      backgroundColor={featuredSectionStyles.backgroundColor}>
       <FeaturedSectionWrapper>
-        <HeadingText {...styles.titleFont}>
-          {text.featuredSection.heading}
+        <HeadingText {...featuredSectionStyles.titleFont}>
+          {featuredSectionText.heading}
         </HeadingText>
-        {styles.carousel ? (
-          <FeaturedCarousel templates={templates} styles={styles} />
+        {featuredSectionStyles.carousel ? (
+          <FeaturedCarousel
+            templates={templates}
+            styles={featuredSectionStyles}
+            nftCardText={nftCardText}
+          />
         ) : (
-          <FeaturedGrid templates={templates} type="featured" />
+          <FeaturedGrid
+            templates={templates}
+            nftCardText={nftCardText}
+            type="featured"
+          />
         )}
       </FeaturedSectionWrapper>
     </FeaturedSectionContainer>

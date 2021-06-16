@@ -13,6 +13,6 @@ const Template: Story = (args) => <Navbar {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  text: localizationJson['en'],
-  styles: customizationJson.navbar,
+  navbarText: localizationJson['en'].navbar,
+  navbarStyles: customizationJson.navbar,
 };

@@ -2,7 +2,6 @@ import { useRef, FC } from 'react';
 import LazyLoad from 'react-lazyload';
 import { ImageContainer, DefaultImage, Image } from './TemplateImage.styled';
 import { PlaceholderAsset } from '../Card/Card.styled';
-import { ReactComponent as DefaultIcon } from '../../public/placeholder-template-icon.svg';
 
 type Props = {
   templateImgSrc?: string;
@@ -27,7 +26,7 @@ const TemplateImageChild = ({
   if (!templateImgSrc) {
     return (
       <DefaultImage>
-        <DefaultIcon />
+        <img src="/placeholder-template-icon.svg" alt="placeholder" />
       </DefaultImage>
     );
   }

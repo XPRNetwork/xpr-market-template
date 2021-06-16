@@ -1,7 +1,7 @@
 import { FC, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Nft, NftDetails, LoadingPage } from '../components';
-import { useAuthContext, useLocaleContext } from '../components/Provider';
+import { useAuthContext } from '../components/Provider';
 import { useFetchNft } from '../hooks';
 import {
   NftPageContainer,
@@ -12,12 +12,11 @@ import {
 import ProtonSDK from '../services/proton';
 import { formatPrice } from '../utils';
 import { RouterQuery, TOKEN_PRECISION } from '../utils/constants';
-import localizationJson from '../custom/localization';
+import { Text } from '../custom/localization';
 import customizationJson from '../custom/customization';
-
 const { collection } = customizationJson;
 
-const NftDetailPage: FC = () => {
+const NftDetailPage: FC<{ text: Text }> = ({ text: { detailPage } }) => {
   const {
     currentUser,
     currentUserBalance,
@@ -25,11 +24,6 @@ const NftDetailPage: FC = () => {
     login,
     updateCurrentUserBalance,
   } = useAuthContext();
-
-  const { locale, isLoadingLocale } = useLocaleContext();
-  const detailPageText = localizationJson[locale]
-    ? localizationJson[locale].detailPage
-    : localizationJson['en'].detailPage;
 
   const router = useRouter();
   const { templateId } = router.query as RouterQuery;
@@ -82,7 +76,7 @@ const NftDetailPage: FC = () => {
     }
   };
 
-  if (isLoadingUser || isLoadingLocale || isLoading || error) {
+  if (isLoadingUser || isLoading || error) {
     return <LoadingPage />;
   }
 
@@ -90,17 +84,17 @@ const NftDetailPage: FC = () => {
   return (
     <NftPageContainer>
       <Nft name={name} image={image} video={video} />
-      <NftDetails template={template} detailPageText={detailPageText}>
+      <NftDetails template={template} detailPageText={detailPage}>
         {template.lowestPrice ? (
           <Button onClick={currentUser && !isLoadingUser ? buyAsset : login}>
-            {detailPageText.buyButtonText}
+            {detailPage.buyButtonText}
           </Button>
         ) : (
           <ButtonLink
             href={`http://protonmarket.com/${collection}/${templateId}`}
             target="_blank"
             rel="noreferrer">
-            {detailPageText.viewButtonText}
+            {detailPage.viewButtonText}
           </ButtonLink>
         )}
         {purchasingError ? (

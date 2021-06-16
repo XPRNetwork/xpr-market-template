@@ -65,8 +65,8 @@ const iconGetter = (type) => {
   }
 };
 
-export const Footer: FC<{ styles: FooterProps }> = ({ styles }) => {
-  const { logo, socialMediaLinks, backgroundColor, borderColor } = styles;
+export const Footer: FC<{ footerStyles: FooterProps }> = ({ footerStyles }) => {
+  const { logo, socialMediaLinks, backgroundColor, borderColor } = footerStyles;
   return (
     <FooterContainer
       backgroundColor={backgroundColor}

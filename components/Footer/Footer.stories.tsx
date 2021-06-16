@@ -12,5 +12,5 @@ const Template: Story = (args) => <Footer {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  styles: customizationJson.footer,
+  footerStyles: customizationJson.footer,
 };

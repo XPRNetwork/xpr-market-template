@@ -8,18 +8,18 @@ import {
   CollectionName,
   ShimmerBlock,
 } from './Card.styled';
-import { useLocaleContext } from '../Provider';
 import { Template } from '../../services/templates';
-import localizationJson from '../../custom/localization';
+import { NftCardTextProps } from '../../custom/localization';
 import { TemplateImage, TemplateVideo } from '../index';
 import { IPFS_RESOLVER, RESIZER_IMAGE_SM } from '../../utils/constants';
 
 type Props = {
   template: Template;
   type: 'user' | 'featured';
+  nftCardText: NftCardTextProps;
 };
 
-export const Card: FC<Props> = ({ template, type }) => {
+export const Card: FC<Props> = ({ template, type, nftCardText }) => {
   const {
     assetsForSale,
     lowestPrice,
@@ -28,11 +28,6 @@ export const Card: FC<Props> = ({ template, type }) => {
     immutable_data: { name, image, video },
   } = template;
   const router = useRouter();
-
-  const { locale } = useLocaleContext();
-  const text = Object.keys(localizationJson[locale]).length
-    ? localizationJson[locale].nftCard
-    : localizationJson['en'].nftCard;
 
   const formattedSaleCount = assetsForSale
     ? assetsForSale.replace(/\d{1,3}(?=(\d{3})+(?!\d))/g, '$&,')
@@ -43,7 +38,8 @@ export const Card: FC<Props> = ({ template, type }) => {
     ? image
     : `${RESIZER_IMAGE_SM}${IPFS_RESOLVER}${image}`;
   const fallbackImageSrc = image ? `${IPFS_RESOLVER}${image}` : '';
-  const cardHeaderText = type === 'featured' ? text.nftsLeft : text.nftsOwned;
+  const cardHeaderText =
+    type === 'featured' ? nftCardText.nftsLeft : nftCardText.nftsOwned;
   const onClickRoute =
     type === 'featured' ? `/${template_id}` : `/my-items/${template_id}`;
 
@@ -72,20 +68,25 @@ export const Card: FC<Props> = ({ template, type }) => {
       <PriceSection
         lowestPrice={lowestPrice}
         type={type}
-        text={text}
+        nftCardText={nftCardText}
         saleCount={formattedSaleCount}
       />
     </CardContainer>
   );
 };
 
-const PriceSection = ({ lowestPrice, type, text, saleCount }) => {
+const PriceSection: FC<{
+  lowestPrice: string;
+  type: string;
+  nftCardText: NftCardTextProps;
+  saleCount: string;
+}> = ({ lowestPrice, type, nftCardText, saleCount }) => {
   if (type === 'featured') {
     if (lowestPrice === undefined) {
       return <ShimmerBlock position="flex-start" />;
     }
     return lowestPrice || saleCount == '0' ? (
-      <Price>{lowestPrice || text.soldOut}</Price>
+      <Price>{lowestPrice || nftCardText.soldOut}</Price>
     ) : null;
   } else {
     return null;
