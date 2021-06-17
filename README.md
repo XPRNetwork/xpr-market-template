@@ -1,8 +1,20 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Documentation for Editing and Updating Proton Market Template
+
+To update and edit the text and colors/font and various other styles of the site, please look through the documentation [here](https://docs.google.com/document/d/12C-lWflPDy3J2mo35X_yE3JiM6mSz18mB1PUQpB4dRY/edit?usp=sharing).
 
 ## Getting Started
 
-First, run the development server:
+This runs on v15.0.0 Node. Please make sure you have Node installed before trying to install this repo.
+
+To get started:
+
+```
+git clone https://github.com/ProtonProtocol/proton-market-template.git
+
+npm install
+```
+
+To run the development server:
 
 ```bash
 npm run dev
@@ -17,6 +29,26 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 [API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+
+## .env
+
+Please create a `.env` file that uses either the Testnet or the Mainnet variables in the `.env.template` file.
+
+For mainnet, your `.env` file should be:
+```
+NEXT_PUBLIC_CHAIN_ENDPOINTS='https://proton.eoscafeblock.com, https://proton.greymass.com'
+NEXT_PUBLIC_BLOCK_EXPLORER='https://proton.bloks.io/block/'
+NEXT_PUBLIC_NFT_ENDPOINT='https://proton.api.atomicassets.io'
+
+```
+
+For testnet, your `.env` file should be:
+```
+NEXT_PUBLIC_NFT_ENDPOINT='https://test.proton.api.atomicassets.io'
+NEXT_PUBLIC_CHAIN_ENDPOINTS='https://testnet.protonchain.com'
+NEXT_PUBLIC_BLOCK_EXPLORER='https://proton-test.bloks.io/block/'
+```
+
 
 ## Learn More
 
