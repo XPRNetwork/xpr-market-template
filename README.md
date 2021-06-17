@@ -11,14 +11,12 @@ To get started:
 ```
 git clone https://github.com/ProtonProtocol/proton-market-template.git
 
-npm install
+yarn install
 ```
 
 To run the development server:
 
 ```bash
-npm run dev
-# or
 yarn dev
 ```
 
@@ -29,6 +27,20 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 [API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+
+## Customization
+
+To view customizable components on Storybook:
+
+```bash
+yarn storybook
+```
+
+Open [http://localhost:6006](http://localhost:6006) with your browser to see the result.
+
+You can start previewing your customizations by modifying the fields in the **Controls** section below each component.
+
+![proton-market-template-storybook](https://user-images.githubusercontent.com/32081352/122460328-d578a700-cf66-11eb-8a42-61040ec82f07.gif)
 
 ## .env
 
