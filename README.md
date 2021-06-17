@@ -9,7 +9,7 @@ This runs on v15.0.0 Node. Please make sure you have Node installed before tryin
 To get started:
 
 ```
-git clone https://github.com/ProtonProtocol/taskly-demo.git
+git clone https://github.com/ProtonProtocol/proton-market-template.git
 
 npm install
 ```
