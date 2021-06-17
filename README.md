@@ -1,8 +1,20 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Documentation for Editing and Updating Proton Market Template
+
+To update and edit the text and colors/font and various other styles of the site, please look through the documentation [here](https://docs.google.com/document/d/12C-lWflPDy3J2mo35X_yE3JiM6mSz18mB1PUQpB4dRY/edit?usp=sharing).
 
 ## Getting Started
 
-First, run the development server:
+This runs on v15.0.0 Node. Please make sure you have Node installed before trying to install this repo.
+
+To get started:
+
+```
+git clone https://github.com/ProtonProtocol/taskly-demo.git
+
+npm install
+```
+
+To run the development server:
 
 ```bash
 npm run dev
