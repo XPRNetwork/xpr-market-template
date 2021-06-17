@@ -11,10 +11,12 @@ import {
 import { Row, Box } from '../../styles/index.styled';
 import { NftMeta } from '../';
 import { Template } from '../../services/templates';
+import { DetailPageProps } from '../../custom/customization';
 
 export const NftDetails: FC<{
   children: ReactNode;
   template: Template;
+  detailPageStyles: DetailPageProps;
   detailPageText: {
     priceLabelText: string;
     editionLabelText: string;
@@ -23,9 +25,18 @@ export const NftDetails: FC<{
 }> = ({
   children,
   template: { lowestPrice, max_supply, collection, immutable_data },
+  detailPageStyles: {
+    imagePlacement,
+    cardTitleFont,
+    collectionNameFont,
+    priceEditionLabelFont,
+    priceFont,
+    editionFont,
+    cardDescriptionFont,
+  },
   detailPageText: { priceLabelText, editionLabelText, placeholderPriceText },
 }) => (
-  <Container>
+  <Container imagePlacement={imagePlacement}>
     <NftMeta
       templateName={immutable_data.name}
       collectionName={collection.collection_name}
@@ -35,17 +46,21 @@ export const NftDetails: FC<{
       video={immutable_data.video}
     />
     <Box>
-      <Title>{immutable_data.name}</Title>
-      <CollectionName>{collection.name}</CollectionName>
+      <Title {...cardTitleFont}>{immutable_data.name}</Title>
+      <CollectionName {...collectionNameFont}>{collection.name}</CollectionName>
       <Row>
-        <PriceEditionLabel>{priceLabelText}</PriceEditionLabel>
-        <PriceEditionLabel>{editionLabelText}</PriceEditionLabel>
+        <PriceEditionLabel {...priceEditionLabelFont}>
+          {priceLabelText}
+        </PriceEditionLabel>
+        <PriceEditionLabel {...priceEditionLabelFont}>
+          {editionLabelText}
+        </PriceEditionLabel>
       </Row>
       <Row>
-        <Price>{lowestPrice || placeholderPriceText}</Price>
-        <Edition>{max_supply}</Edition>
+        <Price {...priceFont}>{lowestPrice || placeholderPriceText}</Price>
+        <Edition {...editionFont}>{max_supply}</Edition>
       </Row>
-      <Description>{immutable_data.desc}</Description>
+      <Description {...cardDescriptionFont}>{immutable_data.desc}</Description>
     </Box>
     <Box>{children}</Box>
   </Container>

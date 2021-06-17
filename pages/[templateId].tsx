@@ -1,22 +1,19 @@
 import { FC, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { Nft, NftDetails, LoadingPage } from '../components';
+import {
+  NFT_DETAIL_PAGE_TYPES,
+  NftDetailPage,
+  LoadingPage,
+} from '../components';
 import { useAuthContext } from '../components/Provider';
 import { useFetchNft } from '../hooks';
-import {
-  NftPageContainer,
-  Button,
-  ButtonLink,
-  ErrorMessage,
-} from '../styles/templateId.styled';
 import ProtonSDK from '../services/proton';
 import { formatPrice } from '../utils';
 import { RouterQuery, TOKEN_PRECISION } from '../utils/constants';
 import { Text } from '../custom/localization';
 import customizationJson from '../custom/customization';
-const { collection } = customizationJson;
 
-const NftDetailPage: FC<{ text: Text }> = ({ text: { detailPage } }) => {
+const BuyNft: FC<{ text: Text }> = ({ text }) => {
   const {
     currentUser,
     currentUserBalance,
@@ -80,29 +77,18 @@ const NftDetailPage: FC<{ text: Text }> = ({ text: { detailPage } }) => {
     return <LoadingPage />;
   }
 
-  const { name, image, video } = template.immutable_data;
   return (
-    <NftPageContainer>
-      <Nft name={name} image={image} video={video} />
-      <NftDetails template={template} detailPageText={detailPage}>
-        {template.lowestPrice ? (
-          <Button onClick={currentUser && !isLoadingUser ? buyAsset : login}>
-            {detailPage.buyButtonText}
-          </Button>
-        ) : (
-          <ButtonLink
-            href={`http://protonmarket.com/${collection}/${templateId}`}
-            target="_blank"
-            rel="noreferrer">
-            {detailPage.viewButtonText}
-          </ButtonLink>
-        )}
-        {purchasingError ? (
-          <ErrorMessage>{purchasingError}</ErrorMessage>
-        ) : null}
-      </NftDetails>
-    </NftPageContainer>
+    <NftDetailPage
+      type={NFT_DETAIL_PAGE_TYPES.BUY}
+      template={template}
+      detailPageStyles={customizationJson.detailPage}
+      detailPageText={text.detailPage}
+      buyPageProps={{
+        onButtonClick: currentUser && !isLoadingUser ? buyAsset : login,
+        purchasingError,
+      }}
+    />
   );
 };
 
-export default NftDetailPage;
+export default BuyNft;
