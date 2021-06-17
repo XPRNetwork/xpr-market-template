@@ -30,6 +30,26 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
+## .env
+
+Please create a `.env` file that uses either the Testnet or the Mainnet variables in the `.env.template` file.
+
+For mainnet, your `.env` file should be:
+```
+NEXT_PUBLIC_CHAIN_ENDPOINTS='https://proton.eoscafeblock.com, https://proton.greymass.com'
+NEXT_PUBLIC_BLOCK_EXPLORER='https://proton.bloks.io/block/'
+NEXT_PUBLIC_NFT_ENDPOINT='https://proton.api.atomicassets.io'
+
+```
+
+For testnet, your `.env` file should be:
+```
+NEXT_PUBLIC_NFT_ENDPOINT='https://test.proton.api.atomicassets.io'
+NEXT_PUBLIC_CHAIN_ENDPOINTS='https://testnet.protonchain.com'
+NEXT_PUBLIC_BLOCK_EXPLORER='https://proton-test.bloks.io/block/'
+```
+
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
