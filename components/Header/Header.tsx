@@ -23,9 +23,7 @@ export const Header: FC<Props> = ({ headerStyles, headerText, typography }) => (
   <HeaderContainer backgroundColor={headerStyles.backgroundColor}>
     <HeaderContent imagePlacement={headerStyles.imagePlacement}>
       <TextContainer imagePlacement={headerStyles.imagePlacement}>
-        <HighlightText
-          {...headerStyles.highlightFont}
-          typography={typography}>
+        <HighlightText {...headerStyles.highlightFont} typography={typography}>
           {headerText.highlightText}
         </HighlightText>
         <HeaderText {...headerStyles.mainHeadingFont} typography={typography}>
@@ -34,9 +32,7 @@ export const Header: FC<Props> = ({ headerStyles, headerText, typography }) => (
         <HeaderText {...headerStyles.mainHeadingFont} typography={typography}>
           {headerText.headerLine2}
         </HeaderText>
-        <SubHeaderText
-          {...headerStyles.subheadingFont}
-          typography={typography}>
+        <SubHeaderText {...headerStyles.subheadingFont} typography={typography}>
           {headerText.description}
         </SubHeaderText>
         <ButtonWrapperAnchor href={headerStyles.button.link}>
