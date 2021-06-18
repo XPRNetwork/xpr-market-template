@@ -61,19 +61,21 @@ export interface FeaturedSectionTextProps {
   heading: string;
 }
 
+export interface DetailPageTextProps {
+  priceLabelText: string;
+  editionLabelText: string;
+  placeholderPriceText: string;
+  placeholderDropdownText: string;
+  buyButtonText: string;
+  viewButtonText: string;
+  sellButtonText: string;
+  cancelSaleButtonText: string;
+}
+
 export interface Text {
   header: HeaderTextProps;
   navbar: NavbarTextProps;
-  detailPage: {
-    priceLabelText: string;
-    editionLabelText: string;
-    placeholderPriceText: string;
-    placeholderDropdownText: string;
-    buyButtonText: string;
-    viewButtonText: string;
-    sellButtonText: string;
-    cancelSaleButtonText: string;
-  };
+  detailPage: DetailPageTextProps;
   nftCard: NftCardTextProps;
   featuredSection: FeaturedSectionTextProps;
   myItemsPage: {

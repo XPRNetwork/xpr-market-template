@@ -1,9 +1,7 @@
 import styled from 'styled-components';
-import customizationJson from '../../custom/customization';
+import { Typography } from '../../custom/customization';
 import { MaxWidth } from '../../styles/MaxWidth.styled';
 import { breakpoint } from '../../styles/Breakpoints';
-
-const { typography } = customizationJson;
 
 export const HeaderContainer = styled.div<{ backgroundColor: string }>`
   background-color: ${({ backgroundColor }) => backgroundColor || 'blue'};
@@ -61,12 +59,13 @@ export const HighlightText = styled.h3<{
   isShown: boolean;
   type: string;
   color: string;
+  typography: Typography;
 }>`
   display: ${(props) => (props.isShown ? 'block' : 'none')};
   color: ${(props) => props.color};
-  font-family: ${(props) => typography[props.type].font};
-  font-size: ${(props) => typography[props.type].size};
-  font-weight: ${(props) => typography[props.type].fontWeight};
+  font-family: ${(props) => props.typography[props.type].font};
+  font-size: ${(props) => props.typography[props.type].size};
+  font-weight: ${(props) => props.typography[props.type].fontWeight};
   margin-bottom: 8px;
 
   ${breakpoint.mobile`
@@ -77,11 +76,12 @@ export const HighlightText = styled.h3<{
 export const HeaderText = styled.h1<{
   type: string;
   color: string;
+  typography: Typography;
 }>`
   color: ${(props) => props.color};
-  font-family: ${(props) => typography[props.type].font};
-  font-size: ${(props) => typography[props.type].size};
-  font-weight: ${(props) => typography[props.type].fontWeight};
+  font-family: ${(props) => props.typography[props.type].font};
+  font-size: ${(props) => props.typography[props.type].size};
+  font-weight: ${(props) => props.typography[props.type].fontWeight};
   margin: 0;
   line-height: 1.25;
 
@@ -97,11 +97,12 @@ export const HeaderText = styled.h1<{
 export const SubHeaderText = styled.h2<{
   type: string;
   color: string;
+  typography: Typography;
 }>`
   color: ${(props) => props.color};
-  font-family: ${(props) => typography[props.type].font};
-  font-size: ${(props) => typography[props.type].size};
-  font-weight: ${(props) => typography[props.type].fontWeight};
+  font-family: ${(props) => props.typography[props.type].font};
+  font-size: ${(props) => props.typography[props.type].size};
+  font-weight: ${(props) => props.typography[props.type].fontWeight};
   margin-top: 16px;
   max-width: 550px;
 
@@ -125,13 +126,14 @@ export const Button = styled.button<{
   backgroundColor: string;
   textFont: string;
   textColor: string;
+  typography: Typography;
 }>`
   width: 208px;
   height: 56px;
   margin-top: 32px;
   display: ${(props) => (props.isShown ? 'block' : 'none')};
   background-color: ${(props) => props.backgroundColor};
-  font-family: ${(props) => typography[props.textFont].font};
+  font-family: ${(props) => props.typography[props.textFont].font};
   color: ${(props) => props.textColor};
   border: none;
   cursor: pointer;

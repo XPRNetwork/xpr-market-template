@@ -210,25 +210,25 @@ const customizationJson: ThemeProps = {
   },
 };
 
-export const generateFontImportLink = (): string => {
+export const generateFontImportLink = (
+  typographyVariants: TypographyVariant[]
+): string => {
   const stylesByFont = {};
-  Object.values(customizationJson.typography).forEach(
-    ({ font, fontWeight, isItalic }) => {
-      if (!stylesByFont[font] || !stylesByFont[font][fontWeight]) {
-        stylesByFont[font] = {
-          [fontWeight]: {
-            shouldLoadItalic: isItalic,
-          },
-        };
-      }
-
-      if (isItalic) {
-        stylesByFont[font][fontWeight] = {
-          shouldLoadItalic: true,
-        };
-      }
+  typographyVariants.forEach(({ font, fontWeight, isItalic }) => {
+    if (!stylesByFont[font] || !stylesByFont[font][fontWeight]) {
+      stylesByFont[font] = {
+        [fontWeight]: {
+          shouldLoadItalic: isItalic,
+        },
+      };
     }
-  );
+
+    if (isItalic) {
+      stylesByFont[font][fontWeight] = {
+        shouldLoadItalic: true,
+      };
+    }
+  });
 
   const fonts = Object.keys(stylesByFont).map((font) => {
     const styles = stylesByFont[font];
@@ -397,53 +397,33 @@ export interface DetailPageProps {
   };
 }
 
+export interface TypographyVariant {
+  font: string;
+  size: string;
+  fontWeight: string;
+  isItalic: boolean;
+}
+
+export interface Typography {
+  h1: TypographyVariant;
+  h2: TypographyVariant;
+  h3: TypographyVariant;
+  h4: TypographyVariant;
+  paragraph: TypographyVariant;
+  label: TypographyVariant;
+  caption: TypographyVariant;
+}
+
+export interface FontProps {
+  type: string;
+  color: string;
+  typography: Typography;
+}
+
 export type ThemeProps = {
   collection: string;
   owner: string;
-  typography: {
-    h1: {
-      font: string;
-      size: string;
-      fontWeight: string;
-      isItalic: boolean;
-    };
-    h2: {
-      font: string;
-      size: string;
-      fontWeight: string;
-      isItalic: boolean;
-    };
-    h3: {
-      font: string;
-      size: string;
-      fontWeight: string;
-      isItalic: boolean;
-    };
-    h4: {
-      font: string;
-      size: string;
-      fontWeight: string;
-      isItalic: boolean;
-    };
-    paragraph: {
-      font: string;
-      size: string;
-      fontWeight: string;
-      isItalic: boolean;
-    };
-    label: {
-      font: string;
-      size: string;
-      fontWeight: string;
-      isItalic: boolean;
-    };
-    caption: {
-      font: string;
-      size: string;
-      fontWeight: string;
-      isItalic: boolean;
-    };
-  };
+  typography: Typography;
   navbar: NavbarProps;
   footer: FooterProps;
   nftCard: NftCardProps;

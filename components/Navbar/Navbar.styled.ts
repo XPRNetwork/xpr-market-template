@@ -1,10 +1,8 @@
 import styled from 'styled-components';
-import customizationJson from '../../custom/customization';
+import { Typography } from '../../custom/customization';
 import { Image } from '../../styles/index.styled';
 import { MaxWidth } from '../../styles/MaxWidth.styled';
 import { breakpoint } from '../../styles/Breakpoints';
-
-const { navbar, typography } = customizationJson;
 
 export type GradientBackgroundProps = {
   isOpen: boolean;
@@ -17,6 +15,8 @@ type DropdownProps = {
 
 type DropdownLinkProps = {
   color: string;
+  typography: Typography;
+  navLinkFontType: string;
 };
 
 export const AvatarContainer = styled.div`
@@ -27,11 +27,14 @@ export const HamburgerIcon = styled(Image)`
   cursor: pointer;
 `;
 
-export const NavbarContainer = styled.div`
+export const NavbarContainer = styled.div<{
+  bottomBorderColor: string;
+  backgroundColor: string;
+}>`
   width: 100%;
   position: relative;
-  border-bottom: 1px solid ${navbar.bottomBorderColor};
-  background-color: ${navbar.backgroundColor};
+  border-bottom: 1px solid ${({ bottomBorderColor }) => bottomBorderColor};
+  background-color: ${({ backgroundColor }) => backgroundColor};
   height: 96px;
 `;
 
@@ -68,16 +71,25 @@ export const AvatarImage = styled(Image)`
   overflow: hidden;
 `;
 
-export const LoginButton = styled.button`
-  border: 2px solid ${navbar.buttonBorderColor};
+export const LoginButton = styled.button<{
+  buttonBorderColor: string;
+  buttonFontColor: string;
+  buttonBackgroundColor: string;
+  buttonFontType: string;
+  typography: Typography;
+}>`
+  border: 2px solid ${({ buttonBorderColor }) => buttonBorderColor};
   height: 42px;
   padding: 0 15px;
-  color: ${navbar.buttonFontColor};
-  background-color: ${navbar.buttonBackgroundColor};
+  color: ${({ buttonFontColor }) => buttonFontColor};
+  background-color: ${({ buttonBackgroundColor }) => buttonBackgroundColor};
   cursor: pointer;
-  font-family: ${typography[navbar.buttonFontType].font};
-  font-size: ${typography[navbar.buttonFontType].size};
-  font-weight: ${typography[navbar.buttonFontType].fontWeight};
+  font-family: ${({ typography, buttonFontType }) =>
+    typography[buttonFontType].font};
+  font-size: ${({ typography, buttonFontType }) =>
+    typography[buttonFontType].size};
+  font-weight: ${({ typography, buttonFontType }) =>
+    typography[buttonFontType].fontWeight};
 `;
 
 export const MobileOnlySection = styled.section`
@@ -88,16 +100,22 @@ export const MobileOnlySection = styled.section`
   `}
 `;
 
-export const NavLinks = styled.section`
+export const NavLinks = styled.section<{
+  typography: Typography;
+  navLinkFontType: string;
+}>`
   max-width: 45%;
   width: 45%;
   display: flex;
   justify-content: space-between;
 
   a {
-    font-family: ${typography[navbar.navLinkFontType].font};
-    font-size: ${typography[navbar.navLinkFontType].size};
-    font-weight: ${typography[navbar.navLinkFontType].fontWeight};
+    font-family: ${({ typography, navLinkFontType }) =>
+      typography[navLinkFontType].font};
+    font-size: ${({ typography, navLinkFontType }) =>
+      typography[navLinkFontType].size};
+    font-weight: ${({ typography, navLinkFontType }) =>
+      typography[navLinkFontType].fontWeight};
   }
 `;
 
@@ -175,10 +193,13 @@ export const GradientBackground = styled.div<GradientBackgroundProps>`
   `}
 `;
 
-export const Name = styled.span`
-  font-family: ${typography[navbar.navLinkFontType].font};
-  font-size: ${typography[navbar.navLinkFontType].size};
-  font-weight: ${typography[navbar.navLinkFontType].fontWeight};
+export const Name = styled.span<{
+  typography: Typography;
+  fontType: string;
+}>`
+  font-family: ${({ typography, fontType }) => typography[fontType].font};
+  font-size: ${({ typography, fontType }) => typography[fontType].size};
+  font-weight: ${({ typography, fontType }) => typography[fontType].fontWeight};
   line-height: 24px;
   margin: 16px 16px 11px;
 
@@ -199,9 +220,9 @@ export const Subtitle = styled.span`
 `;
 
 export const Balance = styled(Name)`
-  font-family: ${typography[navbar.balanceSubtitleFontType].font};
-  font-size: ${typography[navbar.balanceSubtitleFontType].size};
-  font-weight: ${typography[navbar.balanceSubtitleFontType].fontWeight};
+  font-family: ${({ typography, fontType }) => typography[fontType].font};
+  font-size: ${({ typography, fontType }) => typography[fontType].size};
+  font-weight: ${({ typography, fontType }) => typography[fontType].fontWeight};
   line-height: 24px;
   border-bottom: 1px solid #e6e6e6;
   margin: 0 16px 8px;
@@ -213,9 +234,12 @@ export const Balance = styled(Name)`
 `;
 
 export const DropdownLink = styled.a<DropdownLinkProps>`
-  font-family: ${typography[navbar.navLinkFontType].font};
-  font-size: ${typography[navbar.navLinkFontType].size};
-  font-weight: ${typography[navbar.navLinkFontType].fontWeight};
+  font-family: ${({ typography, navLinkFontType }) =>
+    typography[navLinkFontType].font};
+  font-size: ${({ typography, navLinkFontType }) =>
+    typography[navLinkFontType].size};
+  font-weight: ${({ typography, navLinkFontType }) =>
+    typography[navLinkFontType].fontWeight};
   color: ${({ color }) => color};
   font-size: 14px;
   line-height: 24px;

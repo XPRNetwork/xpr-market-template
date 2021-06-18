@@ -9,9 +9,12 @@ import {
 } from './TemplateVideo.styled';
 import { useNavigatorUserAgent } from '../../hooks';
 import { PlaceholderAsset } from '../Card/Card.styled';
+import { useState } from 'react';
 
 type Props = {
   src: string;
+  borderRadius: string;
+  secondaryBackgroundColor: string;
   autoPlay?: boolean;
   controls?: boolean;
   priceTag?: JSX.Element;
@@ -32,14 +35,23 @@ export const TemplateVideo: FC<Props> = ({
   priceTag,
   autoPlay = false,
   controls = true,
+  borderRadius,
+  secondaryBackgroundColor,
 }) => {
   const { isDesktop, isBrowserVideoCompatible } = useNavigatorUserAgent();
   const refPlaceholder = useRef<HTMLDivElement>();
+  const [hasControls, setHasControls] = useState(false);
 
-  const removePlaceholder = () => refPlaceholder.current.remove();
+  const removePlaceholder = () => {
+    refPlaceholder.current.remove();
+    setTimeout(() => setHasControls(controls), 500);
+  };
 
   return (
-    <VideoContainer onClick={(e) => e.stopPropagation()}>
+    <VideoContainer
+      onClick={(e) => e.stopPropagation()}
+      borderRadius={borderRadius}
+      secondaryBackgroundColor={secondaryBackgroundColor}>
       <CenterContainer>
         {isBrowserVideoCompatible ? (
           <div>
@@ -47,7 +59,7 @@ export const TemplateVideo: FC<Props> = ({
             <LazyLoad height="100%" offset={100} once>
               <Video
                 autoPlay={autoPlay}
-                controls={controls}
+                controls={hasControls}
                 loop
                 poster={isDesktop ? null : src}
                 src={src}

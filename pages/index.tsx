@@ -8,11 +8,15 @@ import {
 } from '../services/templates';
 import { FC } from 'react';
 import { LoadingPage, Header, FeaturedSection } from '../components';
-import customizationJson from '../custom/customization';
+import customizationJson, { Typography } from '../custom/customization';
 import { Text } from '../custom/localization';
-const { collection, owner, header, featuredSection } = customizationJson;
+const { collection, owner, header, featuredSection, nftCard } =
+  customizationJson;
 
-const HomePage: FC<{ text: Text }> = ({ text }) => {
+const HomePage: FC<{ text: Text; typography: Typography }> = ({
+  text,
+  typography,
+}) => {
   const [isLoadingTemplates, setIsLoadingTemplates] = useState<boolean>(true);
   const [templates, setTemplates] = useState<Template[]>([]);
 
@@ -50,15 +54,21 @@ const HomePage: FC<{ text: Text }> = ({ text }) => {
   }
 
   return (
-    <div>
-      <Header headerStyles={header} headerText={text.header} />
+    <>
+      <Header
+        headerStyles={header}
+        headerText={text.header}
+        typography={typography}
+      />
       <FeaturedSection
         templates={templates}
         featuredSectionText={text.featuredSection}
-        nftCardText={text.nftCard}
         featuredSectionStyles={featuredSection}
+        nftCardText={text.nftCard}
+        nftCardStyles={nftCard}
+        typography={typography}
       />
-    </div>
+    </>
   );
 };
 
