@@ -15,19 +15,27 @@ import {
   ButtonNextContainer,
 } from './FeaturedCarousel.styled';
 import { useWindowSize } from '../../hooks';
-import { FeaturedSectionProps } from '../../custom/customization';
+import {
+  FeaturedSectionProps,
+  NftCardProps,
+  Typography,
+} from '../../custom/customization';
 import { NftCardTextProps } from '../../custom/localization';
 
 type FeaturedCarouselProps = {
   templates: Template[];
   styles: FeaturedSectionProps;
   nftCardText: NftCardTextProps;
+  nftCardStyles: NftCardProps;
+  typography: Typography;
 };
 
 export const FeaturedCarousel: FC<FeaturedCarouselProps> = ({
   templates,
   styles,
   nftCardText,
+  nftCardStyles,
+  typography,
 }) => {
   const [slideStep, setSlideStep] = useState<number>(4);
   const [visibleSlides, setVisibleSlides] = useState<number>(4);
@@ -63,17 +71,18 @@ export const FeaturedCarousel: FC<FeaturedCarouselProps> = ({
           totalSlides={templates.length}
           dragEnabled={true}>
           <Slider>
-            {templates.map((template, i) => {
-              return (
-                <Slide index={i} key={template.template_id}>
-                  <Card
-                    nftCardText={nftCardText}
-                    template={template}
-                    type="featured"
-                  />
-                </Slide>
-              );
-            })}
+            {templates.map((template, i) => (
+              <Slide index={i} key={`${template.template_id}-${i}`}>
+                <Card
+                  nftCardText={nftCardText}
+                  template={template}
+                  type="featured"
+                  nftCardStyles={nftCardStyles}
+                  typography={typography}
+                  isCarousel
+                />
+              </Slide>
+            ))}
           </Slider>
           <ButtonBackContainer
             isVisible={templates.length > visibleSlides}

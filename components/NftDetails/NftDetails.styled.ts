@@ -1,33 +1,24 @@
 import styled from 'styled-components';
-import customizationJson from '../../custom/customization';
+import { FontProps } from '../../custom/customization';
 import { breakpoint } from '../../styles/Breakpoints';
 
-const {
-  typography,
-  detailPage: {
-    imagePlacement,
-    cardTitleFont,
-    collectionNameFont,
-    priceEditionLabelFont,
-    priceFont,
-    editionFont,
-    cardDescriptionFont,
-  },
-} = customizationJson;
-
-export const Container = styled.div`
+export const Container = styled.div<{ imagePlacement: string }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 50%;
   height: 50vh;
-  margin-left: ${imagePlacement === 'left' ? '48px' : '0'};
-  margin-right: ${imagePlacement === 'left' ? '0' : '48px'};
+  margin-left: ${({ imagePlacement }) =>
+    imagePlacement === 'left' ? '48px' : '0'};
+  margin-right: ${({ imagePlacement }) =>
+    imagePlacement === 'left' ? '0' : '48px'};
 
   ${breakpoint.laptop`
     width: 60%;
-    margin-left: ${imagePlacement === 'left' ? '24px' : '0'};
-    margin-right: ${imagePlacement === 'left' ? '0' : '24px'};
+    margin-left: ${({ imagePlacement }) =>
+      imagePlacement === 'left' ? '24px' : '0'};
+    margin-right: ${({ imagePlacement }) =>
+      imagePlacement === 'left' ? '0' : '24px'};
   `}
 
   ${breakpoint.tablet`
@@ -37,11 +28,11 @@ export const Container = styled.div`
   `}
 `;
 
-export const Title = styled.h1`
-  color: ${cardTitleFont.color};
-  font-family: ${typography[cardTitleFont.type].font};
-  font-size: ${typography[cardTitleFont.type].size};
-  font-weight: ${typography[cardTitleFont.type].fontWeight};
+export const Title = styled.h1<FontProps>`
+  color: ${(props) => props.color};
+  font-family: ${(props) => props.typography[props.type].font};
+  font-size: ${(props) => props.typography[props.type].size};
+  font-weight: ${(props) => props.typography[props.type].fontWeight};
   line-height: 80px;
 
   ${breakpoint.tablet`
@@ -50,11 +41,11 @@ export const Title = styled.h1`
   `}
 `;
 
-export const CollectionName = styled.h3`
-  color: ${collectionNameFont.color};
-  font-family: ${typography[collectionNameFont.type].font};
-  font-size: ${typography[collectionNameFont.type].size};
-  font-weight: ${typography[collectionNameFont.type].fontWeight};
+export const CollectionName = styled.h3<FontProps>`
+  color: ${(props) => props.color};
+  font-family: ${(props) => props.typography[props.type].font};
+  font-size: ${(props) => props.typography[props.type].size};
+  font-weight: ${(props) => props.typography[props.type].fontWeight};
   line-height: 24px;
   margin: 0 0 24px;
 
@@ -63,11 +54,11 @@ export const CollectionName = styled.h3`
   `}
 `;
 
-export const PriceEditionLabel = styled.label`
-  color: ${priceEditionLabelFont.color};
-  font-family: ${typography[priceEditionLabelFont.type].font};
-  font-size: ${typography[priceEditionLabelFont.type].size};
-  font-weight: ${typography[priceEditionLabelFont.type].fontWeight};
+export const PriceEditionLabel = styled.label<FontProps>`
+  color: ${(props) => props.color};
+  font-family: ${(props) => props.typography[props.type].font};
+  font-size: ${(props) => props.typography[props.type].size};
+  font-weight: ${(props) => props.typography[props.type].fontWeight};
   line-height: 24px;
 
   ${breakpoint.tablet`
@@ -76,11 +67,11 @@ export const PriceEditionLabel = styled.label`
   `}
 `;
 
-export const Price = styled.h2`
-  color: ${priceFont.color};
-  font-family: ${typography[priceFont.type].font};
-  font-size: ${typography[priceFont.type].size};
-  font-weight: ${typography[priceFont.type].fontWeight};
+export const Price = styled.h2<FontProps>`
+  color: ${(props) => props.color};
+  font-family: ${(props) => props.typography[props.type].font};
+  font-size: ${(props) => props.typography[props.type].size};
+  font-weight: ${(props) => props.typography[props.type].fontWeight};
   line-height: 40px;
 
   ${breakpoint.tablet`
@@ -89,11 +80,11 @@ export const Price = styled.h2`
   `}
 `;
 
-export const Edition = styled.h2`
-  color: ${editionFont.color};
-  font-family: ${typography[editionFont.type].font};
-  font-size: ${typography[editionFont.type].size};
-  font-weight: ${typography[editionFont.type].fontWeight};
+export const Edition = styled.h2<FontProps>`
+  color: ${(props) => props.color};
+  font-family: ${(props) => props.typography[props.type].font};
+  font-size: ${(props) => props.typography[props.type].size};
+  font-weight: ${(props) => props.typography[props.type].fontWeight};
   line-height: 40px;
 
   ${breakpoint.tablet`
@@ -102,11 +93,11 @@ export const Edition = styled.h2`
   `}
 `;
 
-export const Description = styled.p`
-  color: ${cardDescriptionFont.color};
-  font-family: ${typography[cardDescriptionFont.type].font};
-  font-size: ${typography[cardDescriptionFont.type].size};
-  font-weight: ${typography[cardDescriptionFont.type].fontWeight};
+export const Description = styled.p<FontProps>`
+  color: ${(props) => props.color};
+  font-family: ${(props) => props.typography[props.type].font};
+  font-size: ${(props) => props.typography[props.type].size};
+  font-weight: ${(props) => props.typography[props.type].fontWeight};
   margin-top: 24px;
   line-height: 24px;
 

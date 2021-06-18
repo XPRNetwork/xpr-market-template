@@ -6,10 +6,22 @@ type Props = {
   name: string;
   image: string;
   video?: string;
+  nftStyles: {
+    imageBackgroundColor: string;
+    imagePlacement: string;
+    imageShadow: boolean;
+  };
 };
 
-export const Nft: FC<Props> = ({ name, video, image }) => (
-  <NftContainer>
+export const Nft: FC<Props> = ({
+  name,
+  video,
+  image,
+  nftStyles: { imageBackgroundColor, imagePlacement, imageShadow },
+}) => (
+  <NftContainer
+    imageBackgroundColor={imageBackgroundColor}
+    imagePlacement={imagePlacement}>
     {video ? (
       <Video
         controls
@@ -19,9 +31,14 @@ export const Nft: FC<Props> = ({ name, video, image }) => (
           (document.getElementsByTagName('video')[0].volume = 0.15)
         }
         src={`${IPFS_RESOLVER}${video}`}
+        imageShadow={imageShadow}
       />
     ) : (
-      <Image src={`${IPFS_RESOLVER}${image}`} alt={name} />
+      <Image
+        src={`${IPFS_RESOLVER}${image}`}
+        alt={name}
+        imageShadow={imageShadow}
+      />
     )}
   </NftContainer>
 );

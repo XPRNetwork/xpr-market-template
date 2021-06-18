@@ -1,25 +1,17 @@
 import styled from 'styled-components';
 import { FadeInImageContainer } from '../../styles/FadeInImageContainer.styled';
-import customizationJson from '../../custom/customization';
+import { MediaContainerProps } from '../TemplateImage/TemplateImage.styled';
 
-type ImageContainerProps = {
-  isAudio?: boolean;
-  isVideo?: boolean;
-};
-
-const {
-  nftCard: { secondaryBackgroundColor, borderRadius },
-} = customizationJson;
-
-export const VideoContainer = styled(FadeInImageContainer)<ImageContainerProps>`
+export const VideoContainer = styled(FadeInImageContainer)<MediaContainerProps>`
   position: relative;
   width: 100%;
   height: 270px;
   padding-bottom: 100%;
   border-radius: 8px;
   margin-bottom: 24px;
-  background-color: ${secondaryBackgroundColor};
-  border-radius: ${borderRadius};
+  background-color: ${({ secondaryBackgroundColor }) =>
+    secondaryBackgroundColor};
+  border-radius: ${({ borderRadius }) => borderRadius};
 `;
 
 export const CenterContainer = styled.div`

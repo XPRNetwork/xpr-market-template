@@ -1,13 +1,20 @@
 import { FC, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { LoadingPage, Nft, NftDetails, NftDropdown } from '../../components';
+import {
+  NFT_DETAIL_PAGE_TYPES,
+  NftDetailPage,
+  LoadingPage,
+} from '../../components';
 import { useAuthContext } from '../../components/Provider';
 import { useFetchNft, useFetchOwnedNfts } from '../../hooks';
-import { NftPageContainer, ButtonLink } from '../../styles/templateId.styled';
-import { Text } from '../../custom/localization';
 import { RouterQuery } from '../../utils/constants';
+import customizationJson, { Typography } from '../../custom/customization';
+import { Text } from '../../custom/localization';
 
-const MyNftDetailPage: FC<{ text: Text }> = ({ text }) => {
+const MyNft: FC<{ text: Text; typography: Typography }> = ({
+  text,
+  typography,
+}) => {
   const { currentUser, isLoadingUser } = useAuthContext();
   const owner = currentUser ? currentUser.actor : '';
 
@@ -18,7 +25,7 @@ const MyNftDetailPage: FC<{ text: Text }> = ({ text }) => {
     template,
     isLoading: isTemplateLoading,
     error: templateError,
-  } = useFetchNft(templateId);
+  } = useFetchNft({ templateId, collection: customizationJson.collection });
 
   const {
     assets,
@@ -52,34 +59,25 @@ const MyNftDetailPage: FC<{ text: Text }> = ({ text }) => {
     return <LoadingPage />;
   }
 
-  const {
-    template_id,
-    collection: { collection_name },
-    immutable_data: { name, image, video },
-  } = template;
-
   return (
-    <NftPageContainer>
-      <Nft name={name} image={image} video={video} />
-      <NftDetails template={template} detailPageText={text.detailPage}>
-        <NftDropdown
-          assets={assets}
-          salePrices={salePrices}
-          selectedAssetId={selectedAssetId}
-          setSelectedAssetId={setSelectedAssetId}
-          placeholderDropdownText={text.detailPage.placeholderDropdownText}
-        />
-        <ButtonLink
-          href={`http://protonmarket.com/details/${owner}/${collection_name}/${template_id}`}
-          target="_blank"
-          rel="noreferrer">
-          {saleIds[selectedAssetId]
-            ? text.detailPage.cancelSaleButtonText
-            : text.detailPage.sellButtonText}
-        </ButtonLink>
-      </NftDetails>
-    </NftPageContainer>
+    <NftDetailPage
+      type={NFT_DETAIL_PAGE_TYPES.OWNED}
+      template={template}
+      detailPageStyles={customizationJson.detailPage}
+      detailPageText={text.detailPage}
+      ownedPageProps={{
+        owner,
+        isSelectedAssetOnSale: !!saleIds[selectedAssetId],
+        dropdownProps: {
+          assets,
+          salePrices,
+          selectedAssetId,
+          setSelectedAssetId,
+        },
+      }}
+      typography={typography}
+    />
   );
 };
 
-export default MyNftDetailPage;
+export default MyNft;
