@@ -1,19 +1,6 @@
 import styled, { keyframes } from 'styled-components';
-import customizationJson from '../../custom/customization';
+import { FontProps } from '../../custom/customization';
 
-const {
-  typography,
-  featuredSection: { carousel },
-  nftCard: {
-    mainBackgroundColor,
-    priceFont,
-    countFont,
-    titleFont,
-    collectionNameFont,
-    borderColor,
-    borderRadius,
-  },
-} = customizationJson;
 const minWidth = '300px';
 
 type ShimmerBlockProps = {
@@ -21,59 +8,69 @@ type ShimmerBlockProps = {
   position?: string;
 };
 
-export const CardContainer = styled.div`
+interface NameProps extends FontProps {
+  isCarousel: boolean;
+  carouselHeight: string;
+}
+
+export const CardContainer = styled.div<{
+  borderRadius: string;
+  borderColor: string;
+  mainBackgroundColor: string;
+}>`
   min-width: ${minWidth};
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: ${borderRadius};
-  border: 1px solid ${borderColor};
-  background-color: ${mainBackgroundColor};
+  border-radius: ${({ borderRadius }) => borderRadius};
+  border: 1px solid ${({ borderColor }) => borderColor};
+  background-color: ${({ mainBackgroundColor }) => mainBackgroundColor};
   padding: 0 24px 24px;
   cursor: pointer;
 `;
 
-export const QuantityText = styled.div`
-  color: ${countFont.color};
-  font-family: ${typography[countFont.type].font};
-  font-size: ${typography[countFont.type].size};
-  font-weight: ${typography[countFont.type].fontWeight};
+export const QuantityText = styled.div<FontProps>`
+  color: ${(props) => props.color};
+  font-family: ${(props) => props.typography[props.type].font};
+  font-size: ${(props) => props.typography[props.type].size};
+  font-weight: ${(props) => props.typography[props.type].fontWeight};
   margin: 16px 0;
   line-height: 1.71;
 `;
 
-export const Name = styled.div`
+export const Name = styled.div<NameProps>`
   width: calc(${minWidth} - 48px);
-  color: ${titleFont.color};
-  font-family: ${typography[titleFont.type].font};
-  font-size: ${typography[titleFont.type].size};
-  font-weight: ${typography[titleFont.type].fontWeight};
-  ${carousel
-    ? `
+  color: ${(props) => props.color};
+  font-family: ${(props) => props.typography[props.type].font};
+  font-size: ${(props) => props.typography[props.type].size};
+  font-weight: ${(props) => props.typography[props.type].fontWeight};
+  ${({ isCarousel }) =>
+    isCarousel
+      ? `
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    height: ${titleFont.carouselHeight};
+    height: ${(props) => props.carouselHeight};
     `
-    : 'line-height: 1.78;'}
+      : 'line-height: 1.78;'}
   align-self: flex-start;
 `;
 
-export const CollectionName = styled.p`
-  color: ${collectionNameFont.color};
-  font-family: ${typography[collectionNameFont.type].font};
-  font-size: ${typography[collectionNameFont.type].size};
-  font-weight: ${typography[collectionNameFont.type].fontWeight};
+export const CollectionName = styled.p<FontProps>`
+  color: ${(props) => props.color};
+  font-family: ${(props) => props.typography[props.type].font};
+  font-size: ${(props) => props.typography[props.type].size};
+  font-weight: ${(props) => props.typography[props.type].fontWeight};
   align-self: flex-start;
   line-height: 1.71;
   margin-bottom: 16px;
 `;
 
-export const Price = styled.p`
-  color: ${priceFont.color};
-  font-family: ${typography[priceFont.type].font};
-  font-size: ${typography[priceFont.type].size};
-  font-weight: ${typography[priceFont.type].fontWeight};
+export const Price = styled.p<FontProps>`
+  color: ${(props) => props.color};
+  font-family: ${(props) => props.typography[props.type].font};
+  font-size: ${(props) => props.typography[props.type].size};
+  font-weight: ${(props) => props.typography[props.type].fontWeight};
   align-self: flex-start;
   line-height: 1.78;
 `;

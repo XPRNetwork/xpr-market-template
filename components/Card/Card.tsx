@@ -9,6 +9,11 @@ import {
   ShimmerBlock,
 } from './Card.styled';
 import { Template } from '../../services/templates';
+import {
+  NftCardProps,
+  Typography,
+  FontProps,
+} from '../../custom/customization';
 import { NftCardTextProps } from '../../custom/localization';
 import { TemplateImage, TemplateVideo } from '../index';
 import { IPFS_RESOLVER, RESIZER_IMAGE_SM } from '../../utils/constants';
@@ -17,9 +22,19 @@ type Props = {
   template: Template;
   type: 'user' | 'featured';
   nftCardText: NftCardTextProps;
+  nftCardStyles: NftCardProps;
+  typography: Typography;
+  isCarousel?: boolean;
 };
 
-export const Card: FC<Props> = ({ template, type, nftCardText }) => {
+export const Card: FC<Props> = ({
+  template,
+  type,
+  nftCardText,
+  nftCardStyles,
+  typography,
+  isCarousel,
+}) => {
   const {
     assetsForSale,
     lowestPrice,
@@ -28,6 +43,16 @@ export const Card: FC<Props> = ({ template, type, nftCardText }) => {
     collection: { collection_name, name: displayName },
     immutable_data: { name, image, video },
   } = template;
+  const {
+    mainBackgroundColor,
+    priceFont,
+    countFont,
+    titleFont,
+    collectionNameFont,
+    borderColor,
+    borderRadius,
+    secondaryBackgroundColor,
+  } = nftCardStyles;
   const router = useRouter();
 
   const formattedSaleCount = assetsForSale
@@ -43,8 +68,12 @@ export const Card: FC<Props> = ({ template, type, nftCardText }) => {
     type === 'featured' ? `/${template_id}` : `/my-items/${template_id}`;
 
   return (
-    <CardContainer onClick={() => router.push(onClickRoute)}>
-      <QuantityText>
+    <CardContainer
+      onClick={() => router.push(onClickRoute)}
+      borderRadius={borderRadius}
+      borderColor={borderColor}
+      mainBackgroundColor={mainBackgroundColor}>
+      <QuantityText {...countFont} typography={typography}>
         {formattedSaleCount ? (
           type === 'featured' ? (
             `${formattedSaleCount} ${nftCardText.nftsLeft}`
@@ -57,22 +86,37 @@ export const Card: FC<Props> = ({ template, type, nftCardText }) => {
       </QuantityText>
 
       {video ? (
-        <TemplateVideo src={videoSrc} autoPlay={false} />
+        <TemplateVideo
+          src={videoSrc}
+          autoPlay={false}
+          borderRadius={borderRadius}
+          secondaryBackgroundColor={secondaryBackgroundColor}
+        />
       ) : (
         <TemplateImage
           templateImgSrc={imageSrc}
           templateName={name}
           fallbackImgSrc={fallbackImageSrc}
+          borderRadius={borderRadius}
+          secondaryBackgroundColor={secondaryBackgroundColor}
         />
       )}
 
-      <Name>{name}</Name>
-      <CollectionName>{displayName || collection_name}</CollectionName>
+      <Name {...titleFont} isCarousel={isCarousel} typography={typography}>
+        {name}
+      </Name>
+      <CollectionName {...collectionNameFont} typography={typography}>
+        {displayName || collection_name}
+      </CollectionName>
       <PriceSection
         lowestPrice={lowestPrice}
         type={type}
         nftCardText={nftCardText}
         saleCount={formattedSaleCount}
+        priceFont={{
+          ...priceFont,
+          typography,
+        }}
       />
     </CardContainer>
   );
@@ -83,15 +127,17 @@ const PriceSection: FC<{
   type: string;
   nftCardText: NftCardTextProps;
   saleCount: string;
-}> = ({ lowestPrice, type, nftCardText, saleCount }) => {
-  if (type === 'featured') {
-    if (lowestPrice === undefined) {
-      return <ShimmerBlock position="flex-start" />;
-    }
-    return lowestPrice || saleCount == '0' ? (
-      <Price>{lowestPrice || nftCardText.soldOut}</Price>
-    ) : null;
-  } else {
+  priceFont: FontProps;
+}> = ({ lowestPrice, type, nftCardText, saleCount, priceFont }) => {
+  if (type !== 'featured') {
     return null;
   }
+
+  if (lowestPrice === undefined) {
+    return <ShimmerBlock position="flex-start" />;
+  }
+
+  return lowestPrice || saleCount == '0' ? (
+    <Price {...priceFont}>{lowestPrice || nftCardText.soldOut}</Price>
+  ) : null;
 };

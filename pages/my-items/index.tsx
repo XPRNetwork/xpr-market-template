@@ -12,15 +12,19 @@ import {
   getTemplatesFromTemplateIds,
   Template,
 } from '../../services/templates';
-import customizationJson from '../../custom/customization';
+import customizationJson, { Typography } from '../../custom/customization';
 import { Text } from '../../custom/localization';
 
 const {
   collection,
+  nftCard,
   myItemsPage: { backgroundColor, headerFont },
 } = customizationJson;
 
-const MyItemsPage: FC<{ text: Text }> = ({ text }) => {
+const MyItemsPage: FC<{ text: Text; typography: Typography }> = ({
+  text,
+  typography,
+}) => {
   const [templates, setTemplates] = useState<Template[]>([]);
   const [isLoadingTemplates, setIsLoadingTemplates] = useState<boolean>(true);
   const { isLoadingUser, currentUser } = useAuthContext();
@@ -63,10 +67,14 @@ const MyItemsPage: FC<{ text: Text }> = ({ text }) => {
 
   return (
     <PageContainer backgroundColor={backgroundColor}>
-      <HeaderText {...headerFont}>{text.myItemsPage.header}</HeaderText>
+      <HeaderText {...headerFont} typography={typography}>
+        {text.myItemsPage.header}
+      </HeaderText>
       <FeaturedGrid
         templates={templates}
         nftCardText={text.nftCard}
+        nftCardStyles={nftCard}
+        typography={typography}
         type="user"
       />
     </PageContainer>

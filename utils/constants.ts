@@ -28,3 +28,20 @@ export const META = {
 export interface RouterQuery {
   [query: string]: string;
 }
+
+export const defaultStorybookTemplate = {
+  assetsForSale: '0',
+  lowestPrice: '44 XUSDC',
+  template_id: '658',
+  collection: { collection_name: 'cryptocadets', name: 'Crypto Cadets' },
+  immutable_data: {
+    desc: 'To the moon and beyond! $MTL',
+    image: '',
+    name: 'Metal Cadet',
+    series: 1,
+    video: 'QmavnTy9zw6zT6Z2EFPC56vyUqao8ttUEyMEWsJpZFNwZY',
+  },
+  lowestPriceSaleId: '59642',
+  max_supply: '65',
+  name: 'Metal Cadet',
+};

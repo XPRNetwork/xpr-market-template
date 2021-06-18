@@ -11,14 +11,12 @@ To get started:
 ```
 git clone https://github.com/ProtonProtocol/proton-market-template.git
 
-npm install
+yarn install
 ```
 
 To run the development server:
 
 ```bash
-npm run dev
-# or
 yarn dev
 ```
 
@@ -30,6 +28,48 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
+## Preview Customization
+
+To view customizable components on Storybook:
+
+```bash
+yarn storybook
+```
+
+Open [http://localhost:6006](http://localhost:6006) with your browser to see the result.
+
+You can start previewing your customizations by modifying the fields in the **Controls** section below each component.
+
+![proton-market-template-storybook](https://user-images.githubusercontent.com/32081352/122460328-d578a700-cf66-11eb-8a42-61040ec82f07.gif)
+
+### Typography
+
+You can preview custom font selections on Storybook.
+
+Currently, you have a selection of 12 fonts that can be previewed on Storybook.
+If you would like us to add a specific font to Storybook for preview, please
+contact us with the font name, specific font weight/styling, and a link to the
+Google Font (i.e. "Open Sans (Regular 400 italic):
+https://fonts.google.com/specimen/Open+Sans").
+
+**[Available fonts](https://fonts.google.com/share?selection.family=Lato%7CMontserrat%7CNoto%20Sans%7CNoto%20Sans%20JP%7COpen%20Sans%7COswald%7CPoppins%7CRaleway%7CRoboto%7CRoboto%20Condensed%7CRoboto%20Mono%7CSource%20Sans%20Pro):**
+- Lato (Regular 400)
+- Montserrat (Regular 400)
+- Noto Sans (Regular 400)
+- Noto Sans JP (Regular 400)
+- Open Sans (Regular 400)
+- Oswald (Regular 400)
+- Poppins (Regular 400)
+- Raleway (Regular 400)
+- Roboto (Regular 400)
+- Roboto Condensed (Regular 400)
+- Roboto Mono (Regular 400)
+- Source Sans Pro (Regular 400)
+
+Note: only fonts on [Google Fonts](https://fonts.google.com/) are available for font customization.
+
+![proton-market-template-storybook-typography](https://user-images.githubusercontent.com/32081352/122600083-21d5ec80-d024-11eb-9c44-6885b163c004.gif)
+
 ## .env
 
 Please create a `.env` file that uses either the Testnet or the Mainnet variables in the `.env.template` file.
@@ -39,7 +79,6 @@ For mainnet, your `.env` file should be:
 NEXT_PUBLIC_CHAIN_ENDPOINTS='https://proton.eoscafeblock.com, https://proton.greymass.com'
 NEXT_PUBLIC_BLOCK_EXPLORER='https://proton.bloks.io/block/'
 NEXT_PUBLIC_NFT_ENDPOINT='https://proton.api.atomicassets.io'
-
 ```
 
 For testnet, your `.env` file should be:
@@ -48,7 +87,6 @@ NEXT_PUBLIC_NFT_ENDPOINT='https://test.proton.api.atomicassets.io'
 NEXT_PUBLIC_CHAIN_ENDPOINTS='https://testnet.protonchain.com'
 NEXT_PUBLIC_BLOCK_EXPLORER='https://proton-test.bloks.io/block/'
 ```
-
 
 ## Learn More
 
