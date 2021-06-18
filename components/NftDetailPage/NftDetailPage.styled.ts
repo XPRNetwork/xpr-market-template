@@ -1,14 +1,13 @@
 import styled from 'styled-components';
-import customizationJson from '../../custom/customization';
+import { Typography } from '../../custom/customization';
 import { breakpoint } from '../../styles/Breakpoints';
 import { MaxWidth } from '../../styles/MaxWidth.styled';
-
-const { typography } = customizationJson;
 
 interface ButtonProps {
   backgroundColor: string;
   textFont: string;
   textColor: string;
+  typography: Typography;
 }
 
 export const NftPageContainer = styled(MaxWidth).attrs({ as: 'main' })<{
@@ -36,7 +35,7 @@ export const Button = styled.button<ButtonProps>`
   margin-top: 32px;
   padding: 0;
   background-color: ${(props) => props.backgroundColor};
-  font-family: ${(props) => typography[props.textFont].font};
+  font-family: ${(props) => props.typography[props.textFont].font};
   color: ${(props) => props.textColor};
   border: none;
   cursor: pointer;
@@ -52,7 +51,7 @@ export const ButtonLink = styled.a<ButtonProps>`
   margin-top: 32px;
   padding: 0;
   background-color: ${(props) => props.backgroundColor};
-  font-family: ${(props) => typography[props.textFont].font};
+  font-family: ${(props) => props.typography[props.textFont].font};
   color: ${(props) => props.textColor};
   border: none;
   cursor: pointer;
@@ -65,10 +64,14 @@ export const ButtonLink = styled.a<ButtonProps>`
   align-items: center;
 `;
 
-export const ErrorMessage = styled.p<{ type: string; color: string }>`
+export const ErrorMessage = styled.p<{
+  type: string;
+  color: string;
+  typography: Typography;
+}>`
   color: ${(props) => props.color};
-  font-family: ${(props) => typography[props.type].font};
-  font-size: ${(props) => typography[props.type].size};
-  font-weight: ${(props) => typography[props.type].fontWeight};
+  font-family: ${(props) => props.typography[props.type].font};
+  font-size: ${(props) => props.typography[props.type].size};
+  font-weight: ${(props) => props.typography[props.type].fontWeight};
   margin-top: 32px;
 `;

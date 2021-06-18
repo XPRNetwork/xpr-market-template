@@ -15,4 +15,5 @@ export const Default = Template.bind({});
 Default.args = {
   navbarText: localizationJson.en.navbar,
   navbarStyles: customizationJson.navbar,
+  typography: customizationJson.typography,
 };

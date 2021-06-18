@@ -4,6 +4,8 @@ import { ImageContainer, DefaultImage, Image } from './TemplateImage.styled';
 import { PlaceholderAsset } from '../Card/Card.styled';
 
 type Props = {
+  borderRadius: string;
+  secondaryBackgroundColor: string;
   templateImgSrc?: string;
   fallbackImgSrc?: string;
   templateName: string;
@@ -55,13 +57,18 @@ export const TemplateImage: FC<Props> = ({
   templateImgSrc,
   priceTag,
   fallbackImgSrc,
+  borderRadius,
+  secondaryBackgroundColor,
 }) => {
   if (!fallbackImgSrc) {
     fallbackImgSrc = '/placeholder-template-image.png';
   }
 
   return (
-    <ImageContainer className="template-image-container">
+    <ImageContainer
+      className="template-image-container"
+      borderRadius={borderRadius}
+      secondaryBackgroundColor={secondaryBackgroundColor}>
       <TemplateImageChild
         templateName={templateName}
         fallbackImgSrc={fallbackImgSrc}

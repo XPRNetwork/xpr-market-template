@@ -1,5 +1,6 @@
 import { useState, FC } from 'react';
 import { useRouter } from 'next/router';
+import { FontImport } from '../../components';
 import Link from 'next/link';
 import {
   NavbarContainer,
@@ -21,7 +22,7 @@ import {
   MobileHeaderWrapper,
 } from '../Navbar/Navbar.styled';
 import { Image } from '../../styles/index.styled';
-import { NavbarProps } from '../../custom/customization';
+import { NavbarProps, Typography } from '../../custom/customization';
 import { ReactComponent as CloseIcon } from '../../public/icon-light-close-16-px.svg';
 import { useAuthContext } from '../Provider';
 import { useScrollLock, useEscapeKeyClose, useWindowSize } from '../../hooks';
@@ -32,6 +33,7 @@ type DropdownProps = {
   isOpen: boolean;
   styles: NavbarProps;
   text: NavbarTextProps;
+  typography: Typography;
   closeNavDropdown: () => void;
 };
 
@@ -39,8 +41,10 @@ const Dropdown: FC<DropdownProps> = ({
   isOpen,
   styles,
   text,
+  typography,
   closeNavDropdown,
 }) => {
+  const { balanceSubtitleFontType, navLinkFontType } = styles;
   const router = useRouter();
   const { currentUser, currentUserBalance, logout } = useAuthContext();
   const { isMobile, isTablet } = useWindowSize();
@@ -99,15 +103,25 @@ const Dropdown: FC<DropdownProps> = ({
           {closeMobileDropdown}
           {isLoggedIn ? (
             <>
-              <Name>{currentUser ? currentUser.name : ''}</Name>
+              <Name typography={typography} fontType={navLinkFontType}>
+                {currentUser ? currentUser.name : ''}
+              </Name>
               <Subtitle>{text.balanceText}</Subtitle>
-              <Balance>{currentUserBalance || `0.00 ${TOKEN_SYMBOL}`}</Balance>
+              <Balance
+                typography={typography}
+                fontType={balanceSubtitleFontType}>
+                {currentUserBalance || `0.00 ${TOKEN_SYMBOL}`}
+              </Balance>
             </>
           ) : null}
           {routes.map(({ name, path, onClick, color }) =>
             path ? (
               <Link href={path} passHref key={name}>
-                <DropdownLink onClick={onClick} color={color}>
+                <DropdownLink
+                  onClick={onClick}
+                  color={color}
+                  typography={typography}
+                  navLinkFontType={navLinkFontType}>
                   {name}
                 </DropdownLink>
               </Link>
@@ -116,7 +130,9 @@ const Dropdown: FC<DropdownProps> = ({
                 tabIndex={0}
                 onClick={onClick}
                 key={name}
-                color={color}>
+                color={color}
+                typography={typography}
+                navLinkFontType={navLinkFontType}>
                 {name}
               </DropdownLink>
             )
@@ -132,12 +148,23 @@ const Dropdown: FC<DropdownProps> = ({
 interface Props {
   navbarStyles: NavbarProps;
   navbarText: NavbarTextProps;
+  typography: Typography;
 }
 
-const Navbar: FC<Props> = ({ navbarStyles, navbarText }) => {
+const Navbar: FC<Props> = ({ navbarStyles, navbarText, typography }) => {
   const { currentUser, login, isLoadingUser } = useAuthContext();
   const [isOpen, setIsOpen] = useState(false);
   useScrollLock(isOpen);
+
+  const {
+    bottomBorderColor,
+    backgroundColor,
+    buttonBorderColor,
+    buttonFontColor,
+    buttonBackgroundColor,
+    buttonFontType,
+    navLinkFontType,
+  } = navbarStyles;
 
   const toggleNavDropdown = () => setIsOpen(!isOpen);
 
@@ -146,56 +173,72 @@ const Navbar: FC<Props> = ({ navbarStyles, navbarText }) => {
   useEscapeKeyClose(closeNavDropdown);
 
   return (
-    <NavbarContainer>
-      <Wrapper>
-        <MobileOnlySection>
-          <Image
-            src="/hamburger-icon.svg"
-            height="24px"
-            width="24px"
-            onClick={toggleNavDropdown}
-          />
-          <LogoContainer href={navbarStyles.logoLink}>
-            <Image src={navbarStyles.logo} height="42px" width="auto" />
-          </LogoContainer>
-        </MobileOnlySection>
-        <DesktopOnlySection>
-          <LogoContainer href={navbarStyles.logoLink}>
-            <Image src={navbarStyles.logo} height="60px" width="auto" />
-          </LogoContainer>
-          <NavLinks>
-            {navbarStyles.navLinks.map(({ link }, index) => (
-              <Link key={navbarText.navLinks[index]} href={link}>
-                {navbarText.navLinks[index]}
-              </Link>
-            ))}
-          </NavLinks>
-        </DesktopOnlySection>
-        {!isLoadingUser && currentUser && currentUser.actor ? (
-          <AvatarContainer>
-            <AvatarImage
+    <>
+      {process.env.STORYBOOK_ENVIRONMENT && (
+        <FontImport typography={typography} />
+      )}
+      <NavbarContainer
+        bottomBorderColor={bottomBorderColor}
+        backgroundColor={backgroundColor}>
+        <Wrapper>
+          <MobileOnlySection>
+            <Image
+              src="/hamburger-icon.svg"
+              height="24px"
+              width="24px"
               onClick={toggleNavDropdown}
-              src={
-                currentUser.avatar ||
-                navbarStyles.defaultAvatarImage ||
-                '/default-avatar.png'
-              }
-              width="48px"
-              height="48px"
             />
-          </AvatarContainer>
-        ) : (
-          <LoginButton onClick={login}>{navbarText.loginText}</LoginButton>
-        )}
-        <Dropdown
-          isOpen={isOpen}
-          closeNavDropdown={closeNavDropdown}
-          styles={navbarStyles}
-          text={navbarText}
-        />
-        <GradientBackground isOpen={isOpen} onClick={closeNavDropdown} />
-      </Wrapper>
-    </NavbarContainer>
+            <LogoContainer href={navbarStyles.logoLink}>
+              <Image src={navbarStyles.logo} height="42px" width="auto" />
+            </LogoContainer>
+          </MobileOnlySection>
+          <DesktopOnlySection>
+            <LogoContainer href={navbarStyles.logoLink}>
+              <Image src={navbarStyles.logo} height="60px" width="auto" />
+            </LogoContainer>
+            <NavLinks typography={typography} navLinkFontType={navLinkFontType}>
+              {navbarStyles.navLinks.map(({ link }, index) => (
+                <Link key={navbarText.navLinks[index]} href={link}>
+                  {navbarText.navLinks[index]}
+                </Link>
+              ))}
+            </NavLinks>
+          </DesktopOnlySection>
+          {!isLoadingUser && currentUser && currentUser.actor ? (
+            <AvatarContainer>
+              <AvatarImage
+                onClick={toggleNavDropdown}
+                src={
+                  currentUser.avatar ||
+                  navbarStyles.defaultAvatarImage ||
+                  '/default-avatar.png'
+                }
+                width="48px"
+                height="48px"
+              />
+            </AvatarContainer>
+          ) : (
+            <LoginButton
+              onClick={login}
+              buttonBorderColor={buttonBorderColor}
+              buttonFontColor={buttonFontColor}
+              buttonBackgroundColor={buttonBackgroundColor}
+              buttonFontType={buttonFontType}
+              typography={typography}>
+              {navbarText.loginText}
+            </LoginButton>
+          )}
+          <Dropdown
+            isOpen={isOpen}
+            closeNavDropdown={closeNavDropdown}
+            styles={navbarStyles}
+            text={navbarText}
+            typography={typography}
+          />
+          <GradientBackground isOpen={isOpen} onClick={closeNavDropdown} />
+        </Wrapper>
+      </NavbarContainer>
+    </>
   );
 };
 

@@ -42,6 +42,10 @@ You can start previewing your customizations by modifying the fields in the **Co
 
 ![proton-market-template-storybook](https://user-images.githubusercontent.com/32081352/122460328-d578a700-cf66-11eb-8a42-61040ec82f07.gif)
 
+To enable dynamic font imports in the Storybook environment, see the end of the `.env` section below.
+
+Note: only fonts on [Google Fonts](https://fonts.google.com/) are available.
+
 ## .env
 
 Please create a `.env` file that uses either the Testnet or the Mainnet variables in the `.env.template` file.
@@ -51,7 +55,6 @@ For mainnet, your `.env` file should be:
 NEXT_PUBLIC_CHAIN_ENDPOINTS='https://proton.eoscafeblock.com, https://proton.greymass.com'
 NEXT_PUBLIC_BLOCK_EXPLORER='https://proton.bloks.io/block/'
 NEXT_PUBLIC_NFT_ENDPOINT='https://proton.api.atomicassets.io'
-
 ```
 
 For testnet, your `.env` file should be:
@@ -61,6 +64,11 @@ NEXT_PUBLIC_CHAIN_ENDPOINTS='https://testnet.protonchain.com'
 NEXT_PUBLIC_BLOCK_EXPLORER='https://proton-test.bloks.io/block/'
 ```
 
+To enable dynamic font imports in the Storybook environment, add the following environment variable to your `.env` file.
+
+```
+STORYBOOK_ENVIRONMENT='storybook'
+```
 
 ## Learn More
 

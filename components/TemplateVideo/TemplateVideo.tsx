@@ -13,6 +13,8 @@ import { useState } from 'react';
 
 type Props = {
   src: string;
+  borderRadius: string;
+  secondaryBackgroundColor: string;
   autoPlay?: boolean;
   controls?: boolean;
   priceTag?: JSX.Element;
@@ -33,6 +35,8 @@ export const TemplateVideo: FC<Props> = ({
   priceTag,
   autoPlay = false,
   controls = true,
+  borderRadius,
+  secondaryBackgroundColor,
 }) => {
   const { isDesktop, isBrowserVideoCompatible } = useNavigatorUserAgent();
   const refPlaceholder = useRef<HTMLDivElement>();
@@ -44,7 +48,10 @@ export const TemplateVideo: FC<Props> = ({
   };
 
   return (
-    <VideoContainer onClick={(e) => e.stopPropagation()}>
+    <VideoContainer
+      onClick={(e) => e.stopPropagation()}
+      borderRadius={borderRadius}
+      secondaryBackgroundColor={secondaryBackgroundColor}>
       <CenterContainer>
         {isBrowserVideoCompatible ? (
           <div>

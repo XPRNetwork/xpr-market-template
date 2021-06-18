@@ -11,9 +11,12 @@ import ProtonSDK from '../services/proton';
 import { formatPrice } from '../utils';
 import { RouterQuery, TOKEN_PRECISION } from '../utils/constants';
 import { Text } from '../custom/localization';
-import customizationJson from '../custom/customization';
+import customizationJson, { Typography } from '../custom/customization';
 
-const BuyNft: FC<{ text: Text }> = ({ text }) => {
+const BuyNft: FC<{ text: Text; typography: Typography }> = ({
+  text,
+  typography,
+}) => {
   const {
     currentUser,
     currentUserBalance,
@@ -87,6 +90,7 @@ const BuyNft: FC<{ text: Text }> = ({ text }) => {
         onButtonClick: currentUser && !isLoadingUser ? buyAsset : login,
         purchasingError,
       }}
+      typography={typography}
     />
   );
 };

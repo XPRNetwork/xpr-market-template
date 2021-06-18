@@ -18,6 +18,7 @@ Default.args = {
   template: defaultStorybookTemplate,
   detailPageStyles: customizationJson.detailPage,
   detailPageText: localizationJson.en.detailPage,
+  typography: customizationJson.typography,
   ownedPageProps: {
     owner: '',
     isSelectedAssetOnSale: false,

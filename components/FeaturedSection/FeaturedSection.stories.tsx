@@ -17,6 +17,8 @@ Default.args = {
   featuredSectionStyles: customizationJson.featuredSection,
   featuredSectionText: localizationJson.en.featuredSection,
   nftCardText: localizationJson.en.nftCard,
+  nftCardStyles: customizationJson.nftCard,
+  typography: customizationJson.typography,
   templates: [
     defaultStorybookTemplate,
     defaultStorybookTemplate,
