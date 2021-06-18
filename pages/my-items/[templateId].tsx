@@ -25,7 +25,7 @@ const MyNft: FC<{ text: Text; typography: Typography }> = ({
     template,
     isLoading: isTemplateLoading,
     error: templateError,
-  } = useFetchNft(templateId);
+  } = useFetchNft({ templateId, collection: customizationJson.collection });
 
   const {
     assets,

@@ -6,7 +6,6 @@ export const FontImport: FC<{
   typography: Typography;
 }> = ({ typography }) => {
   const fontImportLink = generateFontImportLink(Object.values(typography));
-  console.log('fontImportLink', fontImportLink);
   return (
     <Head>
       <link

@@ -4,7 +4,7 @@ import {
   FeaturedSectionContainer,
   HeadingText,
 } from './FeaturedSection.styled';
-import { FeaturedCarousel, FeaturedGrid, FontImport } from '../../components';
+import { FeaturedCarousel, FeaturedGrid } from '../../components';
 import {
   NftCardTextProps,
   FeaturedSectionTextProps,
@@ -33,36 +33,31 @@ export const FeaturedSection: FC<Props> = ({
   templates,
   typography,
 }) => (
-  <>
-    {process.env.STORYBOOK_ENVIRONMENT && (
-      <FontImport typography={typography} />
-    )}
-    <FeaturedSectionContainer
-      backgroundColor={featuredSectionStyles.backgroundColor}>
-      <FeaturedSectionWrapper>
-        <HeadingText
-          {...featuredSectionStyles.titleFont}
-          typography={typography}>
-          {featuredSectionText.heading}
-        </HeadingText>
-        {featuredSectionStyles.carousel ? (
-          <FeaturedCarousel
-            templates={templates}
-            styles={featuredSectionStyles}
-            nftCardText={nftCardText}
-            nftCardStyles={nftCardStyles}
-            typography={typography}
-          />
-        ) : (
-          <FeaturedGrid
-            templates={templates}
-            nftCardText={nftCardText}
-            nftCardStyles={nftCardStyles}
-            typography={typography}
-            type="featured"
-          />
-        )}
-      </FeaturedSectionWrapper>
-    </FeaturedSectionContainer>
-  </>
+  <FeaturedSectionContainer
+    backgroundColor={featuredSectionStyles.backgroundColor}>
+    <FeaturedSectionWrapper>
+      <HeadingText
+        {...featuredSectionStyles.titleFont}
+        typography={typography}>
+        {featuredSectionText.heading}
+      </HeadingText>
+      {featuredSectionStyles.carousel ? (
+        <FeaturedCarousel
+          templates={templates}
+          styles={featuredSectionStyles}
+          nftCardText={nftCardText}
+          nftCardStyles={nftCardStyles}
+          typography={typography}
+        />
+      ) : (
+        <FeaturedGrid
+          templates={templates}
+          nftCardText={nftCardText}
+          nftCardStyles={nftCardStyles}
+          typography={typography}
+          type="featured"
+        />
+      )}
+    </FeaturedSectionWrapper>
+  </FeaturedSectionContainer>
 );

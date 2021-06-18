@@ -10,7 +10,7 @@
     "format": "prettier --write './**/*.{js,jsx, ts, tsx}' --config ./.prettierrc.js",
     "typecheck": "$(npm bin)/tsc --noEmit",
     "check:all": "yarn lint && yarn format && yarn typecheck",
-    "storybook": "start-storybook -s ./public -p 6006",
+    "storybook": "STORYBOOK_ENVIRONMENT=storybook && start-storybook -s ./public -p 6006",
     "build-storybook": "build-storybook"
   },
   "dependencies": {

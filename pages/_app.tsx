@@ -41,12 +41,9 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     locale && localizationJson[locale]
       ? localizationJson[locale]
       : localizationJson['en'];
-
   return isLoadingLocale ? null : (
     <>
-      {!process.env.STORYBOOK_ENVIRONMENT && (
-        <FontImport typography={typography} />
-      )}
+      <FontImport typography={typography} />
       <AuthProvider>
         <Navbar
           navbarText={text.navbar}
