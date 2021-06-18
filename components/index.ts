@@ -25,6 +25,7 @@ export { TemplateVideo } from './TemplateVideo/TemplateVideo';
 export { FeaturedSection } from './FeaturedSection/FeaturedSection';
 export { FeaturedCarousel } from './FeaturedCarousel/FeaturedCarousel';
 export { FeaturedGrid } from './FeaturedGrid/FeaturedGrid';
+export { FontImport } from './FontImport/FontImport';
 export {
   NftDetailPage,
   NFT_DETAIL_PAGE_TYPES,

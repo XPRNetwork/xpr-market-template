@@ -15,4 +15,5 @@ export const Default = Template.bind({});
 Default.args = {
   headerText: localizationJson.en.header,
   headerStyles: customizationJson.header,
+  typography: customizationJson.typography,
 };

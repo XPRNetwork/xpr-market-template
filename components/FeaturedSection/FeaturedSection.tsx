@@ -4,32 +4,45 @@ import {
   FeaturedSectionContainer,
   HeadingText,
 } from './FeaturedSection.styled';
-import { FeaturedCarousel, FeaturedGrid } from '../../components';
+import { FeaturedCarousel, FeaturedGrid, FontImport } from '../../components';
 import {
   NftCardTextProps,
   FeaturedSectionTextProps,
 } from '../../custom/localization';
-import { FeaturedSectionProps } from '../../custom/customization';
+import {
+  FeaturedSectionProps,
+  Typography,
+  NftCardProps,
+} from '../../custom/customization';
 import { Template } from '../../services/templates';
 
 type Props = {
   featuredSectionStyles: FeaturedSectionProps;
   featuredSectionText: FeaturedSectionTextProps;
+  nftCardStyles: NftCardProps;
   nftCardText: NftCardTextProps;
   templates: Template[];
+  typography: Typography;
 };
 
 export const FeaturedSection: FC<Props> = ({
   featuredSectionStyles,
   featuredSectionText,
+  nftCardStyles,
   nftCardText,
   templates,
-}) => {
-  return (
+  typography,
+}) => (
+  <>
+    {process.env.STORYBOOK_ENVIRONMENT && (
+      <FontImport typography={typography} />
+    )}
     <FeaturedSectionContainer
       backgroundColor={featuredSectionStyles.backgroundColor}>
       <FeaturedSectionWrapper>
-        <HeadingText {...featuredSectionStyles.titleFont}>
+        <HeadingText
+          {...featuredSectionStyles.titleFont}
+          typography={typography}>
           {featuredSectionText.heading}
         </HeadingText>
         {featuredSectionStyles.carousel ? (
@@ -37,15 +50,19 @@ export const FeaturedSection: FC<Props> = ({
             templates={templates}
             styles={featuredSectionStyles}
             nftCardText={nftCardText}
+            nftCardStyles={nftCardStyles}
+            typography={typography}
           />
         ) : (
           <FeaturedGrid
             templates={templates}
             nftCardText={nftCardText}
+            nftCardStyles={nftCardStyles}
+            typography={typography}
             type="featured"
           />
         )}
       </FeaturedSectionWrapper>
     </FeaturedSectionContainer>
-  );
-};
+  </>
+);

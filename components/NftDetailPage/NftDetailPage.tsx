@@ -1,12 +1,12 @@
 import { FC, Dispatch, SetStateAction } from 'react';
-import { Nft, NftDetails, NftDropdown } from '../../components';
+import { Nft, NftDetails, NftDropdown, FontImport } from '../../components';
 import {
   NftPageContainer,
   Button,
   ButtonLink,
   ErrorMessage,
 } from './NftDetailPage.styled';
-import { DetailPageProps } from '../../custom/customization';
+import { DetailPageProps, Typography } from '../../custom/customization';
 import { DetailPageTextProps } from '../../custom/localization';
 import { Template } from '../../services/templates';
 import { Asset } from '../../services/assets';
@@ -21,6 +21,7 @@ type Props = {
   template: Template;
   detailPageText: DetailPageTextProps;
   detailPageStyles: DetailPageProps;
+  typography: Typography;
   ownedPageProps?: {
     owner: string;
     isSelectedAssetOnSale: boolean;
@@ -46,6 +47,7 @@ export const NftDetailPage: FC<Props> = ({
   detailPageStyles,
   ownedPageProps,
   buyPageProps,
+  typography,
 }) => {
   const {
     template_id,
@@ -60,7 +62,10 @@ export const NftDetailPage: FC<Props> = ({
         return (
           <>
             {template.lowestPrice ? (
-              <Button onClick={onButtonClick} {...detailPageStyles.button}>
+              <Button
+                onClick={onButtonClick}
+                {...detailPageStyles.button}
+                typography={typography}>
                 {detailPageText.buyButtonText}
               </Button>
             ) : (
@@ -68,12 +73,15 @@ export const NftDetailPage: FC<Props> = ({
                 href={`http://protonmarket.com/${collection_name}/${template_id}`}
                 target="_blank"
                 rel="noreferrer"
-                {...detailPageStyles.button}>
+                {...detailPageStyles.button}
+                typography={typography}>
                 {detailPageText.viewButtonText}
               </ButtonLink>
             )}
             {purchasingError ? (
-              <ErrorMessage {...detailPageStyles.errorFont}>
+              <ErrorMessage
+                {...detailPageStyles.errorFont}
+                typography={typography}>
                 {purchasingError}
               </ErrorMessage>
             ) : null}
@@ -91,13 +99,16 @@ export const NftDetailPage: FC<Props> = ({
           <>
             <NftDropdown
               {...dropdownProps}
+              typography={typography}
+              detailPageStyles={detailPageStyles}
               placeholderDropdownText={placeholderDropdownText}
             />
             <ButtonLink
               href={`http://protonmarket.com/details/${owner}/${collection_name}/${template_id}`}
               target="_blank"
               rel="noreferrer"
-              {...detailPageStyles.button}>
+              {...detailPageStyles.button}
+              typography={typography}>
               {isSelectedAssetOnSale ? cancelSaleButtonText : sellButtonText}
             </ButtonLink>
           </>
@@ -112,23 +123,29 @@ export const NftDetailPage: FC<Props> = ({
     detailPageStyles;
 
   return (
-    <NftPageContainer imagePlacement={imagePlacement}>
-      <Nft
-        name={name}
-        image={image}
-        video={video}
-        nftStyles={{
-          imageBackgroundColor,
-          imagePlacement,
-          imageShadow,
-        }}
-      />
-      <NftDetails
-        template={template}
-        detailPageText={detailPageText}
-        detailPageStyles={detailPageStyles}>
-        {getContent()}
-      </NftDetails>
-    </NftPageContainer>
+    <>
+      {process.env.STORYBOOK_ENVIRONMENT && (
+        <FontImport typography={typography} />
+      )}
+      <NftPageContainer imagePlacement={imagePlacement}>
+        <Nft
+          name={name}
+          image={image}
+          video={video}
+          nftStyles={{
+            imageBackgroundColor,
+            imagePlacement,
+            imageShadow,
+          }}
+        />
+        <NftDetails
+          template={template}
+          detailPageText={detailPageText}
+          detailPageStyles={detailPageStyles}
+          typography={typography}>
+          {getContent()}
+        </NftDetails>
+      </NftPageContainer>
+    </>
   );
 };

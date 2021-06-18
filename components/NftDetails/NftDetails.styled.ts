@@ -1,13 +1,6 @@
 import styled from 'styled-components';
-import customizationJson from '../../custom/customization';
+import { FontProps } from '../../custom/customization';
 import { breakpoint } from '../../styles/Breakpoints';
-
-const { typography } = customizationJson;
-
-interface FontProps {
-  type: string;
-  color: string;
-}
 
 export const Container = styled.div<{ imagePlacement: string }>`
   display: flex;
@@ -37,9 +30,9 @@ export const Container = styled.div<{ imagePlacement: string }>`
 
 export const Title = styled.h1<FontProps>`
   color: ${(props) => props.color};
-  font-family: ${(props) => typography[props.type].font};
-  font-size: ${(props) => typography[props.type].size};
-  font-weight: ${(props) => typography[props.type].fontWeight};
+  font-family: ${(props) => props.typography[props.type].font};
+  font-size: ${(props) => props.typography[props.type].size};
+  font-weight: ${(props) => props.typography[props.type].fontWeight};
   line-height: 80px;
 
   ${breakpoint.tablet`
@@ -50,9 +43,9 @@ export const Title = styled.h1<FontProps>`
 
 export const CollectionName = styled.h3<FontProps>`
   color: ${(props) => props.color};
-  font-family: ${(props) => typography[props.type].font};
-  font-size: ${(props) => typography[props.type].size};
-  font-weight: ${(props) => typography[props.type].fontWeight};
+  font-family: ${(props) => props.typography[props.type].font};
+  font-size: ${(props) => props.typography[props.type].size};
+  font-weight: ${(props) => props.typography[props.type].fontWeight};
   line-height: 24px;
   margin: 0 0 24px;
 
@@ -63,9 +56,9 @@ export const CollectionName = styled.h3<FontProps>`
 
 export const PriceEditionLabel = styled.label<FontProps>`
   color: ${(props) => props.color};
-  font-family: ${(props) => typography[props.type].font};
-  font-size: ${(props) => typography[props.type].size};
-  font-weight: ${(props) => typography[props.type].fontWeight};
+  font-family: ${(props) => props.typography[props.type].font};
+  font-size: ${(props) => props.typography[props.type].size};
+  font-weight: ${(props) => props.typography[props.type].fontWeight};
   line-height: 24px;
 
   ${breakpoint.tablet`
@@ -76,9 +69,9 @@ export const PriceEditionLabel = styled.label<FontProps>`
 
 export const Price = styled.h2<FontProps>`
   color: ${(props) => props.color};
-  font-family: ${(props) => typography[props.type].font};
-  font-size: ${(props) => typography[props.type].size};
-  font-weight: ${(props) => typography[props.type].fontWeight};
+  font-family: ${(props) => props.typography[props.type].font};
+  font-size: ${(props) => props.typography[props.type].size};
+  font-weight: ${(props) => props.typography[props.type].fontWeight};
   line-height: 40px;
 
   ${breakpoint.tablet`
@@ -89,9 +82,9 @@ export const Price = styled.h2<FontProps>`
 
 export const Edition = styled.h2<FontProps>`
   color: ${(props) => props.color};
-  font-family: ${(props) => typography[props.type].font};
-  font-size: ${(props) => typography[props.type].size};
-  font-weight: ${(props) => typography[props.type].fontWeight};
+  font-family: ${(props) => props.typography[props.type].font};
+  font-size: ${(props) => props.typography[props.type].size};
+  font-weight: ${(props) => props.typography[props.type].fontWeight};
   line-height: 40px;
 
   ${breakpoint.tablet`
@@ -102,9 +95,9 @@ export const Edition = styled.h2<FontProps>`
 
 export const Description = styled.p<FontProps>`
   color: ${(props) => props.color};
-  font-family: ${(props) => typography[props.type].font};
-  font-size: ${(props) => typography[props.type].size};
-  font-weight: ${(props) => typography[props.type].fontWeight};
+  font-family: ${(props) => props.typography[props.type].font};
+  font-size: ${(props) => props.typography[props.type].size};
+  font-weight: ${(props) => props.typography[props.type].fontWeight};
   margin-top: 24px;
   line-height: 24px;
 

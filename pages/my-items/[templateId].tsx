@@ -8,10 +8,13 @@ import {
 import { useAuthContext } from '../../components/Provider';
 import { useFetchNft, useFetchOwnedNfts } from '../../hooks';
 import { RouterQuery } from '../../utils/constants';
-import customizationJson from '../../custom/customization';
+import customizationJson, { Typography } from '../../custom/customization';
 import { Text } from '../../custom/localization';
 
-const MyNft: FC<{ text: Text }> = ({ text }) => {
+const MyNft: FC<{ text: Text; typography: Typography }> = ({
+  text,
+  typography,
+}) => {
   const { currentUser, isLoadingUser } = useAuthContext();
   const owner = currentUser ? currentUser.actor : '';
 
@@ -72,6 +75,7 @@ const MyNft: FC<{ text: Text }> = ({ text }) => {
           setSelectedAssetId,
         },
       }}
+      typography={typography}
     />
   );
 };

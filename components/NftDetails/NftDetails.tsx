@@ -11,7 +11,7 @@ import {
 import { Row, Box } from '../../styles/index.styled';
 import { NftMeta } from '../';
 import { Template } from '../../services/templates';
-import { DetailPageProps } from '../../custom/customization';
+import { DetailPageProps, Typography } from '../../custom/customization';
 
 export const NftDetails: FC<{
   children: ReactNode;
@@ -22,6 +22,7 @@ export const NftDetails: FC<{
     editionLabelText: string;
     placeholderPriceText: string;
   };
+  typography: Typography;
 }> = ({
   children,
   template: { lowestPrice, max_supply, collection, immutable_data },
@@ -35,6 +36,7 @@ export const NftDetails: FC<{
     cardDescriptionFont,
   },
   detailPageText: { priceLabelText, editionLabelText, placeholderPriceText },
+  typography,
 }) => (
   <Container imagePlacement={imagePlacement}>
     <NftMeta
@@ -46,21 +48,31 @@ export const NftDetails: FC<{
       video={immutable_data.video}
     />
     <Box>
-      <Title {...cardTitleFont}>{immutable_data.name}</Title>
-      <CollectionName {...collectionNameFont}>{collection.name}</CollectionName>
+      <Title {...cardTitleFont} typography={typography}>
+        {immutable_data.name}
+      </Title>
+      <CollectionName {...collectionNameFont} typography={typography}>
+        {collection.name}
+      </CollectionName>
       <Row>
-        <PriceEditionLabel {...priceEditionLabelFont}>
+        <PriceEditionLabel {...priceEditionLabelFont} typography={typography}>
           {priceLabelText}
         </PriceEditionLabel>
-        <PriceEditionLabel {...priceEditionLabelFont}>
+        <PriceEditionLabel {...priceEditionLabelFont} typography={typography}>
           {editionLabelText}
         </PriceEditionLabel>
       </Row>
       <Row>
-        <Price {...priceFont}>{lowestPrice || placeholderPriceText}</Price>
-        <Edition {...editionFont}>{max_supply}</Edition>
+        <Price {...priceFont} typography={typography}>
+          {lowestPrice || placeholderPriceText}
+        </Price>
+        <Edition {...editionFont} typography={typography}>
+          {max_supply}
+        </Edition>
       </Row>
-      <Description {...cardDescriptionFont}>{immutable_data.desc}</Description>
+      <Description {...cardDescriptionFont} typography={typography}>
+        {immutable_data.desc}
+      </Description>
     </Box>
     <Box>{children}</Box>
   </Container>
