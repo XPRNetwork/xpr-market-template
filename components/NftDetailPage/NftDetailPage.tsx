@@ -1,5 +1,5 @@
 import { FC, Dispatch, SetStateAction } from 'react';
-import { Nft, NftDetails, NftDropdown, FontImport } from '../../components';
+import { Nft, NftDetails, NftDropdown } from '../../components';
 import {
   NftPageContainer,
   Button,
@@ -123,29 +123,24 @@ export const NftDetailPage: FC<Props> = ({
     detailPageStyles;
 
   return (
-    <>
-      {process.env.STORYBOOK_ENVIRONMENT && (
-        <FontImport typography={typography} />
-      )}
-      <NftPageContainer imagePlacement={imagePlacement}>
-        <Nft
-          name={name}
-          image={image}
-          video={video}
-          nftStyles={{
-            imageBackgroundColor,
-            imagePlacement,
-            imageShadow,
-          }}
-        />
-        <NftDetails
-          template={template}
-          detailPageText={detailPageText}
-          detailPageStyles={detailPageStyles}
-          typography={typography}>
-          {getContent()}
-        </NftDetails>
-      </NftPageContainer>
-    </>
+    <NftPageContainer imagePlacement={imagePlacement}>
+      <Nft
+        name={name}
+        image={image}
+        video={video}
+        nftStyles={{
+          imageBackgroundColor,
+          imagePlacement,
+          imageShadow,
+        }}
+      />
+      <NftDetails
+        template={template}
+        detailPageText={detailPageText}
+        detailPageStyles={detailPageStyles}
+        typography={typography}>
+        {getContent()}
+      </NftDetails>
+    </NftPageContainer>
   );
 };

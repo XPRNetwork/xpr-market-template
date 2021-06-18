@@ -1,6 +1,5 @@
 import { useState, FC } from 'react';
 import { useRouter } from 'next/router';
-import { FontImport } from '../../components';
 import Link from 'next/link';
 import {
   NavbarContainer,
@@ -173,72 +172,67 @@ const Navbar: FC<Props> = ({ navbarStyles, navbarText, typography }) => {
   useEscapeKeyClose(closeNavDropdown);
 
   return (
-    <>
-      {process.env.STORYBOOK_ENVIRONMENT && (
-        <FontImport typography={typography} />
-      )}
-      <NavbarContainer
-        bottomBorderColor={bottomBorderColor}
-        backgroundColor={backgroundColor}>
-        <Wrapper>
-          <MobileOnlySection>
-            <Image
-              src="/hamburger-icon.svg"
-              height="24px"
-              width="24px"
-              onClick={toggleNavDropdown}
-            />
-            <LogoContainer href={navbarStyles.logoLink}>
-              <Image src={navbarStyles.logo} height="42px" width="auto" />
-            </LogoContainer>
-          </MobileOnlySection>
-          <DesktopOnlySection>
-            <LogoContainer href={navbarStyles.logoLink}>
-              <Image src={navbarStyles.logo} height="60px" width="auto" />
-            </LogoContainer>
-            <NavLinks typography={typography} navLinkFontType={navLinkFontType}>
-              {navbarStyles.navLinks.map(({ link }, index) => (
-                <Link key={navbarText.navLinks[index]} href={link}>
-                  {navbarText.navLinks[index]}
-                </Link>
-              ))}
-            </NavLinks>
-          </DesktopOnlySection>
-          {!isLoadingUser && currentUser && currentUser.actor ? (
-            <AvatarContainer>
-              <AvatarImage
-                onClick={toggleNavDropdown}
-                src={
-                  currentUser.avatar ||
-                  navbarStyles.defaultAvatarImage ||
-                  '/default-avatar.png'
-                }
-                width="48px"
-                height="48px"
-              />
-            </AvatarContainer>
-          ) : (
-            <LoginButton
-              onClick={login}
-              buttonBorderColor={buttonBorderColor}
-              buttonFontColor={buttonFontColor}
-              buttonBackgroundColor={buttonBackgroundColor}
-              buttonFontType={buttonFontType}
-              typography={typography}>
-              {navbarText.loginText}
-            </LoginButton>
-          )}
-          <Dropdown
-            isOpen={isOpen}
-            closeNavDropdown={closeNavDropdown}
-            styles={navbarStyles}
-            text={navbarText}
-            typography={typography}
+    <NavbarContainer
+      bottomBorderColor={bottomBorderColor}
+      backgroundColor={backgroundColor}>
+      <Wrapper>
+        <MobileOnlySection>
+          <Image
+            src="/hamburger-icon.svg"
+            height="24px"
+            width="24px"
+            onClick={toggleNavDropdown}
           />
-          <GradientBackground isOpen={isOpen} onClick={closeNavDropdown} />
-        </Wrapper>
-      </NavbarContainer>
-    </>
+          <LogoContainer href={navbarStyles.logoLink}>
+            <Image src={navbarStyles.logo} height="42px" width="auto" />
+          </LogoContainer>
+        </MobileOnlySection>
+        <DesktopOnlySection>
+          <LogoContainer href={navbarStyles.logoLink}>
+            <Image src={navbarStyles.logo} height="60px" width="auto" />
+          </LogoContainer>
+          <NavLinks typography={typography} navLinkFontType={navLinkFontType}>
+            {navbarStyles.navLinks.map(({ link }, index) => (
+              <Link key={navbarText.navLinks[index]} href={link}>
+                {navbarText.navLinks[index]}
+              </Link>
+            ))}
+          </NavLinks>
+        </DesktopOnlySection>
+        {!isLoadingUser && currentUser && currentUser.actor ? (
+          <AvatarContainer>
+            <AvatarImage
+              onClick={toggleNavDropdown}
+              src={
+                currentUser.avatar ||
+                navbarStyles.defaultAvatarImage ||
+                '/default-avatar.png'
+              }
+              width="48px"
+              height="48px"
+            />
+          </AvatarContainer>
+        ) : (
+          <LoginButton
+            onClick={login}
+            buttonBorderColor={buttonBorderColor}
+            buttonFontColor={buttonFontColor}
+            buttonBackgroundColor={buttonBackgroundColor}
+            buttonFontType={buttonFontType}
+            typography={typography}>
+            {navbarText.loginText}
+          </LoginButton>
+        )}
+        <Dropdown
+          isOpen={isOpen}
+          closeNavDropdown={closeNavDropdown}
+          styles={navbarStyles}
+          text={navbarText}
+          typography={typography}
+        />
+        <GradientBackground isOpen={isOpen} onClick={closeNavDropdown} />
+      </Wrapper>
+    </NavbarContainer>
   );
 };
 

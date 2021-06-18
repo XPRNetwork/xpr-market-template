@@ -20,44 +20,44 @@ import {
 import { FooterProps } from '../../custom/customization';
 
 const getSocialMediaIcons = (socialMediaLinks) => {
-  return socialMediaLinks.map((link) => (
-    <a href={link.link} target="_blank" rel="noreferrer" key={link.type}>
-      {iconGetter(link.type)}
+  return socialMediaLinks.map(({ link, type, color }) => (
+    <a href={link} target="_blank" rel="noreferrer" key={type}>
+      {iconGetter({ type, color })}
     </a>
   ));
 };
 
-const iconGetter = (type) => {
+const iconGetter = ({ type, color }: { type: string; color: string }) => {
   switch (type) {
     case 'facebook': {
-      return <FacebookIcon />;
+      return <FacebookIcon color={color} />;
     }
     case 'github': {
-      return <GithubIcon />;
+      return <GithubIcon color={color} />;
     }
     case 'google': {
-      return <GoogleIcon />;
+      return <GoogleIcon color={color} />;
     }
     case 'instagram': {
-      return <InstagramIcon />;
+      return <InstagramIcon color={color} />;
     }
     case 'linkedin': {
-      return <LinkedInIcon />;
+      return <LinkedInIcon color={color} />;
     }
     case 'medium': {
-      return <MediumIcon />;
+      return <MediumIcon color={color} />;
     }
     case 'telegram': {
-      return <TelegramIcon />;
+      return <TelegramIcon color={color} />;
     }
     case 'twitter': {
-      return <TwitterIcon />;
+      return <TwitterIcon color={color} />;
     }
     case 'youtube': {
-      return <YoutubeIcon />;
+      return <YoutubeIcon color={color} />;
     }
     case 'messenger': {
-      return <MessengerIcon />;
+      return <MessengerIcon color={color} />;
     }
     default: {
       return null;

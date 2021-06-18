@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { FontImport } from '../../components';
 import {
   HeaderContainer,
   HeaderContent,
@@ -21,39 +20,34 @@ interface Props {
 }
 
 export const Header: FC<Props> = ({ headerStyles, headerText, typography }) => (
-  <>
-    {process.env.STORYBOOK_ENVIRONMENT && (
-      <FontImport typography={typography} />
-    )}
-    <HeaderContainer backgroundColor={headerStyles.backgroundColor}>
-      <HeaderContent imagePlacement={headerStyles.imagePlacement}>
-        <TextContainer imagePlacement={headerStyles.imagePlacement}>
-          <HighlightText
-            {...headerStyles.highlightFont}
-            typography={typography}>
-            {headerText.highlightText}
-          </HighlightText>
-          <HeaderText {...headerStyles.mainHeadingFont} typography={typography}>
-            {headerText.headerLine1}
-          </HeaderText>
-          <HeaderText {...headerStyles.mainHeadingFont} typography={typography}>
-            {headerText.headerLine2}
-          </HeaderText>
-          <SubHeaderText
-            {...headerStyles.subheadingFont}
-            typography={typography}>
-            {headerText.description}
-          </SubHeaderText>
-          <ButtonWrapperAnchor href={headerStyles.button.link}>
-            <Button {...headerStyles.button} typography={typography}>
-              {headerText.buttonText}
-            </Button>
-          </ButtonWrapperAnchor>
-        </TextContainer>
-        <ImageContainer>
-          <img src={headerStyles.image} alt="mlb" />
-        </ImageContainer>
-      </HeaderContent>
-    </HeaderContainer>
-  </>
+  <HeaderContainer backgroundColor={headerStyles.backgroundColor}>
+    <HeaderContent imagePlacement={headerStyles.imagePlacement}>
+      <TextContainer imagePlacement={headerStyles.imagePlacement}>
+        <HighlightText
+          {...headerStyles.highlightFont}
+          typography={typography}>
+          {headerText.highlightText}
+        </HighlightText>
+        <HeaderText {...headerStyles.mainHeadingFont} typography={typography}>
+          {headerText.headerLine1}
+        </HeaderText>
+        <HeaderText {...headerStyles.mainHeadingFont} typography={typography}>
+          {headerText.headerLine2}
+        </HeaderText>
+        <SubHeaderText
+          {...headerStyles.subheadingFont}
+          typography={typography}>
+          {headerText.description}
+        </SubHeaderText>
+        <ButtonWrapperAnchor href={headerStyles.button.link}>
+          <Button {...headerStyles.button} typography={typography}>
+            {headerText.buttonText}
+          </Button>
+        </ButtonWrapperAnchor>
+      </TextContainer>
+      <ImageContainer>
+        <img src={headerStyles.image} alt="mlb" />
+      </ImageContainer>
+    </HeaderContent>
+  </HeaderContainer>
 );

@@ -28,7 +28,10 @@ const BuyNft: FC<{ text: Text; typography: Typography }> = ({
   const router = useRouter();
   const { templateId } = router.query as RouterQuery;
 
-  const { template, isLoading, error } = useFetchNft(templateId);
+  const { template, isLoading, error } = useFetchNft({
+    templateId,
+    collection: customizationJson.collection,
+  });
 
   const [purchasingError, setPurchasingError] = useState<string>('');
 
