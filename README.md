@@ -4,7 +4,7 @@ To update and edit the text and colors/font and various other styles of the
 site, please look through the [Proton Market Templates
 documentation](https://docs.google.com/document/d/12C-lWflPDy3J2mo35X_yE3JiM6mSz18mB1PUQpB4dRY).
 
-## Getting started
+## Getting Started
 
 This runs on v15.0.0 Node. Please make sure you have Node installed before
 trying to install this repo.
@@ -37,7 +37,7 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are
 treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead
 of React pages.
 
-## .env
+## Environment Variables
 
 Please create a `.env` file that uses either the Testnet or the Mainnet
 variables in the `.env.template` file.
@@ -56,7 +56,7 @@ NEXT_PUBLIC_CHAIN_ENDPOINTS='https://testnet.protonchain.com'
 NEXT_PUBLIC_BLOCK_EXPLORER='https://proton-test.bloks.io/block/'
 ```
 
-## Customizing your application
+## Customize the Application
 
 To view customizable components on Storybook:
 
