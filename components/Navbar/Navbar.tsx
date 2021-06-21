@@ -22,7 +22,6 @@ import {
 } from '../Navbar/Navbar.styled';
 import { Image } from '../../styles/index.styled';
 import { NavbarProps, Typography } from '../../custom/customization';
-import { ReactComponent as CloseIcon } from '../../public/icon-light-close-16-px.svg';
 import { useAuthContext } from '../Provider';
 import { useScrollLock, useEscapeKeyClose, useWindowSize } from '../../hooks';
 import { TOKEN_SYMBOL } from '../../utils/constants';
@@ -82,7 +81,7 @@ const Dropdown: FC<DropdownProps> = ({
     closeMobileDropdown = (
       <MobileHeaderWrapper>
         <CloseIconButton onClick={closeNavDropdown}>
-          <CloseIcon />
+          <img src="/icon-light-close-16-px.svg" alt="close" />
         </CloseIconButton>
       </MobileHeaderWrapper>
     );
