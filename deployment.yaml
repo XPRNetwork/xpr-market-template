@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: market-template-sandbox
+  labels:
+    app: market-template-sandbox
+spec:
+  progressDeadlineSeconds: 400
+  replicas: 2
+  selector:
+    matchLabels:
+      app: market-template-sandbox
+  template:
+    metadata:
+      labels:
+        app: market-template-sandbox
+        tier: web
+    spec:
+      containers:
+      - name: market-template-sandbox
+        image: gcr.io/proton-wallet/market-template-sandbox@sha256:5218198bf2151f56535be1b9ee50a6c8ad5f8db6a90e82406e1c93a7d55417e9
+        ports:
+          - name: http
+            containerPort: 6006
+            protocol: TCP
+        livenessProbe:
+          httpGet:
+            host: 
+            path: /
+            port: 6006
+          initialDelaySeconds: 120
+        readinessProbe:
+          httpGet:
+            host:
+            path: /
+            port: 6006
+          initialDelaySeconds: 60
+      terminationGracePeriodSeconds: 120
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: market-template-sandbox-backend
+  labels:
+    app: market-template-sandbox
+spec:
+  type: NodePort
+  selector:
+    app: market-template-sandbox
+    tier: web
+  ports:
+  - port: 3000
+    targetPort: 6006
+

@@ -1,0 +1,6 @@
+commonLabels:
+  app: market-template-sandbox
+resources:
+- deployment.yaml
+- certificate.yaml
+- ingress-tls.yaml
