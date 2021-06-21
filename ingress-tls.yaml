@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: market-template-sandbox-ssl-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: market-template-sandbox-issuer
+  labels:
+    app: market-template-sandbox
+spec:
+  tls:
+  - secretName: market-template-sandbox-cert
+    hosts:
+    - sandbox.protonmarket.com
+  rules:
+  - host: sandbox.protonmarket.com
+    http:
+      paths:
+      - backend:
+          serviceName: market-template-sandbox-backend
+          servicePort: 6006
+        path: /
