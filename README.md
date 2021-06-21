@@ -4,6 +4,7 @@ To update and edit the text and colors/font and various other styles of the
 site, please look through the [Proton Market Templates
 documentation](https://docs.google.com/document/d/12C-lWflPDy3J2mo35X_yE3JiM6mSz18mB1PUQpB4dRY).
 
+To view the interactive tool that allows you to customize each of the components listed in the documentation, please visit the [Proton Market Template Sandbox](https://sandbox.protonmarket.com).
 ## Getting Started
 
 This runs on v15.0.0 Node. Please make sure you have Node installed before
@@ -70,7 +71,7 @@ result.
 ### 1. Preview custom styles
 
 You can start previewing your customizations by modifying the fields in the
-**Controls** section below each component.
+**Controls** section below each component. You can access this Storybook site locally through `yarn storybook` or go to https://sandbox.protonmarket.com.
 
 ![proton-market-template-storybook](https://user-images.githubusercontent.com/32081352/122460328-d578a700-cf66-11eb-8a42-61040ec82f07.gif)
 
