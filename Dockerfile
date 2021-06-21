@@ -26,8 +26,8 @@ COPY .storybook .storybook
 COPY .prettierrc.js .
 COPY .eslintrc.json .
 
-RUN npm i && npm run build-storybook
+RUN yarn && yarn build-storybook
 
 EXPOSE 6006
 
-CMD [ "npm", "run", "storybook" ]
+CMD [ "yarn", "storybook" ]
