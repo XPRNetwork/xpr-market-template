@@ -1,8 +1,8 @@
 ## Documentation for Customizing the Proton Market Template
 
 To update and edit the text and colors/font and various other styles of the
-site, please look through the documentation
-[here](https://docs.google.com/document/d/12C-lWflPDy3J2mo35X_yE3JiM6mSz18mB1PUQpB4dRY/edit?usp=sharing).
+site, please look through the [Proton Market Templates
+documentation](https://docs.google.com/document/d/12C-lWflPDy3J2mo35X_yE3JiM6mSz18mB1PUQpB4dRY).
 
 ## Getting started
 
@@ -131,7 +131,10 @@ src="https://user-images.githubusercontent.com/32081352/122802136-da489e00-d279-
 
 In this project, there is a folder named `custom` that includes two files:
 `customization.ts` and `localization.ts`. These two files are used to customize
-the styling and text of the application.
+the styling and text of the application. To update and edit the text and
+colors/font and various other styles of the site, please look through the
+[Proton Market Templates
+documentation](https://docs.google.com/document/d/12C-lWflPDy3J2mo35X_yE3JiM6mSz18mB1PUQpB4dRY).
 
 In the `customization.ts` file, you'll find information about custom styles. You
 can also customize the application's featured `collection` and the collection's
