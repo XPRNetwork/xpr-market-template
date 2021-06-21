@@ -1,4 +1,4 @@
-const localizationJson = {
+const localizationJson: LocalizationText = {
   en: {
     header: {
       highlightText: 'E X C L U S I V E',
@@ -81,6 +81,10 @@ export interface Text {
   myItemsPage: {
     header: string;
   };
+}
+
+interface LocalizationText {
+  [language: string]: Text;
 }
 
 export default localizationJson;
