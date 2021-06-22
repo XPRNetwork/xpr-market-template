@@ -41,8 +41,8 @@ NEXT_PUBLIC_BLOCK_EXPLORER='https://proton-test.bloks.io/block/'
 
 ## Application Preview
 
-The [Proton Market Template Sandbox] and the [Proton Market Template
-Documentation] display the site broken down into sections and component forms.
+The [Proton Market Template Sandbox] and the [Proton Market Template Documentation] 
+display the site broken down into sections and component forms.
 To preview the application as a whole you must start up the development server:
 
 To run the development server:
@@ -148,8 +148,7 @@ src="https://user-images.githubusercontent.com/32081352/122802136-da489e00-d279-
 This project includes a folder named `custom` that contains two files:
 `customization.ts` and `localization.ts`. These two files are used to customize
 the styling and text of the application. To update, edit text, colors, font, and
-various other styles of the site, please look through the [Proton Market
-Templates Documentation].
+various other styles of the site, please look through the [Proton Market Template Documentation].
 
 In the `customization.ts` file, information about custom styles will be
 provided. Featured collections may also be customized under `collection` along
@@ -246,7 +245,6 @@ from the creators of Next.js.
 Check out the [Next.js deployment
 documentation](https://nextjs.org/docs/deployment) for more details.
 
-[Proton Market Templates
-Documentation]: https://docs.google.com/document/d/12C-lWflPDy3J2mo35X_yE3JiM6mSz18mB1PUQpB4dRY
+[Proton Market Template Documentation]: https://docs.google.com/document/d/12C-lWflPDy3J2mo35X_yE3JiM6mSz18mB1PUQpB4dRY
 [Proton Market Template Sandbox]: https://sandbox.protonmarket.com
 [API routes]: https://nextjs.org/docs/api-routes/introduction
