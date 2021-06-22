@@ -75,6 +75,9 @@ You can start previewing your customizations by modifying the fields in the
 
 ![proton-market-template-storybook](https://user-images.githubusercontent.com/32081352/122460328-d578a700-cf66-11eb-8a42-61040ec82f07.gif)
 
+**Note:** In the `Navbar` component, you can toggle the `isLoggedIn` field to
+preview the `Navbar` in the logged-in and not logged-in states.
+
 ### 2. Preview custom typography
 
 You can preview custom font selections on Storybook.
