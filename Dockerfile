@@ -1,4 +1,4 @@
-FROM node:14-alpine
+FROM node:16-alpine
 
 ARG NEXT_PUBLIC_CHAIN_ENDPOINTS
 ARG NEXT_PUBLIC_BLOCK_EXPLORER
@@ -28,6 +28,6 @@ COPY .eslintrc.json .
 
 RUN yarn && yarn build-storybook
 
-EXPOSE 6006
+EXPOSE 8080
 
-CMD [ "yarn", "storybook" ]
+CMD [ "yarn", "preview-build-storybook" ]
