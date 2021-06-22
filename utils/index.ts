@@ -97,6 +97,7 @@ export const formatPrice = (
 };
 
 export const formatThousands = (numberString: string): string => {
+  if (!numberString) return '';
   const [integers, decimals] = numberString.split('.');
   let salePrice = parseFloat(integers.replace(/[,]/g, '')).toLocaleString();
   salePrice = decimals ? salePrice + '.' + decimals : salePrice;
