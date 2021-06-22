@@ -5,7 +5,7 @@ metadata:
   labels:
     app: market-template-sandbox
 spec:
-  progressDeadlineSeconds: 400
+  progressDeadlineSeconds: 1000
   replicas: 2
   selector:
     matchLabels:
