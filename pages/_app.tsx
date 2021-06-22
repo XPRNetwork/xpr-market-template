@@ -3,7 +3,7 @@ import '../styles/reset.css';
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import { Footer, Navbar, LoadingPage, FontImport } from '../components';
-import { AuthProvider } from '../components/Provider';
+import { AuthProvider, AuthContext } from '../components/Provider';
 import customizationJson from '../custom/customization';
 import localizationJson from '../custom/localization';
 
@@ -45,11 +45,28 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     <>
       <FontImport typography={typography} />
       <AuthProvider>
-        <Navbar
-          navbarText={text.navbar}
-          navbarStyles={navbar}
-          typography={typography}
-        />
+        <AuthContext.Consumer>
+          {({
+            currentUser,
+            isLoadingUser,
+            currentUserBalance,
+            login,
+            logout,
+          }) =>
+            isLoadingUser ? null : (
+              <Navbar
+                navbarText={text.navbar}
+                navbarStyles={navbar}
+                typography={typography}
+                currentUser={currentUser}
+                isLoggedIn={!!(currentUser && currentUser.actor)}
+                currentUserBalance={currentUserBalance}
+                login={login}
+                logout={logout}
+              />
+            )
+          }
+        </AuthContext.Consumer>
         <Component {...pageProps} text={text} typography={typography} />
         <Footer footerStyles={footer} />
       </AuthProvider>
