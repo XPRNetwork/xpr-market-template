@@ -18,25 +18,6 @@ git clone https://github.com/ProtonProtocol/proton-market-template.git
 yarn install
 ```
 
-To run the development server:
-
-```bash
-yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the
-result.
-
-You can start editing the page by modifying `pages/index.js`. The page
-auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on
-[http://localhost:3000/api/hello](http://localhost:3000/api/hello). This
-endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are
-treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead
-of React pages.
 
 ## Environment Variables
 
@@ -56,6 +37,38 @@ NEXT_PUBLIC_NFT_ENDPOINT='https://test.proton.api.atomicassets.io'
 NEXT_PUBLIC_CHAIN_ENDPOINTS='https://testnet.protonchain.com'
 NEXT_PUBLIC_BLOCK_EXPLORER='https://proton-test.bloks.io/block/'
 ```
+
+## Application Preview
+
+The Proton Market Template Sandbox and the Proton Market Template Documentation displays the site broken down into its sections and component forms. To and preview the application as a whole you must start up the development server:
+
+To run the development server:
+
+```bash
+yarn dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the
+result.
+
+You can start editing the page by modifying `pages/index.js`. The page
+auto-updates as you edit the files.
+
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on
+[http://localhost:3000/api/hello](http://localhost:3000/api/hello). This
+endpoint can be edited in `pages/api/hello.js`.
+
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are
+treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead
+of React pages.
+
+![homepage](https://user-images.githubusercontent.com/18355075/122977725-97a2c680-d34a-11eb-8ef5-7a7be5e7be19.png)
+
+![my-items](https://user-images.githubusercontent.com/18355075/122977648-81950600-d34a-11eb-8c68-924896e26c12.png)
+
+![buy-item](https://user-images.githubusercontent.com/18355075/122977850-b86b1c00-d34a-11eb-8274-29c122c9d55b.png)
+
+![sell-item](https://user-images.githubusercontent.com/18355075/122977855-b903b280-d34a-11eb-8671-19ffe2e4fdff.png)
 
 ## Customize the Application
 
