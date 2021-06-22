@@ -19,7 +19,7 @@ interface Props {
   children: JSX.Element | JSX.Element[];
 }
 
-const AuthContext = createContext<AuthContext>({
+export const AuthContext = createContext<AuthContext>({
   currentUser: undefined,
   currentUserBalance: '',
   atomicMarketBalance: '',

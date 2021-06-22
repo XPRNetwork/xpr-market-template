@@ -19,35 +19,41 @@ import {
   GradientBackground,
   CloseIconButton,
   MobileHeaderWrapper,
-} from '../Navbar/Navbar.styled';
+} from './Navbar.styled';
 import { Image } from '../../styles/index.styled';
 import { NavbarProps, Typography } from '../../custom/customization';
-import { useAuthContext } from '../Provider';
 import { useScrollLock, useEscapeKeyClose, useWindowSize } from '../../hooks';
 import { TOKEN_SYMBOL } from '../../utils/constants';
 import { NavbarTextProps } from '../../custom/localization';
+import { User } from '../../services/proton';
 
 type DropdownProps = {
   isOpen: boolean;
+  isLoggedIn: boolean;
   styles: NavbarProps;
   text: NavbarTextProps;
   typography: Typography;
   closeNavDropdown: () => void;
+  currentUser: User;
+  currentUserBalance: string;
+  logout: () => Promise<void>;
 };
 
 const Dropdown: FC<DropdownProps> = ({
   isOpen,
+  isLoggedIn,
   styles,
   text,
   typography,
   closeNavDropdown,
+  currentUser,
+  currentUserBalance,
+  logout,
 }) => {
   const { balanceSubtitleFontType, navLinkFontType } = styles;
   const router = useRouter();
-  const { currentUser, currentUserBalance, logout } = useAuthContext();
   const { isMobile, isTablet } = useWindowSize();
   useEscapeKeyClose(closeNavDropdown);
-  const isLoggedIn = currentUser && currentUser.actor;
   const routes = [];
 
   if (isMobile || isTablet) {
@@ -147,10 +153,23 @@ interface Props {
   navbarStyles: NavbarProps;
   navbarText: NavbarTextProps;
   typography: Typography;
+  currentUser: User;
+  currentUserBalance: string;
+  isLoggedIn: boolean;
+  login: () => Promise<void>;
+  logout: () => Promise<void>;
 }
 
-const Navbar: FC<Props> = ({ navbarStyles, navbarText, typography }) => {
-  const { currentUser, login, isLoadingUser } = useAuthContext();
+export const Navbar: FC<Props> = ({
+  navbarStyles,
+  navbarText,
+  typography,
+  currentUser,
+  currentUserBalance,
+  isLoggedIn,
+  login,
+  logout,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   useScrollLock(isOpen);
 
@@ -169,6 +188,12 @@ const Navbar: FC<Props> = ({ navbarStyles, navbarText, typography }) => {
   const closeNavDropdown = () => setIsOpen(false);
 
   useEscapeKeyClose(closeNavDropdown);
+
+  const avatarImage = currentUser
+    ? currentUser.avatar
+    : '' || navbarStyles
+    ? navbarStyles.defaultAvatarImage
+    : '' || '/default-avatar.png';
 
   return (
     <NavbarContainer
@@ -198,15 +223,11 @@ const Navbar: FC<Props> = ({ navbarStyles, navbarText, typography }) => {
             ))}
           </NavLinks>
         </DesktopOnlySection>
-        {!isLoadingUser && currentUser && currentUser.actor ? (
+        {isLoggedIn ? (
           <AvatarContainer>
             <AvatarImage
               onClick={toggleNavDropdown}
-              src={
-                currentUser.avatar ||
-                navbarStyles.defaultAvatarImage ||
-                '/default-avatar.png'
-              }
+              src={avatarImage}
               width="48px"
               height="48px"
             />
@@ -224,15 +245,17 @@ const Navbar: FC<Props> = ({ navbarStyles, navbarText, typography }) => {
         )}
         <Dropdown
           isOpen={isOpen}
+          isLoggedIn={isLoggedIn}
           closeNavDropdown={closeNavDropdown}
           styles={navbarStyles}
           text={navbarText}
           typography={typography}
+          currentUser={currentUser}
+          currentUserBalance={currentUserBalance}
+          logout={logout}
         />
         <GradientBackground isOpen={isOpen} onClick={closeNavDropdown} />
       </Wrapper>
     </NavbarContainer>
   );
 };
-
-export default Navbar;
