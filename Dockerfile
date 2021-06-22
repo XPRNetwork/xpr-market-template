@@ -22,6 +22,7 @@ COPY tsconfig.json .
 COPY next.config.js .
 COPY next-env.d.ts .
 COPY babel.config.json .
+COPY yarn.lock .
 COPY .storybook .storybook
 COPY .prettierrc.js .
 COPY .eslintrc.json .
