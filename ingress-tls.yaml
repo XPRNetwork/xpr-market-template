@@ -18,5 +18,5 @@ spec:
       paths:
       - backend:
           serviceName: market-template-sandbox-backend
-          servicePort: 6006
+          servicePort: 8080
         path: /

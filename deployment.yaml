@@ -52,5 +52,5 @@ spec:
     tier: web
   ports:
   - port: 3000
-    targetPort: 6006
+    targetPort: 8080
 
