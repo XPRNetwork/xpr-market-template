@@ -11,7 +11,8 @@
     "typecheck": "$(npm bin)/tsc --noEmit",
     "check:all": "yarn lint && yarn format && yarn typecheck",
     "storybook": "start-storybook -s ./public -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook -s public",
+    "preview-build-storybook": "npx http-server ./storybook-static"
   },
   "dependencies": {
     "@proton/js": "^22.0.64",
