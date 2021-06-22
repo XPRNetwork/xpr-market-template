@@ -21,19 +21,19 @@ spec:
         image: gcr.io/proton-wallet/market-template-sandbox@sha256:5218198bf2151f56535be1b9ee50a6c8ad5f8db6a90e82406e1c93a7d55417e9
         ports:
           - name: http
-            containerPort: 6006
+            containerPort: 8080
             protocol: TCP
         livenessProbe:
           httpGet:
             host: 
             path: /
-            port: 6006
+            port: 8080
           initialDelaySeconds: 120
         readinessProbe:
           httpGet:
             host:
             path: /
-            port: 6006
+            port: 8080
           initialDelaySeconds: 60
       terminationGracePeriodSeconds: 120
 
