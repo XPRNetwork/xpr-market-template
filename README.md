@@ -2,7 +2,7 @@
 
 To update and edit the text and colors/font and various other styles of the
 site, please look through the [Proton Market Templates
-documentation](https://docs.google.com/document/d/12C-lWflPDy3J2mo35X_yE3JiM6mSz18mB1PUQpB4dRY).
+Documentation](https://docs.google.com/document/d/12C-lWflPDy3J2mo35X_yE3JiM6mSz18mB1PUQpB4dRY).
 
 To view the interactive tool that allows you to customize each of the components listed in the documentation, please visit the [Proton Market Template Sandbox](https://sandbox.protonmarket.com).
 ## Getting Started
@@ -135,7 +135,7 @@ In this project, there is a folder named `custom` that includes two files:
 the styling and text of the application. To update and edit the text and
 colors/font and various other styles of the site, please look through the
 [Proton Market Templates
-documentation](https://docs.google.com/document/d/12C-lWflPDy3J2mo35X_yE3JiM6mSz18mB1PUQpB4dRY).
+Documentation](https://docs.google.com/document/d/12C-lWflPDy3J2mo35X_yE3JiM6mSz18mB1PUQpB4dRY).
 
 In the `customization.ts` file, you'll find information about custom styles. You
 can also customize the application's featured `collection` and the collection's

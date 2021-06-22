@@ -1,6 +1,6 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
-import Navbar from './Navbar';
+import { Navbar } from './Navbar';
 import localizationJson from '../../custom/localization';
 import customizationJson from '../../custom/customization';
 
