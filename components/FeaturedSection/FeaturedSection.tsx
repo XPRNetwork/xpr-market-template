@@ -36,9 +36,13 @@ export const FeaturedSection: FC<Props> = ({
   <FeaturedSectionContainer
     backgroundColor={featuredSectionStyles.backgroundColor}>
     <FeaturedSectionWrapper>
-      <HeadingText {...featuredSectionStyles.titleFont} typography={typography}>
-        {featuredSectionText.heading}
-      </HeadingText>
+      {featuredSectionText && featuredSectionText.heading ? (
+        <HeadingText
+          {...featuredSectionStyles.titleFont}
+          typography={typography}>
+          {featuredSectionText.heading}
+        </HeadingText>
+      ) : null}
       {featuredSectionStyles.carousel ? (
         <FeaturedCarousel
           templates={templates}
