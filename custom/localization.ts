@@ -29,7 +29,7 @@ const localizationJson: LocalizationText = {
       soldOut: 'SOLD OUT',
     },
     featuredSection: {
-      heading: 'BREAKING NOW',
+      heading: '', // optional
     },
     myItemsPage: {
       header: 'MY ITEMS',
