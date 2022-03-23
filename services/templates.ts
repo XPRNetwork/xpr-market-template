@@ -196,7 +196,7 @@ export const getLowestPricesForAllCollectionTemplates = async ({
       owner,
       symbol: TOKEN_SYMBOL,
       order: 'desc',
-      sort: 'created',
+      // sort: 'created',
       limit,
       page,
     };
